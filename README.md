@@ -7,5 +7,18 @@ Web platform for social media sharing using [KOAN boilerplate](https://github.co
 * Mongodb, any recent version
 
 ## Installation 
-Just run setup.sh in the script folder
-Sometimes npm has a hard time resolving dependencies, so you might want to install again or update.
+Execute
+```shell 
+./setup.sh 
+``` 
+from the script folder.
+Sometimes npm has a hard time resolving dependencies, so you might want to install again or update if the app fails at startup.
+
+## Run
+```shell
+npm start
+```
+or 
+```shell
+node --harmony app.js
+```

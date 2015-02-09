@@ -9,6 +9,9 @@ angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media,
   var user = $scope.common.user;
   $scope.postBox = {message: '', disabled: false};
   $scope.posts = [];
+  var datebuff;
+  $scope.lastEnteredKey = null;
+  $scope.lastEnteredKeyDate = null;
 
   // retrieve posts from server
   api.posts.list().success(function (posts) {
@@ -19,6 +22,18 @@ angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media,
     });
     $scope.posts = posts;
   });
+
+  $scope.test = function($event) {
+    datebuff = new Date();
+    datebuff = datebuff.getTime();
+    if($scope.lastEnteredKey != null && $event.keyCode === 13 && (datebuff - $scope.lastEnteredKeyDate) < 500) {
+      $scope.createPost($event);
+      $event.preventDefault();
+      return;
+    }
+    $scope.lastEnteredKeyDate = datebuff;
+    $scope.lastEnteredKey = $event.keyCode;
+  }
 
   // add post/comment creation functions to scope
   $scope.createPost = function ($event) {

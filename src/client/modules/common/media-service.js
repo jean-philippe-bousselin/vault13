@@ -13,7 +13,7 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
         headers = {Authorization: 'Bearer ' + token},
         // TEMPORARY @TODO handle as must media as possible and drop this shit.
         iframeRegex = /<iframe.*<\/iframe>/i,
-        youtubeRegex = /https?:\/\/(www\.)?youtu.*\/watch\?v=(.{11})/i,
+        youtubeRegex = /https?:\/\/(www\.)?youtu.*\/(watch\?v=)?(.{11})/i,
         soundCloudRegex = /https?:\/\/soundcloud\.com\/\S*/gi,
         //bandCampRegex = /https?:\/\/(.*)\.bandcamp.com\/\S*/gi,
         urlRegex = /https?:\/\/\S*/i,
@@ -22,9 +22,8 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
     media.platforms = {
         get: function (text) {
             var deferred = $q.defer();
-            var regExp = youtubeRegex;
             var matchIframe = text.match(iframeRegex);
-            var match = text.match(regExp);
+            var matchYT = text.match(youtubeRegex);
             var matchSC = text.match(soundCloudRegex);
             //var matchBC = text.match(bandCampRegex);
             var matchUrl = text.match(urlRegex);
@@ -33,15 +32,15 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
                 deferred.resolve({
                     text: text
                 });
-            } else if (match && match[2].length == 11) { // youtube
+            } else if (matchYT && matchYT[3].length == 11) { // youtube
                 $http({
                     method: 'GET',
-                    url: 'https://gdata.youtube.com/feeds/api/videos/' + match[2] + '?v=2&alt=jsonc'
+                    url: 'https://gdata.youtube.com/feeds/api/videos/' + matchYT[3] + '?v=2&alt=jsonc'
                 })
                 .success(function (videoInfosJson) {
                     // replace link with embeded player and return updated text
                     deferred.resolve({
-                        text: text.replace(youtubeRegex, getYoutubeEmbededPlayer(match[2]))
+                        text: text.replace(youtubeRegex, getYoutubeEmbededPlayer(matchYT[3]))
                     });
                 })
                 .error(function () {

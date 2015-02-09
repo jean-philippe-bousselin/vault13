@@ -1,8 +1,10 @@
 
-angular.module('koan.common').directive('focusOn', function() {
+angular.module('koan.common').directive('focusOn', function($timeout) {
     return function(scope, elem, attr) {
         scope.$on(attr.focusOn, function(e) {
-            elem[0].focus();
+            $timeout(function() {
+                elem[0].focus();
+            });
         });
     };
 });

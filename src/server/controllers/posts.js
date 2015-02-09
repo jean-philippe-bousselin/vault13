@@ -61,6 +61,11 @@ function *createPost() {
 
   // now notify everyone about this new post
   post.id = post._id;
+  post.from = {
+      id: this.user.id,
+      name: this.user.name,
+      picture: '/api/users/' + this.user.id + '/picture'
+  };
   delete post._id;
   ws.notify('posts.created', post);
 }

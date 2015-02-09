@@ -122,6 +122,7 @@ angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media,
     if (!_.some($scope.posts, function (p) {
       return p.id === post.id;
     })) {
+      post.message = $sce.trustAsHtml(post.message);
       post.comments = [];
       post.commentBox = {message: '', disabled: false};
       $scope.posts.unshift(post);

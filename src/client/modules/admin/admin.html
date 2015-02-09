@@ -1,0 +1,19 @@
+<div class="col-md-12">
+    <div class="users">
+       <h1>Users</h1>
+        <fieldset>
+            <legend>Add user</legend>
+            <form ng-submit="createUser($event)">
+                <p class="alert alert-danger" ng-if="error">{{error}}</p>
+                <p class="alert alert-success" ng-if="success">{{success}}</p>
+                <div class="form-group">
+                    <input ng-model="newUser.username" type="text" class="form-control" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <input ng-model="newUser.password" type="password" class="form-control" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </fieldset>
+    </div>
+</div>

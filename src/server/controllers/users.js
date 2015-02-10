@@ -19,7 +19,6 @@ exports.init = function (app) {
  */
 function *createUser() {
 
-    console.log(this.user);
   if(this.user.role != 'admin') {
       this.status = 403;
       this.body = {error: 'Unauthorized'};

@@ -6,22 +6,37 @@
 
 angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media, $sce) {
 
+  var postsPerRequest = 5;
+  var loadedPostsCount = 0;
   var user = $scope.common.user;
   $scope.postBox = {message: '', disabled: false};
   $scope.posts = [];
+  $scope.noMorePosts = false; // disallow new post list request if true
+
   var datebuff;
   $scope.lastEnteredKey = null;
   $scope.lastEnteredKeyDate = null;
 
+  $scope.loadPosts = function() {
+    if(!$scope.noMorePosts) {
+      api.posts.list(postsPerRequest, loadedPostsCount).success(function (posts) {
+        posts.forEach(function (post) {
+          post.message = $sce.trustAsHtml(post.message);
+          post.commentBox = {message: '', disabled: false};
+          post.comments = post.comments || [];
+        });
+        $scope.posts = $scope.posts.concat(posts);
+        loadedPostsCount += posts.length;
+        if(posts.length < postsPerRequest) {
+          // this means we loaded the last posts
+          $scope.noMorePosts = true;
+        }
+      });
+    }
+  };
+
   // retrieve posts from server
-  api.posts.list().success(function (posts) {
-    posts.forEach(function (post) {
-      post.message = $sce.trustAsHtml(post.message);
-      post.commentBox = {message: '', disabled: false};
-      post.comments = post.comments || [];
-    });
-    $scope.posts = posts;
-  });
+  $scope.loadPosts();
 
   $scope.checkForSendShortcut = function($event) {
     datebuff = new Date();
@@ -36,7 +51,7 @@ angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media,
     }
     $scope.lastEnteredKeyDate = datebuff;
     $scope.lastEnteredKey = $event.keyCode;
-  }
+  };
 
   // add post/comment creation functions to scope
   $scope.createPost = function ($event) {

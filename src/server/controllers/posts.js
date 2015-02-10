@@ -4,7 +4,9 @@
  * Posts controller for serving user posts.
  */
 
-var route = require('koa-route'),
+var qs = require('querystring'),
+    route = require('koa-route'),
+    request = require('co-request'),
     parse = require('co-body'),
     mongo = require('../config/mongo'),
     ws = require('../config/ws'),
@@ -13,7 +15,7 @@ var route = require('koa-route'),
 
 // register koa routes
 exports.init = function (app) {
-  app.use(route.get('/api/posts', listPosts));
+  app.use(route.get('/api/posts/:limit/:offset', listPosts));
   app.use(route.post('/api/posts', createPost));
   app.use(route.post('/api/posts/:postId/comments', createComment));
 };
@@ -21,12 +23,18 @@ exports.init = function (app) {
 /**
  * Lists last 15 posts with latest 15 comments in them.
  */
-function *listPosts() {
-  var author,
+function *listPosts(limit, offset) {
+
+    var author,
       posts = yield mongo.posts.find(
       {},
-      {comments: {$slice: -15 /* only get last x many comments for each post */}},
-      {limit: 15, sort: {_id: -1}} /* only get last 15 posts by last updated */).toArray();
+      {comments: {$slice: -2 /* only get last x many comments for each post */}},
+      {
+          limit: limit,
+          skip: offset,
+          sort: {_id: -1}} /* only get last 15 posts by last updated */
+      )
+      .toArray();
 
     yield * foreach(posts, function * (post) {
         post.id = post._id;

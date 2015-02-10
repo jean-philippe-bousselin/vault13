@@ -92,3 +92,10 @@ body {
   margin-left: 1px;
   margin-bottom: 1px;
 }
+
+.loading {
+  background-image: url(images/gear.gif);
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 50px;
+}

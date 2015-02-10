@@ -6,7 +6,7 @@
 
 angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media, $sce) {
 
-  var postsPerRequest = 5;
+  var postsPerRequest = 25;
   var loadedPostsCount = 0;
   var user = $scope.common.user;
   $scope.postBox = {message: '', disabled: false};

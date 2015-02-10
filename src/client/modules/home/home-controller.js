@@ -23,10 +23,13 @@ angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media,
     $scope.posts = posts;
   });
 
-  $scope.test = function($event) {
+  $scope.checkForSendShortcut = function($event) {
     datebuff = new Date();
     datebuff = datebuff.getTime();
-    if($scope.lastEnteredKey != null && $event.keyCode === 13 && (datebuff - $scope.lastEnteredKeyDate) < 500) {
+    if($scope.lastEnteredKey != null
+        && $event.keyCode === 13 // enter
+        && $scope.lastEnteredKey == 16 // shift
+        && (datebuff - $scope.lastEnteredKeyDate) < 500) {
       $scope.createPost($event);
       $event.preventDefault();
       return;

@@ -5,9 +5,9 @@
             ng-model="postBox.message"
             class="form-control"
             name="message"
-            placeholder="Hint: CTRL + ENTER will submit your post."
+            placeholder="Hint: SHIFT + ENTER will submit your post."
             ng-disabled="postBox.disabled"
-            ng-keydown="test($event)"></textarea>
+            ng-keydown="checkForSendShortcut($event)"></textarea>
 
     <div class="message-box-tools">
       <input type="submit" class="btn btn-default btn-sm pull-right" value="Post">

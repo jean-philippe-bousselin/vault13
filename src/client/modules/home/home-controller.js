@@ -8,6 +8,7 @@ angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media,
 
   var postsPerRequest = 25;
   var loadedPostsCount = 0;
+  var queryLocked = false;
   var user = $scope.common.user;
   $scope.postBox = {message: '', disabled: false};
   $scope.posts = [];
@@ -18,7 +19,8 @@ angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media,
   $scope.lastEnteredKeyDate = null;
 
   $scope.loadPosts = function() {
-    if(!$scope.noMorePosts) {
+    if(!$scope.noMorePosts && !queryLocked) {
+      queryLocked = true;
       api.posts.list(postsPerRequest, loadedPostsCount).success(function (posts) {
         posts.forEach(function (post) {
           post.message = $sce.trustAsHtml(post.message);
@@ -27,6 +29,7 @@ angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media,
         });
         $scope.posts = $scope.posts.concat(posts);
         loadedPostsCount += posts.length;
+        queryLocked = false;
         if(posts.length < postsPerRequest) {
           // this means we loaded the last posts
           $scope.noMorePosts = true;

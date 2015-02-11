@@ -40,7 +40,9 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
                 .success(function (videoInfosJson) {
                     // replace link with embeded player and return updated text
                     deferred.resolve({
-                        text: text.replace(youtubeRegex, getYoutubeEmbededPlayer(matchYT[3]))
+                        text: text
+                                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+                                .replace(youtubeRegex, getYoutubeEmbededPlayer(matchYT[3]))
                     });
                 })
                 .error(function () {
@@ -54,7 +56,9 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
                 })
                 .success(function (responseJson) {
                     deferred.resolve({
-                        text: text.replace(soundCloudRegex, responseJson.html)
+                        text: text
+                                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+                                .replace(soundCloudRegex, responseJson.html)
                     });
                 })
                 .error(function () {
@@ -63,11 +67,13 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
                 });
             } else if(matchUrl){
                 deferred.resolve({
-                    text: text.replace(matchUrl, '<a href="' + matchUrl[0] + '" target="_blank">' + matchUrl[0] + '</a>')
+                    text: text
+                            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+                            .replace(matchUrl, '<a href="' + matchUrl[0] + '" target="_blank">' + matchUrl[0] + '</a>')
                 });
             } else {
                 deferred.resolve({
-                    text: text
+                    text: text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
                 });
             }
             return deferred.promise;

@@ -26,11 +26,17 @@
     height: 50px;
     width: 50px;
 }
-
+.post-message-container {
+    padding: 10px 0 10px 0;
+}
 .post-body {
     width:100%;
 }
-
+.post-body img {
+    margin: 10px 0 10px 0;
+    height: auto;
+    width: auto;
+}
 .post-body h5 {
     margin: 0;
 }

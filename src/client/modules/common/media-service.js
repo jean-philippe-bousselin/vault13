@@ -7,7 +7,7 @@
  * Service for providing access the backend API via HTTP and WebSockets.
  */
 
-angular.module('koan.common').factory('media', function ($rootScope, $http, $window, $q) {
+angular.module('koan.common').factory('media', function ($rootScope, $http, $window, $q, youtubeService) {
 
     var token = ($window.sessionStorage.token || $window.localStorage.token),
         headers = {Authorization: 'Bearer ' + token},
@@ -18,6 +18,28 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
         //bandCampRegex = /https?:\/\/(.*)\.bandcamp.com\/\S*/gi,
         urlRegex = /https?:\/\/\S*/i,
         media = {events: {}};
+
+    media.processPost = function(post) {
+
+        var deferred = $q.defer(),
+            servicePromises = [
+            youtubeService.matchAndReplace(post)
+        ];
+
+        $q.all(servicePromises)
+        .then(function(data){
+            deferred.resolve(post);
+        }, function(errors){
+            deferred.reject();
+        });
+
+        //$.when(youtubePromise).done(function (ytResponse) {
+        //    messageClosure = messageClosure.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        //    youtubeService.
+        //});
+
+        return deferred.promise;
+    };
 
     media.platforms = {
         get: function (text) {

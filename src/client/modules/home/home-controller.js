@@ -67,23 +67,25 @@ angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media,
     // disable the post box and push the new post to server
     $scope.postBox.disabled = true;
 
-    media.platforms.get($scope.postBox.message)
-      .then(function(response) {
-        $scope.postBox.message = $sce.trustAsHtml(response.text);
-        api.posts.create({message: response.text})
-          .success(function (post) {
+    var newPost = {
+      from: user,
+      message: $scope.postBox.message,
+      createdTime: new Date(),
+      comments: [],
+      commentBox: {message: '', disabled: false}
+    };
+
+    media.processPost(newPost)
+      .then(function(processedPost) {
+        api.posts.create({message: processedPost.message})
+          .success(function (savedPost) {
             // only add the post if we don't have it already in the posts list to avoid dupes
             if (!_.some($scope.posts, function (p) {
-                  return p.id === post.id;
+                  return p.id === savedPost.id;
                 })) {
-              $scope.posts.unshift({
-                id: post.id,
-                from: user,
-                message: $scope.postBox.message,
-                createdTime: new Date(),
-                comments: [],
-                commentBox: {message: '', disabled: false}
-              });
+              processedPost.id = savedPost.id;
+              processedPost.message = $sce.trustAsHtml(processedPost.message);
+              $scope.posts.unshift(processedPost);
             }
             // clear the post box and enable it
             $scope.postBox.message = '';

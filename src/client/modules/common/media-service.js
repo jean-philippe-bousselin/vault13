@@ -33,11 +33,6 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
             deferred.reject();
         });
 
-        //$.when(youtubePromise).done(function (ytResponse) {
-        //    messageClosure = messageClosure.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-        //    youtubeService.
-        //});
-
         return deferred.promise;
     };
 

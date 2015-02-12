@@ -4,7 +4,7 @@
  * Home controller simply lists all the posts from everyone on the front page.
  */
 
-angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media, $sce) {
+angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media, $sce, $compile) {
 
   var postsPerRequest = 25;
   var loadedPostsCount = 0;
@@ -17,6 +17,10 @@ angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media,
   var datebuff;
   $scope.lastEnteredKey = null;
   $scope.lastEnteredKeyDate = null;
+
+  $scope.test = function() {
+    alert('lol');
+  };
 
   $scope.loadPosts = function() {
     if(!$scope.noMorePosts && !queryLocked) {

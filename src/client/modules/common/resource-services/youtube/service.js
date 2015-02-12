@@ -7,7 +7,7 @@
  * Service for providing access the backend API via HTTP and WebSockets.
  */
 
-angular.module('koan.common').factory('youtubeService', function ($rootScope, $window, $http, $q) {
+angular.module('koan.common').factory('youtubeService', function ($rootScope, $window, $http, $q, $compile) {
 
     var youtubeService = {},
         token = ($window.sessionStorage.token || $window.localStorage.token),
@@ -30,8 +30,7 @@ angular.module('koan.common').factory('youtubeService', function ($rootScope, $w
                 createResource(videoInfosJson)
                 .success(function (resource) {
                     //update the post message
-                        post.message = post.message.replace(matchRegex, buildHtml(resource));
-
+                    post.message = $compile(post.message.replace(matchRegex, buildPreviewHtml(resource)))($rootScope);
                     deferred.resolve();
                 })
                 .error(function () {
@@ -60,9 +59,10 @@ angular.module('koan.common').factory('youtubeService', function ($rootScope, $w
         return $http({method: 'POST', url: 'api/resources', data: resource, headers: headers});
     }
 
-    function buildHtml(resource) {
-        return '<img src="' + resource.thumbnailHQUrl + '" data-resource-id="' + resource.resourceId + '" alt=""/><div><b>' + resource.title + '</b></div>';
+    function buildPreviewHtml(resource) {
+        return '<youtube/>';
     }
 
     return youtubeService;
+
 });

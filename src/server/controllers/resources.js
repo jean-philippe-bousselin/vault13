@@ -9,7 +9,17 @@ var qs = require('querystring'),
 // register koa routes
 exports.init = function (app) {
     app.use(route.post('/api/resources', createResource));
+    app.use(route.get('/api/resources/:id', getResource));
 };
+
+function *getResource(id) {
+
+    var resource = yield mongo.resources.findOne({resourceId: id});
+    resource.id = resource._id;
+
+    this.status = 201;
+    this.body = resource;
+}
 
 function *createResource() {
     var resource = yield parse(this);

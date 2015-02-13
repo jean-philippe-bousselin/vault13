@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="/modules/home/home.css">
   <link rel="stylesheet" href="/modules/chat/chat.css">
   <link rel="stylesheet" href="/modules/profile/profile.css">
+  <link rel="stylesheet" href="/modules/mediatv/mediatv.css">
 </head>
 <body>
 <div class="navbar navbar-default navbar-fixed-top">
@@ -121,17 +122,7 @@
     </div>
     <div class="col-md-5 middle-column-container" ng-view scroll-watcher></div>
     <div class="col-md-4">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">
-            <span class="glyphicon glyphicon-film"></span> Media TV
-          </h3>
-        </div>
-        <div class="panel-body">
-          @TODO
-        </div>
-      </div>
-
+      <mediatv/>
     </div>
   </div>
 </div>
@@ -158,8 +149,11 @@
 <script src="/modules/chat/chat-directive.js"></script>
 <script src="/modules/home/home.js"></script>
 <script src="/modules/home/home-controller.js"></script>
+<script src="/modules/home/compilator.js"></script>
 <script src="/modules/profile/profile.js"></script>
 <script src="/modules/profile/profile-controller.js"></script>
+<script src="/modules/mediatv/mediatv-controller.js"></script>
+<script src="/modules/mediatv/mediatv-directive.js"></script>
 <script ng-if="common.user.role == 'admin'" src="/modules/admin/admin.js"></script>
 <script ng-if="common.user.role == 'admin'" src="/modules/admin/admin-service.js"></script>
 <script ng-if="common.user.role == 'admin'" src="/modules/admin/admin-controller.js"></script>

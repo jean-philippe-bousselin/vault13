@@ -25,7 +25,11 @@
         <a href="#">{{post.from.name}}</a>
         <span ng-if="post.to"><span class="glyphicon glyphicon-play"></span> <a href="#">{{post.to.name}}</a></span>
       </h5>
-      <div class="post-message-container" ng-model="post.message" ng-bind-html="post.message"></div>
+      <div class="post-message-container"
+           ng-model="post.message"
+           compilator
+           template="{{post.message}}"
+           ng-controller="MediaTVCtrl"></div>
       <small class="post-tools">
         {{post.createdTime | date:'medium'}}
       </small>

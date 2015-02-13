@@ -1,13 +1,3 @@
-.embed-container {
-
-}
-.embed-container iframe,
-.embed-container object,
-.embed-container embed {
-    width: 100%;
-    height: 320px;
-}
-
 .posts {
 
 }
@@ -121,4 +111,11 @@
 
 .message-box-tools {
     height: 31px;
+}
+
+.resource-thumbnail {
+    cursor: pointer;
+}
+.resource-thumbnail:hover {
+    opacity: 0.8;
 }

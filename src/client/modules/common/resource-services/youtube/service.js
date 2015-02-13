@@ -12,17 +12,18 @@ angular.module('koan.common').factory('youtubeService', function ($rootScope, $w
     var youtubeService = {},
         token = ($window.sessionStorage.token || $window.localStorage.token),
         headers = {Authorization: 'Bearer ' + token},
-        matchRegex = /https?:\/\/(www\.)?youtu.*\/(watch\?v=)?(.{11})/i;
+        matchRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?/i,
+        apiUrl = 'https://gdata.youtube.com/feeds/api/videos/%VIDEOID%?v=2&alt=jsonc';
 
     youtubeService.matchAndReplace = function(post) {
 
         var deferred = $q.defer(),
             matchYT = post.message.match(matchRegex);
 
-        if (matchYT && matchYT[3].length == 11) { // youtube
+        if (matchYT && matchYT[1].length == 11) {
             $http({
                 method: 'GET',
-                url: 'https://gdata.youtube.com/feeds/api/videos/' + matchYT[3] + '?v=2&alt=jsonc'
+                url: apiUrl.replace('%VIDEOID%', matchYT[1])
             })
             .success(function (videoInfosJson) {
 
@@ -30,7 +31,7 @@ angular.module('koan.common').factory('youtubeService', function ($rootScope, $w
                 createResource(videoInfosJson)
                 .success(function (resource) {
                     //update the post message
-                    post.message = $compile(post.message.replace(matchRegex, buildPreviewHtml(resource)))($rootScope);
+                    post.message = post.message.replace(matchRegex, buildPreviewHtml(resource));
                     deferred.resolve();
                 })
                 .error(function () {
@@ -47,11 +48,20 @@ angular.module('koan.common').factory('youtubeService', function ($rootScope, $w
         return deferred.promise;
     };
 
+    youtubeService.getHTMLPlayer = function(resource) {
+        return '<iframe src="https://www.youtube.com/embed/' + resource.externalId + '?autoplay=1" frameborder="0" allowfullscreen></iframe>';
+    };
+
+    youtubeService.getResourceInfosAsHTML = function(resource) {
+        return '<div>Selected: <b>' + resource.title + '</b></div>';
+    }
+
     function createResource(videoInfosJson) {
         var resource = {
             type:        'youtube',
             category:    videoInfosJson.data.category,
-            resourceId:  videoInfosJson.data.id,
+            resourceId:  'youtube_' + videoInfosJson.data.id,
+            externalId:  videoInfosJson.data.id,
             title:       videoInfosJson.data.title,
             thumbnailLQUrl:   videoInfosJson.data.thumbnail.sqDefault,
             thumbnailHQUrl:   videoInfosJson.data.thumbnail.hqDefault
@@ -60,7 +70,7 @@ angular.module('koan.common').factory('youtubeService', function ($rootScope, $w
     }
 
     function buildPreviewHtml(resource) {
-        return '<youtube/>';
+        return '<div><img class="resource-thumbnail" ng-click="playResource(\'' + resource.resourceId + '\');" src="' + resource.thumbnailHQUrl + '" alt=""/><div><b>' + resource.title + '</b></div></div>';
     }
 
     return youtubeService;

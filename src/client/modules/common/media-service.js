@@ -36,6 +36,16 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
         return deferred.promise;
     };
 
+    media.resource = {
+        fetch: function(resourceId) {
+            return $http({
+                method: 'GET',
+                url: 'api/resources/' + resourceId,
+                headers: headers
+            });
+        }
+    };
+
     media.platforms = {
         get: function (text) {
             var deferred = $q.defer();

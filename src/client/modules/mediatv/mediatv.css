@@ -1,0 +1,10 @@
+.loading {
+    height: 300px;
+    width: 100%;
+    opacity: 0.8;
+    position: absolute;
+}
+
+.player h1 {
+    text-align: center;
+}

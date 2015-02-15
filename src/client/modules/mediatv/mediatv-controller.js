@@ -1,6 +1,6 @@
 angular.module('koan.common').controller('MediaTVCtrl', function ($scope, media, $injector) {
 
-    var service;
+    var service = null;
         currentResourceId = null
         isPlaying = false;
 
@@ -8,7 +8,7 @@ angular.module('koan.common').controller('MediaTVCtrl', function ($scope, media,
 
     $scope.playResource = function(resourceId) {
 
-        if(currentResourceId == resourceId) {
+        if(currentResourceId == resourceId && service != null) {
             if(isPlaying) {
                 service.player.trigger('pause');
                 isPlaying = false;

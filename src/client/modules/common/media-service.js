@@ -1,17 +1,22 @@
 'use strict';
 
-angular.module('koan.common').factory('media', function ($rootScope, $http, $window, $q, youtubeService, soundcloudService) {
+/**
+ * General service for embedded media management.
+ */
+angular.module('koan.common').factory('media', function ($rootScope, $http, $window, $q, youtubeService, soundcloudService, vimeoService) {
 
     var token = ($window.sessionStorage.token || $window.localStorage.token),
         headers = {Authorization: 'Bearer ' + token},
-        // TEMPORARY @TODO handle as must media as possible and drop this shit.
-        iframeRegex = /<iframe.*<\/iframe>/i,
-        youtubeRegex = /https?:\/\/(www\.)?youtu.*\/(watch\?v=)?(.{11})/i,
-        soundCloudRegex = /https?:\/\/soundcloud\.com\/\S*/gi,
-        //bandCampRegex = /https?:\/\/(.*)\.bandcamp.com\/\S*/gi,
-        urlRegex = /https?:\/\/\S*/i,
-        media = {events: {}};
+        media = {};
 
+    /**
+     * Check a post message content for any external services url.
+     * Executes a number of services on the messages, and replaces
+     * the content as necessary.
+     *
+     * @param post
+     * @returns Promise
+     */
     media.processPost = function(post) {
 
         post.message = sanitize(post.message);
@@ -19,7 +24,8 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
         var deferred = $q.defer(),
             servicePromises = [
             youtubeService.matchAndReplace(post),
-            soundcloudService.matchAndReplace(post)
+            soundcloudService.matchAndReplace(post),
+            vimeoService.matchAndReplace(post)
         ];
 
         $q.all(servicePromises)
@@ -32,10 +38,20 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
         return deferred.promise;
     };
 
+    /**
+     * Escapes html elements from a string.
+     *
+     * @param string
+     * @returns {string}
+     */
     function sanitize(string) {
         return string.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     };
 
+    /**
+     * Defines a serie of functions suitable
+     * for a resource.
+     */
     media.resource = {
         fetch: function(resourceId) {
             return $http({
@@ -43,67 +59,6 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
                 url: 'api/resources/' + resourceId,
                 headers: headers
             });
-        }
-    };
-
-    media.platforms = {
-        get: function (text) {
-            var deferred = $q.defer();
-            var matchIframe = text.match(iframeRegex);
-            var matchYT = text.match(youtubeRegex);
-            var matchSC = text.match(soundCloudRegex);
-            //var matchBC = text.match(bandCampRegex);
-            var matchUrl = text.match(urlRegex);
-
-            if(matchIframe) {
-                deferred.resolve({
-                    text: text
-                });
-            } else if (matchYT && matchYT[3].length == 11) { // youtube
-                $http({
-                    method: 'GET',
-                    url: 'https://gdata.youtube.com/feeds/api/videos/' + matchYT[3] + '?v=2&alt=jsonc'
-                })
-                .success(function (videoInfosJson) {
-                    // replace link with embeded player and return updated text
-                    deferred.resolve({
-                        text: text
-                                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
-                                .replace(youtubeRegex, getYoutubeEmbededPlayer(matchYT[3]))
-                    });
-                })
-                .error(function () {
-                    // do nothing
-                    deferred.reject('error');
-                });
-            } else if(matchSC) { // soundcloud
-                $http({
-                    method: 'GET',
-                    url: 'http://soundcloud.com/oembed?format=json&url=' + matchSC[0] + '&iframe=true'
-                })
-                .success(function (responseJson) {
-                    deferred.resolve({
-                        text: text
-                                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
-                                .replace(soundCloudRegex, responseJson.html)
-                    });
-                })
-                .error(function () {
-                    // do nothing
-                    deferred.reject('error');
-                });
-            } else if(matchUrl){
-                deferred.resolve({
-                    text: text
-                            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
-                            .replace(matchUrl, '<a href="' + matchUrl[0] + '" target="_blank">' + matchUrl[0] + '</a>')
-                });
-            } else {
-                deferred.resolve({
-                    text: text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
-                });
-            }
-            return deferred.promise;
         }
     };
 

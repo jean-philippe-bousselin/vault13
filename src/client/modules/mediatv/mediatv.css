@@ -1,3 +1,7 @@
+.mediatv-container {
+    max-height: 100%;
+    overflow-y: auto;
+}
 .loading {
     width: 100%;
     opacity: 0.8;
@@ -21,17 +25,26 @@
     text-align: center;
 }
 
-#mediatv .panel-footer,
-#mediatv .panel-footer ul {
+#mediatv ul {
     padding: 0;
+    width: 100%;
 }
-#mediatv .panel-footer ul li {
+#mediatv ul li {
     padding: 5px;
     list-style-type: none;
+    width: 100%
 }
-#mediatv .panel-footer .media-left img {
+#mediatv ul li:hover {
+    opacity: 0.8;
+}
+#mediatv .media-left img {
     margin-right: 10px;
 }
-#mediatv .panel-footer .media-left {
+#mediatv .media-left {
     cursor: pointer;
+}
+
+.queue-item img {
+    height: 40px;
+    width: 50px;
 }

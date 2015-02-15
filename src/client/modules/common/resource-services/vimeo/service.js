@@ -54,7 +54,7 @@ angular.module('koan.common').factory('vimeoService', function ($rootScope, $win
             return '<div>Selected: <b>' + resource.title + '</b></div>';
         },
         getQueueHTML: function(resource) {
-            return '<div class="media-left"><img width="50" src="' + resource.thumbnailUrl + '">' + resource.title; + '</div>';
+            return '<div ng-click="playResource(\'' + resource.resourceId + '\');" class="media-left"><img src="' + resource.thumbnailUrl + '">' + resource.title; + '</div>';
         }
     };
 

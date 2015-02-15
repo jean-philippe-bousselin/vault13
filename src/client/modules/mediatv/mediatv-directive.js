@@ -1,4 +1,4 @@
-angular.module('koan.common').directive('mediatv', function(media, $injector, $sce) {
+angular.module('koan.common').directive('mediatv', function(media, $injector, $sce, $anchorScroll, $location) {
     return {
         templateUrl: '/modules/mediatv/mediatv.html',
         controller: function($scope) {
@@ -30,6 +30,8 @@ angular.module('koan.common').directive('mediatv', function(media, $injector, $s
                     $scope.queueHistory.unshift($sce.trustAsHtml(html));
                     $scope.addItemToQueue(resourceId, html);
                     isPlaying = true;
+                    $location.hash('mediatv');
+                    $anchorScroll();
                 });
             };
 

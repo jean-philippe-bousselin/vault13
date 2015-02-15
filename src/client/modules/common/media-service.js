@@ -59,6 +59,24 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
                 url: 'api/resources/' + resourceId,
                 headers: headers
             });
+        },
+        addResourceToQueue: function(resourceId, html) {
+            return $http({
+                method: 'POST',
+                url: 'api/playQueue/',
+                data: {
+                    resourceId: resourceId,
+                    html: html
+                },
+                headers: headers
+            });
+        },
+        loadQueue: function(userId) {
+            return $http({
+                method: 'GET',
+                url: 'api/playQueue/' + userId,
+                headers: headers
+            });
         }
     };
 

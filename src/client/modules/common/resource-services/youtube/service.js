@@ -56,6 +56,9 @@ angular.module('koan.common').factory('youtubeService', function ($rootScope, $w
         },
         getInfos: function(resource) {
             return '<div>Selected: <b>' + resource.title + '</b></div>';
+        },
+        getQueueHTML: function(resource) {
+            return '<div class="media-left"><img width="50" src="' + resource.thumbnailLQUrl + '">' + resource.title; + '</div>';
         }
     };
 

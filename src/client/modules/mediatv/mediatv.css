@@ -20,3 +20,18 @@
 .player h1 {
     text-align: center;
 }
+
+#mediatv .panel-footer,
+#mediatv .panel-footer ul {
+    padding: 0;
+}
+#mediatv .panel-footer ul li {
+    padding: 5px;
+    list-style-type: none;
+}
+#mediatv .panel-footer .media-left img {
+    margin-right: 10px;
+}
+#mediatv .panel-footer .media-left {
+    cursor: pointer;
+}

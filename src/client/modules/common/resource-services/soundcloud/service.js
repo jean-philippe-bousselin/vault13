@@ -58,6 +58,9 @@ angular.module('koan.common').factory('soundcloudService', function ($rootScope,
         },
         getInfos: function(resource) {
             return '<div>Selected: <b>' + resource.title + '</b></div>';
+        },
+        getQueueHTML: function(resource) {
+            return '<div class="media-left"><img width="50" src="' + resource.thumbnailUrl + '">' + resource.title; + '</div>';
         }
     };
 

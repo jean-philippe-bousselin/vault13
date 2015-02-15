@@ -46,18 +46,15 @@ angular.module('koan.common').factory('vimeoService', function ($rootScope, $win
 
         },
         getHTML: function(resource) {
-            var iframe = $(resource.htmlPlayer);
-            var src = iframe.attr('src');
-            iframe.attr('id', playerId);
-            iframe.attr('src', src + '?autoplay=1');
-            iframe.removeAttr('width');
-            iframe.removeAttr('height');
-            return iframe[0];
+            return resource.htmlPlayer;
         },
         trigger: function() {
         },
         getInfos: function(resource) {
             return '<div>Selected: <b>' + resource.title + '</b></div>';
+        },
+        getQueueHTML: function(resource) {
+            return '<div class="media-left"><img width="50" src="' + resource.thumbnailUrl + '">' + resource.title; + '</div>';
         }
     };
 

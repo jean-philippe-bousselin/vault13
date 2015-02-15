@@ -30,6 +30,7 @@ comongo.connect = function *() {
   comongo.posts = yield db.collection('posts');
   comongo.shouts = yield db.collection('shouts');
   comongo.resources = yield db.collection('resources');
+  comongo.playQueue = yield db.collection('playQueue');
 };
 
 /**

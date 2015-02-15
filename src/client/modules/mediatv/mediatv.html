@@ -1,4 +1,4 @@
-<div class="chat-box" ng-controller="MediaTVCtrl">
+<div id="mediatv">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">
@@ -6,10 +6,14 @@
             </h3>
         </div>
         <div class="panel-body player-container">
-            <div class="loading hide"></div>
-            <div id="resource-player" class="player embed-container"></div></div>
-        <div class="panel-footer resource-infos">
-            &nbsp;
+            <div id="resource-player" class="player embed-container" ng-bind-html="player.embed">
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="resource-info" ng-bind-html="player.infos"></div>
+            <ul>
+                <li ng-repeat="item in queueHistory" ng-bind-html="item"></li>
+            </ul>
         </div>
     </div>
 </div>

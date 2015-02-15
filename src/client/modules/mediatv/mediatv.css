@@ -1,10 +1,22 @@
 .loading {
-    height: 300px;
     width: 100%;
     opacity: 0.8;
     position: absolute;
 }
-
+.player-container {
+    padding: 0;
+}
+.player {
+    height: 320px;
+    width: 100%;
+    background: url(../../images/blackscreen.png);
+    background-repeat: no-repeat;
+    position: relative;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
 .player h1 {
     text-align: center;
 }

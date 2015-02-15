@@ -13,7 +13,9 @@ angular.module('koan.common').factory('youtubeService', function ($rootScope, $w
         token = ($window.sessionStorage.token || $window.localStorage.token),
         headers = {Authorization: 'Bearer ' + token},
         matchRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?/i,
-        apiUrl = 'https://gdata.youtube.com/feeds/api/videos/%VIDEOID%?v=2&alt=jsonc';
+        apiUrl = 'https://gdata.youtube.com/feeds/api/videos/%VIDEOID%?v=2&alt=jsonc',
+        playerId = 'youtube_embedded_player'
+        playerObject;
 
     youtubeService.matchAndReplace = function(post) {
 
@@ -48,13 +50,20 @@ angular.module('koan.common').factory('youtubeService', function ($rootScope, $w
         return deferred.promise;
     };
 
-    youtubeService.getHTMLPlayer = function(resource) {
-        return '<iframe src="https://www.youtube.com/embed/' + resource.externalId + '?autoplay=1" frameborder="0" allowfullscreen></iframe>';
-    };
+    youtubeService.player = {
+        getHTML: function(resource) {
+            // set the js player
+            return '<iframe src="https://www.youtube.com/embed/' + resource.externalId + '?version=3&autoplay=1&enablejsapi=1&playerapiid=' + playerId + '" frameborder="0" allowfullscreen></iframe>';
+        },
+        trigger: function(action) {
+            var iframe = document.getElementById("resource-player").getElementsByTagName("iframe")[0].contentWindow;
+            iframe.postMessage('{"event":"command","func":"' + action + 'Video","args":""}', '*');
+        }
+    }
 
     youtubeService.getResourceInfosAsHTML = function(resource) {
         return '<div>Selected: <b>' + resource.title + '</b></div>';
-    }
+    };
 
     function createResource(videoInfosJson) {
         var resource = {

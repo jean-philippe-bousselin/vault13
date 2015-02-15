@@ -29,14 +29,14 @@ angular.module('koan.common').factory('soundcloudService', function ($rootScope,
                             deferred.resolve();
                         })
                         .error(function () {
-                            // do nothing
-                            deferred.reject('error');
+                            deferred.resolve();
                         });
                 })
                 .error(function () {
-                    // do nothing
-                    deferred.reject('error');
+                    deferred.resolve();
                 });
+        } else {
+            deferred.resolve();
         }
 
         return deferred.promise;

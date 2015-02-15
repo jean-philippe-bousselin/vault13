@@ -14,6 +14,8 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
 
     media.processPost = function(post) {
 
+        post.message = sanitize(post.message);
+
         var deferred = $q.defer(),
             servicePromises = [
             youtubeService.matchAndReplace(post),
@@ -28,6 +30,10 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
         });
 
         return deferred.promise;
+    };
+
+    function sanitize(string) {
+        return string.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     };
 
     media.resource = {

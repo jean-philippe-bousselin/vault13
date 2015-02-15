@@ -1,21 +1,13 @@
-/**
- * Created by blackcat on 2/1/15.
- */
 'use strict';
 
-/**
- * Service for providing access the backend API via HTTP and WebSockets.
- */
-
-angular.module('koan.common').factory('youtubeService', function ($rootScope, $window, $http, $q, $compile) {
+angular.module('koan.common').factory('youtubeService', function ($rootScope, $window, $http, $q) {
 
     var youtubeService = {},
         token = ($window.sessionStorage.token || $window.localStorage.token),
         headers = {Authorization: 'Bearer ' + token},
         matchRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?/i,
         apiUrl = 'https://gdata.youtube.com/feeds/api/videos/%VIDEOID%?v=2&alt=jsonc',
-        playerId = 'youtube_embedded_player'
-        playerObject;
+        playerId = 'youtube_embedded_player';
 
     youtubeService.matchAndReplace = function(post) {
 
@@ -38,19 +30,22 @@ angular.module('koan.common').factory('youtubeService', function ($rootScope, $w
                 })
                 .error(function () {
                     // do nothing
-                    deferred.reject('error');
+                    deferred.resolve();
                 });
             })
             .error(function () {
                 // do nothing
-                deferred.reject('error');
+                deferred.resolve();
             });
+        } else {
+            deferred.resolve();
         }
 
         return deferred.promise;
     };
 
     youtubeService.player = {
+        initialize: function() {},
         getHTML: function(resource) {
             // set the js player
             return '<iframe src="https://www.youtube.com/embed/' + resource.externalId + '?version=3&autoplay=1&enablejsapi=1&playerapiid=' + playerId + '" frameborder="0" allowfullscreen></iframe>';
@@ -58,11 +53,10 @@ angular.module('koan.common').factory('youtubeService', function ($rootScope, $w
         trigger: function(action) {
             var iframe = document.getElementById("resource-player").getElementsByTagName("iframe")[0].contentWindow;
             iframe.postMessage('{"event":"command","func":"' + action + 'Video","args":""}', '*');
+        },
+        getInfos: function(resource) {
+            return '<div>Selected: <b>' + resource.title + '</b></div>';
         }
-    }
-
-    youtubeService.getResourceInfosAsHTML = function(resource) {
-        return '<div>Selected: <b>' + resource.title + '</b></div>';
     };
 
     function createResource(videoInfosJson) {

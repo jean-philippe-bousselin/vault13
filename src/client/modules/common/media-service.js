@@ -1,13 +1,6 @@
-/**
- * Created by blackcat on 2/1/15.
- */
 'use strict';
 
-/**
- * Service for providing access the backend API via HTTP and WebSockets.
- */
-
-angular.module('koan.common').factory('media', function ($rootScope, $http, $window, $q, youtubeService) {
+angular.module('koan.common').factory('media', function ($rootScope, $http, $window, $q, youtubeService, soundcloudService) {
 
     var token = ($window.sessionStorage.token || $window.localStorage.token),
         headers = {Authorization: 'Bearer ' + token},
@@ -23,7 +16,8 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
 
         var deferred = $q.defer(),
             servicePromises = [
-            youtubeService.matchAndReplace(post)
+            youtubeService.matchAndReplace(post),
+            soundcloudService.matchAndReplace(post)
         ];
 
         $q.all(servicePromises)
@@ -106,10 +100,6 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
             return deferred.promise;
         }
     };
-
-    function getYoutubeEmbededPlayer(videoId){
-        return '<iframe src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>';
-    }
 
     return media;
 });

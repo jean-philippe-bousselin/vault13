@@ -21,17 +21,13 @@ angular.module('koan.common').controller('MediaTVCtrl', function ($scope, media,
 
         currentResourceId = resourceId;
 
-        // show loader
-        $('.loading').removeClass('hide');
         // fetch the resource
         media.resource.fetch(resourceId)
         .success(function(resource){
-            // replace content with generated loader
             service = $injector.get(resource.type + 'Service');
             $('.player').html(service.player.getHTML(resource));
-            $('.resource-infos').html(service.getResourceInfosAsHTML(resource));
-            // hide loader
-            $('.loading').addClass('hide');
+            $('.resource-infos').html(service.player.getInfos(resource));
+            service.player.initialize();
             isPlaying = true;
         });
     };

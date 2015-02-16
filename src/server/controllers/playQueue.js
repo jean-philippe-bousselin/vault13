@@ -11,18 +11,21 @@ var qs = require('querystring'),
 
 // register koa routes
 exports.init = function (app) {
-    app.use(route.get('/api/playqueue/:userId', getQueue));
+    app.use(route.get('/api/playqueue', getQueue));
     app.use(route.post('/api/playqueue', queueItem));
 };
 
 /**
  * Lists last 15 posts with latest 15 comments in them.
  */
-function *getQueue(userId) {
-    console.log(userId);
+function *getQueue() {
     var items = yield mongo.playQueue.find(
-            {},
-            {html: 1}
+            {user_id: this.user.id},
+            {
+                resourceId: 1,
+                user_id: 1,
+                html: 1
+            }
         ).toArray();
 
     this.status = 201;
@@ -33,11 +36,21 @@ function *getQueue(userId) {
  * Saves a new post in the database after proper validations.
  */
 function *queueItem() {
-    // it is best to validate post body with something like node-validator here, before saving it in the database..
+
     var data = yield parse(this);
-    data.user_id = this.user.id;
-    data.createdTime = new Date();
-    var results = yield mongo.playQueue.insert(data);
+
+    // delete item if already in queue
+    yield mongo.playQueue.remove({
+        user_id: this.user.id,
+        resourceId: data.resourceId
+    });
+
+    var results = yield mongo.playQueue.insert({
+        user_id: this.user.id,
+        createdTime: new Date(),
+        html: data.html,
+        resourceId: data.resourceId
+    });
 
     this.status = 201;
     this.body = {id: results[0]._id};

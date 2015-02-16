@@ -71,10 +71,10 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
                 headers: headers
             });
         },
-        loadQueue: function(userId) {
+        loadQueue: function() {
             return $http({
                 method: 'GET',
-                url: 'api/playQueue/' + userId,
+                url: 'api/playQueue',
                 headers: headers
             });
         }

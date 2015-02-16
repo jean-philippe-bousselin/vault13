@@ -11,7 +11,7 @@
     padding: 0;
 }
 .player {
-    height: 320px;
+    height: 33vh;
     width: 100%;
     background: url(../../images/blackscreen.png);
     background-repeat: no-repeat;
@@ -30,12 +30,25 @@
     width: 100%;
 }
 #mediatv ul li {
-    padding: 5px;
+    padding: 5px 0 5px 0;
     list-style-type: none;
     width: 100%
 }
+#mediatv ul li.selected {
+    height: 80px;
+    font-weight: bold;
+    font-size: 16px;
+    background: black;
+    color: #dddddd;
+}
+#mediatv ul li.selected .media-left img {
+    height: 70px;
+    width: auto;
+    margin-left: 5px;
+}
 #mediatv ul li:hover {
-    opacity: 0.8;
+    opacity: 0.9;
+    color: #e30613;
 }
 #mediatv .media-left img {
     margin-right: 10px;
@@ -43,7 +56,9 @@
 #mediatv .media-left {
     cursor: pointer;
 }
-
+.queue-item {
+    border-bottom: 2px dashed #eeeeee;
+}
 .queue-item img {
     height: 40px;
     width: 50px;

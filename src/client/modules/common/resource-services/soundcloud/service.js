@@ -47,11 +47,7 @@ angular.module('koan.common').factory('soundcloudService', function ($rootScope,
            widget = SC.Widget(playerId);
         },
         getHTML: function(resource) {
-            var iframe = $(resource.htmlPlayer);
-            iframe.attr('id', playerId);
-            iframe.removeAttr('width');
-            iframe.removeAttr('height');
-            return iframe[0];
+            return resource.htmlPlayer.replace(/width=".{1,4}"\sheight=".{1,4}"/i, 'id="' + playerId + '"');
         },
         trigger: function() {
             widget.toggle();

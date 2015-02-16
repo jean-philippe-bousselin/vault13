@@ -26,6 +26,12 @@ angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media,
           post.message = $sce.trustAsHtml(post.message);
           post.commentBox = {message: '', disabled: false};
           post.comments = post.comments || [];
+          post.comments.forEach(function(comment, key){
+            if(key < post.comments.length - 2) {
+              comment.isHidden = true;
+              post.hasHiddenComments = true;
+            }
+          });
         });
         $scope.posts = $scope.posts.concat(posts);
         loadedPostsCount += posts.length;
@@ -40,6 +46,13 @@ angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media,
 
   // retrieve posts from server
   $scope.loadPosts();
+
+  $scope.showAllComments = function(post) {
+    post.comments.forEach(function(comment){
+      comment.isHidden = false;
+    });
+    post.hasHiddenComments = false;
+  };
 
   $scope.checkForSendShortcut = function($event) {
     datebuff = new Date();

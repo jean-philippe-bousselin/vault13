@@ -43,7 +43,10 @@
       </small>
       <ul class="media-list post-comments">
         <li class="media"><span class="arrow-up-small"></span></li>
-        <li class="media post-comment" ng-repeat="comment in post.comments">
+        <li class="media" ng-if="post.hasHiddenComments">
+          <a href="#" style="padding: 5px;" ng-click="showAllComments(post)">Show all comments</a>
+        </li>
+        <li class="media post-comment" ng-repeat="comment in post.comments" ng-class="{hide: comment.isHidden}">
           <a href="#" class="media-left">
             <img class="media-object" ng-src="{{comment.from.picture}}" alt="">
           </a>

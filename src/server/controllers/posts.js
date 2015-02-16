@@ -26,7 +26,7 @@ function *listPosts(limit, offset) {
     var author,
       posts = yield mongo.posts.find(
       {},
-      {comments: {$slice: -2 /* only get last x many comments for each post */}},
+      {},
       {
           limit: limit,
           skip: offset,

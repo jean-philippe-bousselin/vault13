@@ -24,6 +24,14 @@
       <h5 class="media-heading">
         <a href="#">{{post.from.name}}</a>
         <span ng-if="post.to"><span class="glyphicon glyphicon-play"></span> <a href="#">{{post.to.name}}</a></span>
+        <div class="btn-group" style="float:right" ng-if="post.user_id == common.user.id || common.user.role == 'admin'">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right" role="menu">
+            <li><a href="#" ng-click="deletePost(post);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete post</a></li>
+          </ul>
+        </div>
       </h5>
       <div class="post-message-container"
            ng-model="post.message"

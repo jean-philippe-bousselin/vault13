@@ -63,6 +63,9 @@ angular.module('koan.common').factory('api', function ($rootScope, $http, $windo
     create: function (post) {
       return $http({method: 'POST', url: apiBase + '/posts', data: post, headers: headers});
     },
+    delete: function(post) {
+      return $http({method: 'DELETE', url: apiBase + '/posts/' + post.id, headers: headers});
+    },
     created: event(),
     comments: {
       create: function (postId, comment) {

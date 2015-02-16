@@ -56,7 +56,6 @@ html, body, .container {
 
 .summary {
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -71,6 +70,7 @@ body {
 .middle-column-container {
   max-height: 100%;
   overflow-y: auto;
+  overflow-x: visible;
 }
 .block {
   display: block;

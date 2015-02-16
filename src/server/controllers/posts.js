@@ -18,11 +18,9 @@ exports.init = function (app) {
   app.use(route.get('/api/posts/:limit/:offset', listPosts));
   app.use(route.post('/api/posts', createPost));
   app.use(route.post('/api/posts/:postId/comments', createComment));
+  app.use(route.delete('/api/posts/:id', deletePost));
 };
 
-/**
- * Lists last 15 posts with latest 15 comments in them.
- */
 function *listPosts(limit, offset) {
 
     var author,
@@ -76,6 +74,24 @@ function *createPost() {
   };
   delete post._id;
   ws.notify('posts.created', post);
+}
+
+function *deletePost(id) {
+    var post = yield mongo.posts.findOne(ObjectID(id));
+
+    if(post != null) {
+        if(post.user_id == this.user.id || this.user.role == 'admin') {
+            yield mongo.posts.remove({_id: ObjectID(id)});
+            this.status = 201;
+            this.body = {success: 'Resource deleted.'};
+        } else {
+            this.status = 403;
+            this.body = {error: 'You are not allowed to perform this action.'};
+        }
+    } else {
+        this.status = 404;
+        this.body = {error: 'Requested resource not found.'};
+    }
 }
 
 /**

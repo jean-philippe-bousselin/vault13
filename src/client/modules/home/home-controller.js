@@ -85,6 +85,7 @@ angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media,
                 })) {
               processedPost.id = savedPost.id;
               processedPost.message = $sce.trustAsHtml(processedPost.message);
+              processedPost.user_id = $scope.common.user.id;
               $scope.posts.unshift(processedPost);
             }
             // clear the post box and enable it
@@ -96,6 +97,15 @@ angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media,
             $scope.postBox.disabled = false;
           });
       });
+  };
+
+  $scope.deletePost = function(post) {
+    api.posts.delete(post).success(function() {
+      $scope.posts.splice($scope.posts.indexOf(post), 1);
+    })
+    .error(function() {
+      alert('error');
+    });
   };
 
   $scope.createComment = function ($event, post) {

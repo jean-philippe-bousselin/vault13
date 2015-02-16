@@ -44,10 +44,7 @@ function *createUser() {
 function *updateUser() {
     var putData = yield parse(this);
 
-    //console.log(putData);
-    var user = mongo.users.find();
     var updateData = {};
-
     if(typeof putData.user.name != 'undefined') {
         updateData.name = putData.user.name;
         user.name = putData.user.name;
@@ -62,7 +59,7 @@ function *updateUser() {
     }
 
     var result = yield mongo.users.update(
-        {_id: putData.user.id},
+        {_id: this.user.id},
         {$set: updateData}
     );
 

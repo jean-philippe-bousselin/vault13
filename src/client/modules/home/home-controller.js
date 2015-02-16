@@ -47,7 +47,8 @@ angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media,
   // retrieve posts from server
   $scope.loadPosts();
 
-  $scope.showAllComments = function(post) {
+  $scope.showAllComments = function(post, $event) {
+    $event.preventDefault();
     post.comments.forEach(function(comment){
       comment.isHidden = false;
     });

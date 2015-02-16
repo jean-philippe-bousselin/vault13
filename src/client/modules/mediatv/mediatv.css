@@ -12,6 +12,7 @@
 }
 .player {
     height: 33vh;
+    min-height: 300px;
     width: 100%;
     background: url(../../images/blackscreen.png);
     background-repeat: no-repeat;
@@ -40,6 +41,7 @@
     font-size: 16px;
     background: black;
     color: #dddddd;
+    padding-bottom: 5px;
 }
 #mediatv ul li.selected .media-left img {
     height: 70px;

@@ -31,8 +31,8 @@ angular.module('koan.common').directive('mediatv', function(media, $injector, $s
                     var html = service.player.getQueueHTML(resource);
                     $scope.addItemToQueue(resourceId, html);
                     isPlaying = true;
-                    $location.hash('mediatv');
-                    $anchorScroll();
+
+                    $(".mediatv-container").animate({ scrollTop: 0 });
                 });
             };
 

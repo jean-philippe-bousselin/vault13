@@ -44,19 +44,13 @@ angular.module('koan.common').factory('soundcloudService', function ($rootScope,
 
     soundcloudService.player = {
         initialize: function() {
-           widget = SC.Widget(playerId);
+           //widget = SC.Widget(playerId);
         },
         getHTML: function(resource) {
             return resource.htmlPlayer.replace(/width=".{1,4}"\sheight=".{1,4}"/i, 'id="' + playerId + '"');
         },
         trigger: function() {
-            widget.toggle();
-        },
-        getInfos: function(resource) {
-            return '<div>Selected: <b>' + resource.title + '</b></div>';
-        },
-        getQueueHTML: function(resource) {
-            return '<div ng-click="playResource(\'' + resource.resourceId + '\');" class="media-left"><img src="' + resource.thumbnailUrl + '">' + resource.title; + '</div>';
+            //widget.toggle();
         }
     };
 
@@ -73,7 +67,7 @@ angular.module('koan.common').factory('soundcloudService', function ($rootScope,
     }
 
     function buildPreviewHtml(resource) {
-        return '<div><img class="resource-thumbnail" ng-click="playResource(\'' + resource.resourceId + '\');" src="' + resource.thumbnailUrl + '" alt=""/><div><b>' + resource.title + '</b></div></div>';
+        return '<div class="resource-preview" ng-click="playResource(\'' + resource.resourceId + '\');"><img class="resource-thumbnail" src="' + resource.thumbnailUrl + '" alt=""/><div class="resource-caption">' + resource.title + '</div></div>';
     }
 
     return soundcloudService;

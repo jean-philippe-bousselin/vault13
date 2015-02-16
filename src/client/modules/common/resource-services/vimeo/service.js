@@ -42,19 +42,11 @@ angular.module('koan.common').factory('vimeoService', function ($rootScope, $win
     };
 
     vimeoService.player = {
-        initialize: function() {
-
-        },
+        initialize: function() {},
         getHTML: function(resource) {
             return resource.htmlPlayer;
         },
         trigger: function() {
-        },
-        getInfos: function(resource) {
-            return '<div>Selected: <b>' + resource.title + '</b></div>';
-        },
-        getQueueHTML: function(resource) {
-            return '<div ng-click="playResource(\'' + resource.resourceId + '\');" class="media-left"><img src="' + resource.thumbnailUrl + '">' + resource.title; + '</div>';
         }
     };
 
@@ -72,7 +64,7 @@ angular.module('koan.common').factory('vimeoService', function ($rootScope, $win
     }
 
     function buildPreviewHtml(resource) {
-        return '<div><img class="resource-thumbnail" ng-click="playResource(\'' + resource.resourceId + '\');" src="' + resource.thumbnailUrl + '" alt=""/><div><b>' + resource.title + '</b></div></div>';
+        return '<div class="resource-preview" ng-click="playResource(\'' + resource.resourceId + '\');"><img class="resource-thumbnail" src="' + resource.thumbnailUrl + '" alt=""/><div class="resource-caption">' + resource.title + '</div></div>';
     }
 
     return vimeoService;

@@ -21,11 +21,7 @@ exports.init = function (app) {
 function *getQueue() {
     var items = yield mongo.playQueue.find(
             {user_id: this.user.id},
-            {
-                resourceId: 1,
-                user_id: 1,
-                html: 1
-            }
+            {resource: 1}
         ).toArray();
 
     this.status = 201;
@@ -42,14 +38,14 @@ function *queueItem() {
     // delete item if already in queue
     yield mongo.playQueue.remove({
         user_id: this.user.id,
-        resourceId: data.resourceId
+        resourceId: data.resource.resourceId
     });
 
     var results = yield mongo.playQueue.insert({
         user_id: this.user.id,
         createdTime: new Date(),
-        html: data.html,
-        resourceId: data.resourceId
+        resourceId: data.resource.resourceId,
+        resource: data.resource
     });
 
     this.status = 201;

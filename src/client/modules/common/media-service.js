@@ -60,13 +60,12 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
                 headers: headers
             });
         },
-        addResourceToQueue: function(resourceId, html) {
+        addResourceToQueue: function(resource) {
             return $http({
                 method: 'POST',
                 url: 'api/playQueue/',
                 data: {
-                    resourceId: resourceId,
-                    html: html
+                    resource: resource
                 },
                 headers: headers
             });

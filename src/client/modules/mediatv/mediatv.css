@@ -38,8 +38,8 @@
 #mediatv ul li.selected {
     height: 80px;
     font-weight: bold;
-    font-size: 16px;
     background: black;
+    border: none;
     color: #dddddd;
     padding-bottom: 5px;
 }
@@ -52,10 +52,7 @@
     opacity: 0.9;
     color: #e30613;
 }
-#mediatv .media-left img {
-    margin-right: 10px;
-}
-#mediatv .media-left {
+#mediatv .queue-item {
     cursor: pointer;
 }
 .queue-item {

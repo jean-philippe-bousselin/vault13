@@ -53,12 +53,6 @@ angular.module('koan.common').factory('youtubeService', function ($rootScope, $w
         trigger: function(action) {
             var iframe = document.getElementById("resource-player").getElementsByTagName("iframe")[0].contentWindow;
             iframe.postMessage('{"event":"command","func":"' + action + 'Video","args":""}', '*');
-        },
-        getInfos: function(resource) {
-            return '<div>Selected: <b>' + resource.title + '</b></div>';
-        },
-        getQueueHTML: function(resource) {
-            return '<div ng-click="playResource(\'' + resource.resourceId + '\');" class="media-left"><img src="' + resource.thumbnailLQUrl + '">' + resource.title; + '</div>';
         }
     };
 
@@ -69,14 +63,13 @@ angular.module('koan.common').factory('youtubeService', function ($rootScope, $w
             resourceId:  'youtube_' + videoInfosJson.data.id,
             externalId:  videoInfosJson.data.id,
             title:       videoInfosJson.data.title,
-            thumbnailLQUrl:   videoInfosJson.data.thumbnail.sqDefault,
-            thumbnailHQUrl:   videoInfosJson.data.thumbnail.hqDefault
+            thumbnailUrl:   videoInfosJson.data.thumbnail.hqDefault
         };
         return $http({method: 'POST', url: 'api/resources', data: resource, headers: headers});
     }
 
     function buildPreviewHtml(resource) {
-        return '<div><img class="resource-thumbnail" ng-click="playResource(\'' + resource.resourceId + '\');" src="' + resource.thumbnailHQUrl + '" alt=""/><div><b>' + resource.title + '</b></div></div>';
+        return '<div class="resource-preview" ng-click="playResource(\'' + resource.resourceId + '\');"><img class="resource-thumbnail" src="' + resource.thumbnailUrl + '" alt=""/><div class="resource-caption">' + resource.title + '</div></div>';
     }
 
     return youtubeService;

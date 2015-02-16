@@ -18,9 +18,20 @@
 .post-body {
     width:100%;
 }
-.post-body img {
-    height: 20vh;
-    width: auto;
+.post-body .resource-preview {
+    height: auto;
+    width: 90%;
+}
+.post-body .resource-preview .resource-caption {
+    width: 100%;
+    border-bottom: 1px solid #eeeeee;
+    border-left: 1px solid #eeeeee;
+    border-right: 1px solid #eeeeee;
+    padding: 5px;
+}
+.post-body .resource-preview img {
+    width: 100%;
+    height: auto;
 }
 .post-body h5 {
     margin: 0;
@@ -108,9 +119,9 @@
     height: 31px;
 }
 
-.resource-thumbnail {
+.resource-preview {
     cursor: pointer;
 }
-.resource-thumbnail:hover {
-    opacity: 0.8;
+.resource-preview:hover {
+    opacity: 0.9;
 }

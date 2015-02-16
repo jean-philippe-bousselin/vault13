@@ -7,7 +7,15 @@
         <li class="queue-item"
             ng-repeat="item in queueHistory"
             ng-class="{selected: item.resourceId == currentResourceId}"
-            compilator
-            template="{{item.html}}"></li>
+            ng-click="playResource(item.resourceId);" >
+
+            <div class="media-left">
+                <img src="{{item.thumbnailUrl}}">
+            </div>
+            <div class="media-body">
+                {{item.title}}
+            </div>
+
+        </li>
     </ul>
 </div>

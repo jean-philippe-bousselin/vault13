@@ -53,6 +53,7 @@ angular.module('koan.common').factory('vimeoService', function ($rootScope, $win
     };
 
     function createResource(infosJson) {
+        debugger;
         var resource = {
             type:        'vimeo',
             resourceId:  'vimeo_' + infosJson.video_id,
@@ -61,7 +62,6 @@ angular.module('koan.common').factory('vimeoService', function ($rootScope, $win
             htmlPlayer:   infosJson.html,
             author:       infosJson.author_name,
             thumbnailUrl: infosJson.thumbnail_url,
-            duration:     infosJson.duration
         };
         return $http({method: 'POST', url: 'api/resources', data: resource, headers: headers});
     }

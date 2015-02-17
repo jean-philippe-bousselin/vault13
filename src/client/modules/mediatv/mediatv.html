@@ -12,12 +12,11 @@
             <div class="media-body">
                 {{currentResource.title}} <span class="label label-primary" ng-if="currentResource.author">{{currentResource.author}}</span>
                 <div>
-                    <img src="/api/users/{{currentResource.sharerId}}/picture"
+                    <img ng-src="/api/users/{{currentResource.sharerId}}/picture"
                          alt=""
-                         data-toggle="tooltip"
                          data-placement="right"
                          tooltip
-                         title="{{currentResource.sharerName}} shared this on {{currentResource.createdTime | date:'MMM d, H:mm'}}"/>
+                         data-title="{{currentResource.sharerName}} shared this on {{currentResource.createdTime | date:'MMM d, H:mm'}}"/>
                 </div>
             </div>
         </li>

@@ -3,7 +3,7 @@
 /**
  * General service for embedded media management.
  */
-angular.module('koan.common').factory('media', function ($rootScope, $http, $window, $q, youtubeService, soundcloudService, vimeoService) {
+angular.module('koan.common').factory('media', function ($rootScope, $http, $window, $q, youtubeService, soundcloudService, vimeoService, bandcampService) {
 
     var token = ($window.sessionStorage.token || $window.localStorage.token),
         headers = {Authorization: 'Bearer ' + token},
@@ -25,7 +25,8 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
             servicePromises = [
             youtubeService.matchAndReplace(post),
             soundcloudService.matchAndReplace(post),
-            vimeoService.matchAndReplace(post)
+            vimeoService.matchAndReplace(post),
+            bandcampService.matchAndReplace(post)
         ];
 
         $q.all(servicePromises)

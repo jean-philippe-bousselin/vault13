@@ -60,7 +60,8 @@ angular.module('koan.common').factory('vimeoService', function ($rootScope, $win
             title:        infosJson.title,
             htmlPlayer:   infosJson.html,
             author:       infosJson.author_name,
-            thumbnailUrl: infosJson.thumbnail_url
+            thumbnailUrl: infosJson.thumbnail_url,
+            duration:     infosJson.duration
         };
         return $http({method: 'POST', url: 'api/resources', data: resource, headers: headers});
     }

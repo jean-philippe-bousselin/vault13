@@ -38,15 +38,17 @@
 #mediatv ul li.selected {
     height: 80px;
     font-weight: bold;
-    background: black;
     border: none;
-    color: #dddddd;
     padding-bottom: 5px;
+    cursor: default;
+}
+#mediatv ul li.selected:hover {
+    opacity: 1;
+    color: inherit;
 }
 #mediatv ul li.selected .media-left img {
     height: 70px;
     width: auto;
-    margin-left: 5px;
 }
 #mediatv ul li:hover {
     opacity: 0.9;
@@ -64,4 +66,5 @@
 }
 .play-history-header {
     border-bottom: 1px solid #cccccc;
+    border-top: 1px solid #cccccc;
 }

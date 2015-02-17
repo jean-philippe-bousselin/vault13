@@ -63,7 +63,8 @@ angular.module('koan.common').factory('soundcloudService', function ($rootScope,
             title:        infosJson.title,
             htmlPlayer:   infosJson.html,
             author:       infosJson.author_name,
-            thumbnailUrl: infosJson.thumbnail_url
+            thumbnailUrl: infosJson.thumbnail_url,
+            sharer:       $rootScope.common.user.name
         };
         return $http({method: 'POST', url: 'api/resources', data: resource, headers: headers});
     }

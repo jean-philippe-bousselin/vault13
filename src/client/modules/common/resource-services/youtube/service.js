@@ -60,12 +60,13 @@ angular.module('koan.common').factory('youtubeService', function ($rootScope, $w
 
     function createResource(videoInfosJson) {
         var resource = {
-            type:        'youtube',
-            category:    videoInfosJson.data.category,
-            resourceId:  'youtube_' + videoInfosJson.data.id,
-            externalId:  videoInfosJson.data.id,
-            title:       videoInfosJson.data.title,
-            thumbnailUrl:   videoInfosJson.data.thumbnail.hqDefault
+            type:         'youtube',
+            category:     videoInfosJson.data.category,
+            resourceId:   'youtube_' + videoInfosJson.data.id,
+            externalId:   videoInfosJson.data.id,
+            title:        videoInfosJson.data.title,
+            thumbnailUrl: videoInfosJson.data.thumbnail.hqDefault,
+            duration:     videoInfosJson.data.duration
         };
         return $http({method: 'POST', url: 'api/resources', data: resource, headers: headers});
     }

@@ -23,7 +23,8 @@ function *getResource(id) {
 
 function *createResource() {
     var resource = yield parse(this);
-    resource.user_id = this.user.id;
+    resource.sharerId = this.user.id;
+    resource.sharerName = this.user.name;
     resource.createdTime = new Date();
     var results = yield mongo.resources.insert(resource);
     resource.id = results[0]._id;

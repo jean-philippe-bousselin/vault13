@@ -46,7 +46,10 @@
       <div class="post-resources" ng-repeat="resource in post.resources">
         <div class="resource-preview" ng-click="playResource(resource.resourceId);">
           <img class="resource-thumbnail" ng-src="{{resource.thumbnailUrl}}" alt="">
-          <div class="resource-caption" ng-bind="resource.title"></div>
+          <div class="resource-caption">
+            <span class="label label-default" ng-bind="resource.title"></span>
+            <span class="label label-primary" ng-if="resource.duration" ng-bind="resource.duration | secondsToMinutes"></span>
+          </div>
         </div>
       </div>
     </div>

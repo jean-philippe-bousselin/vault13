@@ -16,59 +16,66 @@
 </div>
 
 <ul class="media-list posts">
+  <!--empty list-->
+  <li class="text-center" ng-hide="posts.length"><h2>There is no post yet, add something awesome!</h2></li>
+  <!-- -->
   <li class="media post" ng-repeat="post in posts" id="post_{{post.id}}">
-    <a href="#" class="media-left">
-      <img class="media-object" ng-src="{{post.from.picture}}" alt="">
-    </a>
-    <div class="media-body post-body">
-      <h5 class="media-heading">
-        <a href="#">{{post.from.name}}</a>
-        <span ng-if="post.to"><span class="glyphicon glyphicon-play"></span> <a href="#">{{post.to.name}}</a></span>
-        <div class="btn-group" style="float:right" ng-if="post.user_id == common.user.id || common.user.role == 'admin'">
-          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-right" role="menu">
-            <li><a href="#" ng-click="deletePost(post);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete post</a></li>
-          </ul>
+  <a href="#" class="media-left">
+    <img class="media-object" ng-src="{{post.from.picture}}" alt="">
+  </a>
+  <div class="media-body post-body">
+    <h5 class="media-heading">
+      <a href="#">{{post.from.name}}</a>
+      <span ng-if="post.to"><span class="glyphicon glyphicon-play"></span> <a href="#">{{post.to.name}}</a></span>
+      <div class="btn-group" style="float:right" ng-if="post.user_id == common.user.id || common.user.role == 'admin'">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <li>
+            <a href="#" confirm message="Delete this post? There is no going back passed this point." callback="deletePost(post)">
+              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete post
+            </a>
+          </li>
+        </ul>
+      </div>
+    </h5>
+    <div class="post-message-container"
+         ng-model="post.message"
+         compilator
+         template="{{post.message}}"
+         ng-controller="MediaTVCtrl"></div>
+    <small class="post-tools">
+      {{post.createdTime | date:'medium'}}
+    </small>
+    <ul class="media-list post-comments">
+      <li class="media"><span class="arrow-up-small"></span></li>
+      <li class="media" ng-if="post.hasHiddenComments">
+        <a href="#" style="padding: 5px;" ng-click="showAllComments(post, $event)">Show all comments</a>
+      </li>
+      <li class="media post-comment" ng-repeat="comment in post.comments" ng-class="{hide: comment.isHidden}">
+        <a href="#" class="media-left">
+          <img class="media-object" ng-src="{{comment.from.picture}}" alt="">
+        </a>
+        <div class="media-body story-comment-body">
+          <small><a href="#" class="bold">{{comment.from.name}}</a> {{comment.message}}</small>
+          <small class="post-comment-tools">
+            {{comment.createdTime | date:'short'}}
+          </small>
         </div>
-      </h5>
-      <div class="post-message-container"
-           ng-model="post.message"
-           compilator
-           template="{{post.message}}"
-           ng-controller="MediaTVCtrl"></div>
-      <small class="post-tools">
-        {{post.createdTime | date:'medium'}}
-      </small>
-      <ul class="media-list post-comments">
-        <li class="media"><span class="arrow-up-small"></span></li>
-        <li class="media" ng-if="post.hasHiddenComments">
-          <a href="#" style="padding: 5px;" ng-click="showAllComments(post, $event)">Show all comments</a>
-        </li>
-        <li class="media post-comment" ng-repeat="comment in post.comments" ng-class="{hide: comment.isHidden}">
-          <a href="#" class="media-left">
-            <img class="media-object" ng-src="{{comment.from.picture}}" alt="">
-          </a>
-          <div class="media-body story-comment-body">
-            <small><a href="#" class="bold">{{comment.from.name}}</a> {{comment.message}}</small>
-            <small class="post-comment-tools">
-              {{comment.createdTime | date:'short'}}
-            </small>
-          </div>
-        </li>
-        <li class="media post-comment comment-box">
-          <a href="#" class="media-left">
-            <img class="media-object" ng-src="{{common.user.picture}}" alt="">
-          </a>
-          <div class="media-body post-comment-body">
-            <textarea msd-elastic ng-model="post.commentBox.message" ng-keypress="createComment($event, post)" ng-disabled="post.commentBox.disabled" class="form-control" placeholder="Write a comment..."></textarea>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </li>
-  <li>
-    <div class="loading" ng-class="{hide: noMorePosts}"></div>
-  </li>
+      </li>
+      <li class="media post-comment comment-box">
+        <a href="#" class="media-left">
+          <img class="media-object" ng-src="{{common.user.picture}}" alt="">
+        </a>
+        <div class="media-body post-comment-body">
+          <textarea msd-elastic ng-model="post.commentBox.message" ng-keypress="createComment($event, post)" ng-disabled="post.commentBox.disabled" class="form-control" placeholder="Write a comment..."></textarea>
+        </div>
+      </li>
+    </ul>
+  </div>
+</li>
+<li>
+  <div class="loading" ng-class="{hide: noMorePosts}"></div>
+</li>
 </ul>

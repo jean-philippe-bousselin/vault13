@@ -4,18 +4,26 @@
     </div>
     <div class="resource-info" ng-bind-html="player.infos"></div>
     <ul>
+        <li class="queue-item selected"
+            ng-if="currentResource">
+            <div class="media-left">
+                <img src="{{currentResource.thumbnailUrl}}">
+            </div>
+            <div class="media-body">
+                {{currentResource.title}}
+            </div>
+        </li>
+        <li class="play-history-header text-center" ng-show="queueHistory.length"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Play history</li>
         <li class="queue-item"
             ng-repeat="item in queueHistory"
-            ng-class="{selected: item.resourceId == currentResourceId}"
-            ng-click="playResource(item.resourceId);" >
-
+            ng-click="playResource(item.resourceId);">
             <div class="media-left">
                 <img src="{{item.thumbnailUrl}}">
             </div>
             <div class="media-body">
                 {{item.title}}
             </div>
-
         </li>
+        <li ng-hide="queueHistory.length"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Your history is empty. That's most suspicious.</li>
     </ul>
 </div>

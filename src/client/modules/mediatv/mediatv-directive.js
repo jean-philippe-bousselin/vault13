@@ -3,25 +3,15 @@ angular.module('koan.common').directive('mediatv', function(media, $injector, $s
         templateUrl: '/modules/mediatv/mediatv.html',
         controller: function($scope) {
 
-            $scope.currentResourceId = null;
+            var service = null;
 
+            $scope.currentResource = null;
             $scope.queueHistory = [];
             $scope.player = {
                 embed: null,
                 infos: null
             };
             $scope.playResource = function(resourceId) {
-                if($scope.currentResourceId == resourceId && service != null) {
-                    if(isPlaying) {
-                        service.player.trigger('pause');
-                        isPlaying = false;
-                    } else {
-                        service.player.trigger('play');
-                        isPlaying = true;
-                    }
-                    return;
-                }
-                $scope.currentResourceId = resourceId;
                 // fetch the resource
                 media.resource.fetch(resourceId)
                 .success(function(resource) {
@@ -29,8 +19,7 @@ angular.module('koan.common').directive('mediatv', function(media, $injector, $s
                     $scope.player.embed = $sce.trustAsHtml(service.player.getHTML(resource));
                     service.player.initialize();
                     $scope.addResourceToQueue(resource);
-                    isPlaying = true;
-
+                    $scope.currentResource = resource;
                     $(".mediatv-container").animate({ scrollTop: 0 });
                 });
             };

@@ -40,11 +40,17 @@
         </ul>
       </div>
     </h5>
-    <div class="post-message-container"
-         ng-model="post.message"
-         compilator
-         template="{{post.message}}"
-         ng-controller="MediaTVCtrl"></div>
+
+    <div class="post-message-container">
+      <div class="post-message-text" ng-model="post.message" ng-bind-html="post.message"></div>
+      <div class="post-resources" ng-repeat="resource in post.resources">
+        <div class="resource-preview" ng-click="playResource(resource.resourceId);">
+          <img class="resource-thumbnail" ng-src="{{resource.thumbnailUrl}}" alt="">
+          <div class="resource-caption" ng-bind="resource.title"></div>
+        </div>
+      </div>
+    </div>
+
     <small class="post-tools">
       {{post.createdTime | date:'medium'}}
     </small>

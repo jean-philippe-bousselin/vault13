@@ -45,7 +45,9 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
      * @returns {string}
      */
     function sanitize(string) {
-        return string.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        return string
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+                .replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '<br/>');
     };
 
     /**

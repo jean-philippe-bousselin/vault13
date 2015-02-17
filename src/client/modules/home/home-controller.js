@@ -85,13 +85,14 @@ angular.module('koan.home').controller('HomeCtrl', function ($scope, api, media,
       from: user,
       message: $scope.postBox.message,
       createdTime: new Date(),
+      resources: [],
       comments: [],
       commentBox: {message: '', disabled: false}
     };
 
     media.processPost(newPost)
       .then(function(processedPost) {
-        api.posts.create({message: processedPost.message})
+        api.posts.create(processedPost)
           .success(function (savedPost) {
             // only add the post if we don't have it already in the posts list to avoid dupes
             if (!_.some($scope.posts, function (p) {

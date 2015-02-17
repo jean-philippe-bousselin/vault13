@@ -7,7 +7,7 @@
         <li class="queue-item selected"
             ng-if="currentResource">
             <div class="media-left">
-                <img src="{{currentResource.thumbnailUrl}}">
+                <img ng-src="{{currentResource.thumbnailUrl}}">
             </div>
             <div class="media-body">
                 {{currentResource.title}}
@@ -18,7 +18,7 @@
             ng-repeat="item in queueHistory"
             ng-click="playResource(item.resourceId);">
             <div class="media-left">
-                <img src="{{item.thumbnailUrl}}">
+                <img ng-src="{{item.thumbnailUrl}}">
             </div>
             <div class="media-body">
                 {{item.title}}

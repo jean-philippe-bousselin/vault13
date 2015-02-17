@@ -24,7 +24,9 @@ angular.module('koan.common').factory('vimeoService', function ($rootScope, $win
                 createResource(responseJson)
                     .success(function (resource) {
                         //update the post message
-                        post.message = post.message.replace(matchRegex, buildPreviewHtml(resource));
+                        post.message = post.message.replace(matchRegex, '');
+                        // add the resource to post
+                        post.resources.push(resource);
                         deferred.resolve();
                     })
                     .error(function () {
@@ -61,10 +63,6 @@ angular.module('koan.common').factory('vimeoService', function ($rootScope, $win
             thumbnailUrl: infosJson.thumbnail_url
         };
         return $http({method: 'POST', url: 'api/resources', data: resource, headers: headers});
-    }
-
-    function buildPreviewHtml(resource) {
-        return '<div class="resource-preview" ng-click="playResource(\'' + resource.resourceId + '\');"><img class="resource-thumbnail" src="' + resource.thumbnailUrl + '" alt=""/><div class="resource-caption">' + resource.title + '</div></div>';
     }
 
     return vimeoService;

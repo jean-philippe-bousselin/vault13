@@ -15,12 +15,15 @@
 .post-message-container {
     padding: 10px 0 10px 0;
 }
+.post-message-text {
+    margin-bottom: 10px;
+}
 .post-body {
     width:100%;
 }
 .post-body .resource-preview {
     height: auto;
-    width: 80%;
+    width: 60%;
 }
 .post-body .resource-preview .resource-caption {
     width: 100%;

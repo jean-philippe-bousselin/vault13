@@ -44,11 +44,19 @@
     <div class="post-message-container">
       <div class="post-message-text" ng-model="post.message" ng-bind-html="post.message"></div>
       <div class="post-resources" ng-repeat="resource in post.resources">
-        <div class="resource-preview" ng-click="playResource(resource.resourceId);">
-          <img class="resource-thumbnail" ng-src="{{resource.thumbnailUrl}}" alt="">
+        <div class="resource-preview"
+             ng-click="playResource(resource.resourceId);"
+             ng-mouseenter="showOverlay = true;"
+             ng-mouseleave="showOverlay = false;">
+          <!--<img class="resource-thumbnail" ng-src="{{resource.thumbnailUrl}}" alt="">-->
+          <img class="resource-thumbnail" ng-src="images/default-profile-pic.jpg" alt="">
           <div class="resource-caption">
             <span class="label label-default" ng-bind="resource.title"></span>
             <span class="label label-primary" ng-if="resource.duration" ng-bind="resource.duration | secondsToMinutes"></span>
+          </div>
+          <div class="resource-overlay" ng-show="showOverlay">
+            <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
           </div>
         </div>
       </div>

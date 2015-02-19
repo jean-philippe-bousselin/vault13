@@ -3,7 +3,7 @@
 /**
  * General service for embedded media management.
  */
-angular.module('koan.common').factory('media', function ($rootScope, $http, $window, $q, youtubeService, soundcloudService, vimeoService, bandcampService) {
+angular.module('koan.common').factory('media', function ($rootScope, $http, $window, $q, youtubeService, soundcloudService, vimeoService, bandcampService, simpleLinkService) {
 
     var token = ($window.sessionStorage.token || $window.localStorage.token),
         headers = {Authorization: 'Bearer ' + token},
@@ -31,6 +31,8 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
 
         $q.all(servicePromises)
         .then(function(data){
+            // last step is to check for remaining link
+            simpleLinkService.matchAndReplace(post);
             deferred.resolve(post);
         }, function(errors){
             deferred.reject();
@@ -48,7 +50,7 @@ angular.module('koan.common').factory('media', function ($rootScope, $http, $win
     function sanitize(string) {
         return string
                 .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
-                .replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '<br/>');
+                .replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, ' <br/>');
     };
 
     /**

@@ -43,4 +43,22 @@ if (Meteor.isServer) {
           return true;
         }
     });
+
+    Meteor.methods({
+        addChat: function (text) {
+            // Make sure the user is logged in before inserting a task
+            if (! Meteor.userId()) {
+                throw new Meteor.Error("not-authorized");
+            }
+            chats.insert({
+                message: text,
+                createdTime: new Date(),
+                from: {
+                    id: Meteor.userId(),
+                    name: Meteor.user().username,
+                    picture: "/public/images/avatar.png"
+                }
+            });
+        }
+    });
 }

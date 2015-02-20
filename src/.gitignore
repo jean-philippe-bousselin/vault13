@@ -19,6 +19,7 @@ node_modules/
 # KOAN
 
 dist
+.idea
 .tmp
 .nodemon
 bower_components/

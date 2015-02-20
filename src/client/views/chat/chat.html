@@ -1,17 +1,20 @@
 <template name="chat">
     <div class="row">
-        <div class="ui divided list" style="height: 100%; overflow: hidden">
+        <h4 class="ui horizontal header divider chat-title">
+            <i class="comments icon"></i>
+            Chat room
+        </h4>
+        <div class="ui tiny list chat-list" style="height: 85vh; overflow-y: hidden">
             {{#each chats}}
                 {{> chat_row}}
             {{/each}}
-            <div class="item">
-                <img class="ui avatar image" src="../public/images/avatar.png">
-                <div class="content">
-                    <div class="ui left icon input">
-                        <input type="text" placeholder="Talk, man.">
-                        <i class="comment icon"></i>
-                    </div>
-                </div>
+        </div>
+        <div class="item">
+            <div class="ui icon input" style="width: 100%;">
+                <form class="new-chat">
+                    <input type="text" name="text" placeholder="Talk, man.">
+                </form>
+                <i class="comment icon"></i>
             </div>
         </div>
     </div>
@@ -19,7 +22,9 @@
 
 <template name="chat_row">
     <div class="item">
-        <img class="ui avatar image" src="{{from.picture}}">
+        <div class="left floated">
+            <img class="ui avatar image" src="/images/avatar.png">
+        </div>
         <div class="content">
             {{message}}
         </div>

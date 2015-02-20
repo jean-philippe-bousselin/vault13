@@ -7,6 +7,11 @@ function loadFixture(fixtures, collection) {
   }
 }
 
+function clearDb() {
+    chats.remove({});
+}
+
 Meteor.startup(function () {
+  clearDb();
   loadFixture(Fixtures.chats, chats);
 });

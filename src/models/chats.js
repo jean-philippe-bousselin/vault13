@@ -24,8 +24,6 @@ chats.attachSchema(
     })
 );
 
-// Collection2 already does schema checking
-// Add custom permission rules if needed
 if (Meteor.isServer) {
 
     Meteor.publish('chats', function () {

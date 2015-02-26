@@ -3,13 +3,13 @@ Template.header.created = function () {
   Session.set('showLogin', false);
 };
 
-Template['header'].helpers({
-  isActive: function () {
-    return Session.get('isActive') ? 'active' : '';
+Template.header.helpers({
+  active: function (route) {
+    return Router.current().route.getName() == route;
   }
 });
 
-Template['header'].events({
+Template.header.events({
   'click .log-out.button' : function () {
     Meteor.logout();
   }

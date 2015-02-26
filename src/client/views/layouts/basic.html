@@ -5,7 +5,17 @@
             {{> header}}
         </header>
 
-        {{> yield}}
+        <div class="ui grid main">
+            <div class="four wide column">
+                {{> chat}}
+            </div>
+            <div class="six wide column dynamic-content">
+                {{> yield}}
+            </div>
+            <div class="six wide column">
+                {{> mediatv}}
+            </div>
+        </div>
 
         <footer>
             {{> footer}}

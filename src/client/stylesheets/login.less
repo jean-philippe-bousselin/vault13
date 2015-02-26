@@ -10,11 +10,8 @@
   background-repeat: no-repeat;
   transition: height 0.8s;
 
-  .ui.main.header {
-    font-size: 3em;
-    padding-top: 160px;
+  .ui.header {
     color: @secondaryFontColor;
-
     > .sub.header {
       color: @secondaryFontColorVariation;
     }
@@ -44,8 +41,10 @@
 
 .login-wrapper {
   max-width: @loginFormWidth;
-  margin: 2em auto 0 auto;
+  margin: 10% auto 0 auto;
   color: @secondaryFontColor;
+
+  .ui.form .field > label {color: @secondaryFontColor;}
 
   .at-title .ui.header, label {
     color: @secondaryFontColor;

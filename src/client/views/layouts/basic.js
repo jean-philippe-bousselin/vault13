@@ -15,4 +15,3 @@ Template.basicLayout.helpers({
 Template.basicLayout.events({
 
 });
-

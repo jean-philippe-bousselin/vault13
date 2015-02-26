@@ -35,10 +35,10 @@ if (Meteor.isServer) {
           return true;
         },
         update : function () {
-          return true;
+          return false;
         },
         remove : function () {
-          return true;
+          return false;
         }
     });
 

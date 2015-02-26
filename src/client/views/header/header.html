@@ -1,10 +1,10 @@
 <template name="header">
     <div class="ui visible top horizontal inverted labeled icon sidebar menu">
-        <a class="active item">
+        <a href="/" class="item {{#if active 'feed'}}active{{/if}}">
             <i class="chat icon"></i>
             Feed
         </a>
-        <a class="item">
+        <a href="/profile" class="item {{#if active 'profile'}}active{{/if}}">
             <i class="user icon"></i>
             Profile
         </a>

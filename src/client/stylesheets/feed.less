@@ -1,13 +1,28 @@
 @import 'variables';
 @import 'lib/elements';
 
+.dynamic-content{
+  overflow-y: scroll;
+}
+
 .ui.divided.items {
   margin-top: 20px;
 
   .post {
+    border: 1px solid #dddddd;
+    margin-bottom: 20px;
     background: #ffffff;
     padding: 10px;
     width: 100%;
+    .comments {
+      max-width: 100%;
+      .comment-box {
+        margin-top: 20px;
+      }
+    }
+    .ui.card {
+      width: auto;
+    }
   }
 
 }

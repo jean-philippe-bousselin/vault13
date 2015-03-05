@@ -1,3 +1,3 @@
-Meteor.publish('chats', function () {
-  return chats.find();
-});
+//Meteor.publish('chats', function () {
+//  return chats.find();
+//});

@@ -1,5 +1,9 @@
 <template name="header">
     <div class="ui visible top horizontal inverted labeled icon sidebar menu">
+        <a href="/" class="left item inline">
+            <i class="setting icon"></i>
+            VAULT13
+        </a>
         <a href="/" class="item {{#if active 'feed'}}active{{/if}}">
             <i class="chat icon"></i>
             Feed
@@ -8,23 +12,7 @@
             <i class="user icon"></i>
             Profile
         </a>
-        <a class="item">
-            <i class="search icon"></i>
-            Search
-        </a>
-        <a class="item">
-            <i class="history icon"></i>
-            Chat history
-        </a>
-        <a class="item">
-            <i class="list layout icon"></i>
-            Manage playlists
-        </a>
-        <a class="item">
-            <i class="settings icon"></i>
-            Settings
-        </a>
-        <a class="item">
+        <a href="/about" class="item">
             <i class="info icon"></i>
             About
         </a>

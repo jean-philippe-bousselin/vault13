@@ -25,3 +25,8 @@ Template.registerHelper('debug', function (optionalValue) {
 Template.registerHelper('constant', function (what) {
   return Meteor.App[what.toUpperCase()];
 });
+
+Template.registerHelper('formatTime', function(context, options) {
+  if(context)
+    return moment(context).format('MM/DD/YYYY, hh:mm');
+});

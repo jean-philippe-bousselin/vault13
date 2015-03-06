@@ -10,4 +10,5 @@ Template.post.events({
 Template.post.rendered = function() {
     $('.toggle-comments').popup();
     $('.tag').popup();
+    $('.ui.dropdown').dropdown();
 };

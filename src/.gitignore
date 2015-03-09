@@ -9,6 +9,7 @@ lib-cov
 *.pid
 *.gz
 
+.uploads/*
 pids
 logs
 results

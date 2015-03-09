@@ -4,15 +4,15 @@
             <i class="setting icon"></i>
             VAULT13
         </a>
-        <a href="/" class="item {{#if active 'feed'}}active{{/if}}">
+        <a href="{{ pathFor 'feed' }}" class="item {{#if active 'feed'}}active{{/if}}">
             <i class="chat icon"></i>
             Feed
         </a>
-        <a href="/profile" class="item {{#if active 'profile'}}active{{/if}}">
+        <a href="{{ pathFor 'profile' }}" class="item {{#if active 'profile'}}active{{/if}}">
             <i class="user icon"></i>
             Profile
         </a>
-        <a href="/about" class="item">
+        <a href="{{ pathFor 'about' }}" class="item {{#if active 'about'}}active{{/if}}">
             <i class="info icon"></i>
             About
         </a>
@@ -20,21 +20,6 @@
             <i class="sign out icon"></i>
             Log out
         </a>
-
     </div>
-
-    <!--<div class="ui secondary pointing menu">-->
-        <!--<a href="" class="brand item">Vault13</a>-->
-        <!--<a href="" class="active item"><i class="comment icon"></i> Feed</a>-->
-        <!--<a href="" class="item"><i class="user icon"></i> Profile</a>-->
-        <!--<a href="" class="item"><i class="setting icon"></i> Admin</a>-->
-
-        <!--<div class="right menu">-->
-            <!--<a href="" class="item log-out button">-->
-                <!--<i class="sign out icon"></i>-->
-                <!--Log out-->
-            <!--</a>-->
-        <!--</div>-->
-    <!--</div>-->
 </template>
 

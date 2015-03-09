@@ -1,0 +1,51 @@
+<template name="edit_profile_modal">
+
+    <div class="profile-edit ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            Edit your accout informations
+        </div>
+        <div class="content">
+            <div class="ui grid">
+                <div class="five wide column">
+                    <div class="fluid image">
+                        <img width="100%" class="profile-pic-edit" src="/images/avatar.png" />
+                    </div>
+                </div>
+                <div class="eleven wide column">
+                    <div class="description">
+                        <div class="ui warning form">
+                            <div class="field">
+                                <label>Username</label>
+                                <div class="ui icon input">
+                                    <input type="text" value="{{currentUser.username}}">
+                                    <i class="user icon"></i>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>Password</label>
+                                <div class="ui icon input">
+                                    <input type="password">
+                                    <i class="lock icon"></i>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>Repeat</label>
+                                <div class="ui icon input">
+                                    <input type="password">
+                                    <i class="lock icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{> upload_semanticUI callbacks=uploadCallBacks}}
+        </div>
+        <div class="actions">
+            <div class="ui button">Cancel</div>
+            <div class="ui button">OK</div>
+        </div>
+    </div>
+
+</template>

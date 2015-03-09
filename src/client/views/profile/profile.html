@@ -4,6 +4,25 @@
         {{user.username}}'s Profile
     </h4>
 
-    <img class="ui middle aligned bordered small image" src="/images/avatar.png" />
+    <div class="ui grid">
+        <div class="four wide column">
+            <img class="ui middle aligned bordered small image" src="/images/avatar.png" />
+            <div class="fluid ui tiny black button edit-profile-button">
+                <i class="edit icon"></i>
+                Edit infos
+            </div>
+        </div>
+        <div class="twelve wide column">
+            {{> profile_chart}}
+        </div>
+    </div>
 
+    <h4 class="ui horizontal header divider">
+        <i class="list icon"></i>
+        {{user.username}}'s publications
+    </h4>
+
+    {{> posts}}
+
+    {{> edit_profile_modal}}
 </template>

@@ -1,5 +1,3 @@
 Template.about.rendered = function() {
-    $('.ui.accordion')
-        .accordion()
-    ;
+    $('.ui.accordion').accordion();
 };

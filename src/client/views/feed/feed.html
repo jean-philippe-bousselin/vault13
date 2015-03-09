@@ -1,32 +1,20 @@
 <template name="feed">
     <h4 class="ui horizontal header divider">
-        <i class="list layout icon"></i>
+        <i class="browser icon"></i>
         Feed
     </h4>
 
     <div class="ui inverted form">
         <div class="fields">
-            <div class="four wide field">
-                <div class="ui fluid blue basic button">
-                    <i class="add circle icon"></i> Add resource
-                </div>
-            </div>
-            <div class="twelve wide field">
-                <div class="ui icon input">
-                    <input type="text" placeholder="Search...">
-                    <i class="search icon"></i>
+            <div class="sixteen wide field">
+                <div class="ui left icon input">
+                    <input type="text" placeholder="Paste any resource url">
+                    <i class="world icon"></i>
                 </div>
             </div>
         </div>
     </div>
 
+    {{> posts}}
 
-
-    <div class="ui divided items">
-        {{> post}}
-        {{> post}}
-        {{> post}}
-        {{> post}}
-        {{> post}}
-    </div>
 </template>

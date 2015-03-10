@@ -54,7 +54,7 @@ if (Meteor.isServer) {
                 from: {
                     id: Meteor.userId(),
                     name: Meteor.user().username,
-                    picture: "/public/images/avatar.png"
+                    picture: Meteor.user().profile.picture
                 }
             });
         }

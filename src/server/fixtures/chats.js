@@ -9,7 +9,7 @@ for(var i = 0; i < 99; i++) {
             "from" : {
                 "id" : "1",
                 "name" : "User",
-                "picture" : "/public/images/avatar.png"
+                "picture" : "/images/avatar.png"
             },
             "createdTime" : new Date()
         }

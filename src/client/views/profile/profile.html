@@ -6,7 +6,7 @@
 
     <div class="ui grid">
         <div class="four wide column">
-            <img class="ui middle aligned bordered small image" src="/images/avatar.png" />
+            <img class="profile-pic ui middle aligned bordered fluid image" src="{{currentUser.profile.picture}}" />
             <div class="fluid ui tiny black button edit-profile-button">
                 <i class="edit icon"></i>
                 Edit infos
@@ -24,5 +24,6 @@
 
     {{> posts}}
 
-    {{> edit_profile_modal}}
+    {{> editProfileModal}}
+
 </template>

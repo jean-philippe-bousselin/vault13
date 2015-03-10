@@ -1,4 +1,4 @@
-<template name="edit_profile_modal">
+<template name="editProfileModal">
 
     <div class="profile-edit ui modal">
         <i class="close icon"></i>
@@ -9,7 +9,7 @@
             <div class="ui grid">
                 <div class="five wide column">
                     <div class="fluid image">
-                        <img width="100%" class="profile-pic-edit" src="/images/avatar.png" />
+                        <img width="100%" class="profile-pic-edit" src="{{currentUser.profile.picture}}" />
                     </div>
                 </div>
                 <div class="eleven wide column">
@@ -40,11 +40,15 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div style="margin: 20px;">
             {{> upload_semanticUI callbacks=uploadCallBacks}}
         </div>
+
         <div class="actions">
-            <div class="ui button">Cancel</div>
-            <div class="ui button">OK</div>
+            <div class="ui button cancel">Cancel</div>
+            <div class="ui button ok">OK</div>
         </div>
     </div>
 

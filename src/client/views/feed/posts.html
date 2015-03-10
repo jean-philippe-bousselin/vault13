@@ -1,11 +1,9 @@
 <template name="posts">
 
     <div class="ui divided items">
-        {{> post}}
-        {{> post}}
-        {{> post}}
-        {{> post}}
-        {{> post}}
+        {{#each posts}}
+            {{> post}}
+        {{/each}}
     </div>
 
 </template>

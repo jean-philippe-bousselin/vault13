@@ -48,9 +48,12 @@ if (Meteor.isServer) {
             if (! Meteor.userId()) {
                 throw new Meteor.Error("not-authorized");
             }
+
+            check(arguments, [Match.Any]);
+
             chats.insert({
-                message: text,
                 createdTime: new Date(),
+                message: text,
                 from: {
                     id: Meteor.userId(),
                     name: Meteor.user().username,

@@ -19,6 +19,7 @@ check@1.0.4
 chuangbo:cookie@1.1.0
 coffeescript@1.0.5
 dburles:collection-helpers@1.0.2
+dburles:mongo-collection-instances@0.2.6
 ddp@1.0.14
 deps@1.0.6
 ejson@1.0.5
@@ -26,6 +27,7 @@ email@1.0.5
 fastclick@1.0.2
 follower-livedata@1.0.3
 geojson-utils@1.0.2
+houston:admin@2.0.3
 html-tools@1.0.3
 htmljs@1.0.3
 http@1.0.10
@@ -77,6 +79,7 @@ spacebars@1.0.5
 spacebars-compiler@1.0.4
 srp@1.0.2
 templating@1.0.11
+tmeasday:paginated-subscription@0.2.4
 tomi:upload-jquery@2.1.0
 tomi:upload-server@1.2.2
 tracker@1.0.5

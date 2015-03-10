@@ -1,4 +1,7 @@
 Template.post.helpers({
+    totalComments: function () {
+        return this.comments.length;
+    }
 });
 
 Template.post.events({

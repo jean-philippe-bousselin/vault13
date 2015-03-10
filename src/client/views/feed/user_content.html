@@ -2,7 +2,7 @@
     <div class="ui comments">
         <div class="comment">
             <a class="avatar">
-                <img src="/images/avatar.png">
+                <img src="{{from.picture}}">
             </a>
             <div class="content">
                 <div class="ui mini right floated pointing dropdown icon button">
@@ -22,14 +22,16 @@
                         </div>
                     </div>
                 </div>
-                <a class="author">{{currentUser.username}}</a>
-                <div class="date">2 days ago</div>
+                <a class="author">{{from.name}}</a>
+                <div class="date momentum" data-date-original="{{createdTime}}">{{fromNow createdTime}}</div>
             </div>
         </div>
     </div>
 
     <div style="margin-top: 15px;">
-        <i class="quote left icon"></i> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. <i class="quote right icon"></i>
+        <i class="quote left icon"></i>
+            {{message}}
+        <i class="quote right icon"></i>
     </div>
 
     <h4 class="ui horizontal header divider">
@@ -37,11 +39,10 @@
     </h4>
 
     <div class="ui tiny tag labels">
-        <a href="#" class="tag ui black label" data-html="Show all <b>Jazz</b> related posts" data-variation="small inverted">
-            Jazz
+        {{#each resource.tags}}
+        <a href="#" class="tag ui black label" data-html="Show all <b>{{name}}</b> related posts" data-variation="small inverted">
+            {{name}}
         </a>
-        <a class="tag ui black label" data-html="Show all <b>Electro-pop</b> related posts" data-variation="small inverted">
-            Electro-pop
-        </a>
+        {{/each}}
     </div>
 </template>

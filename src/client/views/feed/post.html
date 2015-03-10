@@ -10,9 +10,14 @@
         </div>
         <div class="ui minimal comments">
             <h4 class="ui horizontal header divider">
-                <a href="#" class="toggle-comments" data-content="Show/Hide comments" data-variation="small inverted"><i class="comments icon"></i>(3)</a>
+                <a href="#"
+                   class="toggle-comments"
+                   data-content="Show/Hide comments"
+                   data-variation="small inverted">
+                    <i class="comments icon"></i>({{totalComments}})
+                </a>
             </h4>
-            <div class="comments-wrapper hidden">
+            <div class="comments-wrapper {{#if totalComments != 0}}hidden{{/if}}">
                 {{> comments}}
             </div>
         </div>

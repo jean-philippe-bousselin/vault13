@@ -5,32 +5,30 @@
             <i class="list icon"></i>
             Playlist
         </div>
+
         <div class="playlist-items">
 
             <div class="ui small selection celled list">
-                <div class="item">
-                    <img class="ui tiny image" src="http://img.youtube.com/vi/faL4Hu8gXgw/hqdefault.jpg">
-                    <div class="content">
-                        <div class="header">Reign in blood</div>
-                        Slayer
-                    </div>
-                </div>
-                <div class="item">
-                    <img class="ui tiny image" src="http://img.youtube.com/vi/faL4Hu8gXgw/hqdefault.jpg">
-                    <div class="content">
-                        <div class="header">Road</div>
-                        Virus
-                    </div>
-                </div>
-                <div class="item">
-                    <img class="ui tiny image" src="http://img.youtube.com/vi/faL4Hu8gXgw/hqdefault.jpg">
-                    <div class="content">
-                        <div class="header">Sonar Bliss</div>
-                        Dodheimsgard
-                    </div>
-                </div>
-            </div>
+                {{#each playlist}}
+                    {{> playlistItem}}
+                {{/each}}
 
+                {{#if isPlaylistEmpty}}
+                <div class="item">
+                    Nothing there yet.
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="playlistItem">
+    <div class="item hidden">
+        <img class="ui tiny image" src="{{thumbnailUrl}}">
+        <div class="content">
+            <div class="header">{{title}}</div>
+            {{author}}
         </div>
     </div>
 </template>

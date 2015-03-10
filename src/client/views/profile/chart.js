@@ -14,13 +14,6 @@ Template.profile_chart.helpers({
             title: {
                 text: ''
             },
-            plotOptions: {
-                line: {
-                    dataLabels: {
-                        enabled: false
-                    }
-                }
-            },
             yAxis: {
                 gridLineColor: 'transparent',
                 labels: {
@@ -30,16 +23,43 @@ Template.profile_chart.helpers({
                     text: null
                 }
             },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: false
+                    }
+                },
+                pie: {
+                    dataLabels: {
+                        distance: -10,
+                        color: 'red'
+                    }
+                }
+            },
             series: [{
                 type: 'line',
                 name: 'posts by day',
-                data: [
-                    ['1/1', 6],
-                    ['2/1', 12],
-                    ['3/1', 7],
-                    ['4/1', 0],
-                    ['5/1', 3]
-                ]
+                data: [6,12,7,0,3]
+            }, {
+                type: 'pie',
+                name: 'Total consumption',
+                data: [{
+                    name: 'Black Metal',
+                    y: 13,
+                    color: Highcharts.getOptions().colors[0] // Jane's color
+                }, {
+                    name: 'Post-rock',
+                    y: 23,
+                    color: Highcharts.getOptions().colors[1] // John's color
+                }, {
+                    name: 'Hip Hop',
+                    y: 19,
+                    color: Highcharts.getOptions().colors[2] // Joe's color
+                }],
+                center: [100, 80],
+                size: 100,
+                showInLegend: false
+
             }]
         };
     }

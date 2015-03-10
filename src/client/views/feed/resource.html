@@ -5,17 +5,17 @@
                 <div class="ui dimmer">
                     <div class="content">
                         <div class="center">
-                            <div class="ui center aligned inverted button">Play</div>
-                            <div class="ui center aligned inverted button">Queue</div>
+                            <div class="ui center aligned inverted button add-to-playlist">Play</div>
+                            <div class="ui center aligned inverted button add-to-playlist">Queue</div>
                         </div>
                     </div>
                 </div>
-                <img src="http://img.youtube.com/vi/faL4Hu8gXgw/hqdefault.jpg">
+                <img src="{{resource.thumbnailUrl}}">
             </div>
             <div class="content">
-                <a class="header">Title of the video</a>
+                <a class="header">{{resource.title}}</a>
                 <div class="meta">
-                    <span class="date">Artists</span>
+                    <span class="date">{{resource.author}}</span>
                 </div>
             </div>
         </div>

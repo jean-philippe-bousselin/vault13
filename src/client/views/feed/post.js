@@ -15,4 +15,8 @@ Template.post.rendered = function() {
     $('.post .toggle-comments').popup();
     $('.post .tag').popup();
     //$('.post .ui.dropdown').dropdown();
+
+    $(this.firstNode).find('.special.cards .image').dimmer({
+        on: 'hover'
+    });
 };

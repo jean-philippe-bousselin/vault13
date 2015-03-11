@@ -23,43 +23,36 @@ Template.profile_chart.helpers({
                     text: null
                 }
             },
+            xAxis: {
+                type: 'datetime'
+            },
             plotOptions: {
                 line: {
                     dataLabels: {
                         enabled: false
                     }
                 },
-                pie: {
-                    dataLabels: {
-                        distance: -10,
-                        color: 'red'
+                series: {
+                    marker: {
+                        enabled: false
                     }
                 }
             },
             series: [{
                 type: 'line',
                 name: 'posts by day',
-                data: [6,12,7,0,3]
-            }, {
-                type: 'pie',
-                name: 'Total consumption',
-                data: [{
-                    name: 'Black Metal',
-                    y: 13,
-                    color: Highcharts.getOptions().colors[0] // Jane's color
-                }, {
-                    name: 'Post-rock',
-                    y: 23,
-                    color: Highcharts.getOptions().colors[1] // John's color
-                }, {
-                    name: 'Hip Hop',
-                    y: 19,
-                    color: Highcharts.getOptions().colors[2] // Joe's color
-                }],
-                center: [100, 80],
-                size: 100,
-                showInLegend: false
-
+                data: [
+                    [Date.UTC(2015, 2, 1), 2],
+                    [Date.UTC(2015, 2, 2), 3],
+                    [Date.UTC(2015, 2, 3), 8],
+                    [Date.UTC(2015, 2, 4), 13],
+                    [Date.UTC(2015, 2, 5), 4],
+                    [Date.UTC(2015, 2, 6), 0],
+                    [Date.UTC(2015, 2, 7), 0],
+                    [Date.UTC(2015, 2, 8), 12],
+                    [Date.UTC(2015, 2, 9), 21],
+                    [Date.UTC(2015, 2, 10), 16]
+                ]
             }]
         };
     }

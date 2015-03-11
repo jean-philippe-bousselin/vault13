@@ -75,4 +75,41 @@ if (Meteor.isServer) {
         return posts.find();
     });
 
+    posts.allow({
+        insert : function () {
+            return true;
+        },
+        update : function () {
+            return true;
+        },
+        remove : function () {
+            return true;
+        }
+    });
+
+    Meteor.methods({
+        addComment: function (args) {
+            // Make sure the user is logged in before inserting a task
+            if (! Meteor.userId()) {
+                throw new Meteor.Error("not-authorized");
+            }
+
+            check(arguments, [Match.Any]);
+
+            posts.update({
+                _id: args[1]
+            }, {
+                $push: {comments: {
+                    message: args[0],
+                    from: {
+                        id: Meteor.userId(),
+                        name: Meteor.user().username,
+                        picture: Meteor.user().profile.picture
+                    },
+                    createdTime: new Date()
+                }}
+            });
+        }
+    });
+
 }

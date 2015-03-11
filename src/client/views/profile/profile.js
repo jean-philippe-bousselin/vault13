@@ -9,9 +9,12 @@ Template.profile.events({
         $('.profile-edit.ui.modal').modal(
             {
             onApprove: function() {
-                if(Session.get('newImageUrl')) {
-                    Meteor.call('updatePicture', Session.get('newImageUrl'));
-                }
+                var inputs = $('#user-infos-form :input');
+                var values = {};
+                inputs.each(function() {
+                    values[this.name] = $(this).val();
+                });
+                Meteor.call('updateUserInfos', values);
             }
         }
         ).modal('show');

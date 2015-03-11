@@ -6,40 +6,43 @@
             Edit your accout informations
         </div>
         <div class="content">
-            <div class="ui grid">
-                <div class="five wide column">
-                    <div class="fluid image">
-                        <img width="100%" class="profile-pic-edit" src="{{currentUser.profile.picture}}" />
+            <form id="user-infos-form">
+                <div class="ui grid">
+                    <div class="five wide column">
+                        <div class="fluid image">
+                            <img width="100%" class="profile-pic-edit" src="{{currentUser.profile.picture}}" />
+                            <input type="hidden" class="profile-picture" name="profilePicture" />
+                        </div>
                     </div>
-                </div>
-                <div class="eleven wide column">
-                    <div class="description">
-                        <div class="ui warning form">
-                            <div class="field">
-                                <label>Username</label>
-                                <div class="ui icon input">
-                                    <input type="text" value="{{currentUser.username}}">
-                                    <i class="user icon"></i>
+                    <div class="eleven wide column">
+                        <div class="description">
+                            <div class="ui warning form">
+                                <div class="field">
+                                    <label>Username</label>
+                                    <div class="ui icon input">
+                                        <input type="text" name="username" value="{{currentUser.username}}">
+                                        <i class="user icon"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="field">
-                                <label>Password</label>
-                                <div class="ui icon input">
-                                    <input type="password">
-                                    <i class="lock icon"></i>
+                                <div class="field">
+                                    <label>Password</label>
+                                    <div class="ui icon input">
+                                        <input type="password" name="password">
+                                        <i class="lock icon"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="field">
-                                <label>Repeat</label>
-                                <div class="ui icon input">
-                                    <input type="password">
-                                    <i class="lock icon"></i>
+                                <div class="field">
+                                    <label>Repeat</label>
+                                    <div class="ui icon input">
+                                        <input type="password" name="passwordRepeat">
+                                        <i class="lock icon"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
 
         <div style="margin: 20px;">

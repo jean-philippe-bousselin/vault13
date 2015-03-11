@@ -2,7 +2,11 @@ user_admin:
   email: admin@test.com
   username: admin
   password: supersecret
+  profile:
+    picture: /images/avatar.png
 user_test:
   email: test@test.com
   username: test
   password: testtest
+  profile:
+    picture: /images/avatar.png

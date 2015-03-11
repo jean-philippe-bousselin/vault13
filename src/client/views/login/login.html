@@ -7,7 +7,18 @@
                     This is not the darkness you paid for
                 </div>
             </h1>
-            {{> atForm }}
+            <!--{{> atForm }}-->
+            <form id="login-form">
+                <h2>Log In</h2>
+
+                <label for="login-username">Username</label>
+                <input type="text" id="login-username" placeholder="Username" />
+
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Password" />
+
+                <button type="submit">Log In</button>
+            </form>
         </div>
     </div>
 </template>

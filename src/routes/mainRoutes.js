@@ -12,6 +12,8 @@ Router.route('/', {name: 'feed'}, function () {
 
 Router.configure({
   onAfterAction: function() {
-    $('.dynamic-content').hide().fadeIn(300);
+      if(Meteor.isClient) {
+          $('.dynamic-content').hide().fadeIn(300);
+      }
   }
 });

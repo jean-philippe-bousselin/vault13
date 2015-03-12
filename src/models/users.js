@@ -6,12 +6,10 @@ if (Meteor.isServer) {
         if(!user.hasOwnProperty('profile')) {
             user.profile = {};
         }
-        user.profile.picture = options.picture;
+        user.profile.picture = '/images/avatar.png';
 
         return user;
     });
-
-
 
     Meteor.methods({
         updateUserInfos: function (values) {
@@ -21,8 +19,6 @@ if (Meteor.isServer) {
             }
 
             check(arguments, [Match.Any]);
-
-            console.log(values);
 
             var data = {};
             data.username = values.username;

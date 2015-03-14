@@ -18,7 +18,7 @@ Template.feed.events({
         Meteor.call('iframely.oembed', url, function(error, resource) {
 
             if (error) {
-                Session.set(key + url, {error: error.error});
+                Session.set( url, {error: error.error});
                 return;
             }
 
@@ -31,21 +31,36 @@ Template.feed.events({
                 }
             };
 
-            debugger;
-            //Meteor.call('lastfm.artist.getTags', resource.author, function(error, tags) {
+            Session.set('newPost', newPost);
+
+            var lastfm = new LastFM({
+                apiKey    : '990d47d03475973d72e70c0e9123e00c',
+                apiSecret : '598ad5662005daafaa3ff92795edbfeb'
+            });
+
+            if(resource.author != '') {
+                lastfm.artist.getInfo({artist: resource.author}, {success: function(data){
+                    for(tag in data.artist.tags.tag) {
+                        newPost.resource.tags.push(data.artist.tags.tag[tag]);
+                    }
+                    Session.set('newPost', newPost);
+                }, error: function(code, message){
+                    debugger;
+                }});
+            }
+
+
+            //Meteor.call('lastfm.artist.getTags', resource.author, function(error, resource) {
             //    debugger;
-            //    newPost.resource.tags = tags;
             //});
 
-            LastFMClient.artist.getTags({artist: resource.author}, {success: function(data){
-                /* Use data. */
-                debugger;
-            }, error: function(code, message){
-                debugger;
-                /* Show error message. */
-            }});
+            //LastFMApi.artist.getTags({artist: resource.author}, {success: function(data){
+            //    debugger;
+            //}, error: function(code, message){
+            //    debugger;
+            //}});
 
-            Session.set('newPost', newPost);
+
 
             $('.add-resource.ui.modal').modal(
                 {

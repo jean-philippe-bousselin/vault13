@@ -27,7 +27,7 @@ Meteor.methods({
             originalUrl: result.data.url,
             thumbnailUrl: result.data.thumbnail_url,
             title: result.data.title,
-            author: result.data.author,
+            author: result.data.author || '',
             html: result.data.html,
             tags: []
         };

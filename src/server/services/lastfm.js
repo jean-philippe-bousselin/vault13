@@ -6,31 +6,16 @@ Meteor.methods({
 
         check(artist, String);
 
-        var error;
-        console.log(artist);
-        try {
-            var result = HTTP.get('http://ws.audioscrobbler.com/2.0/', {
-                params: {
-                    method: 'artist.getTags',
-                    artist: artist,
-                    api_key: '990d47d03475973d72e70c0e9123e00c',
-                    format: 'json',
-                    secret: '598ad5662005daafaa3ff92795edbfeb'
-                }
-            });
-            //var result = LastFM.request('album.getinfo', opts, this.userId);
-        } catch (ex) {
-            error = ex.response && ex.response.statusCode || ex.message;
-        }
 
-        console.log(result);
-        error = (result && result.content && result.content.message) || (result && result.statusCode !== 200 && result.statusCode) || error;
+        LastFMApi = {
+            client: new LastFM({
+                apiKey    : '990d47d03475973d72e70c0e9123e00c',
+                apiSecret : '598ad5662005daafaa3ff92795edbfeb'
+            })
+        };
 
+        var tags = LastFMApi.client.artist.getTags(artist);
 
-        if (error) {
-            throw new Meteor.Error(error);
-        }
-
-        return result;
+        console.log(tags);
     }
 });

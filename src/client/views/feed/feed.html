@@ -7,14 +7,17 @@
     <div class="ui inverted form">
         <div class="fields">
             <div class="sixteen wide field">
-                <div class="ui left icon input">
-                    <input type="text" placeholder="Paste any resource url">
-                    <i class="world icon"></i>
-                </div>
+                <form id="resource-add-form">
+                    <div class="ui left icon input">
+                        <input class="add-url-button" type="text" placeholder="Paste any resource url">
+                        <i class="world icon"></i>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
     {{> posts}}
 
+    {{> addResource post=newPost}}
 </template>

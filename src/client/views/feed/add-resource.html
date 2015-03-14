@@ -1,0 +1,64 @@
+<template name="addResource">
+
+    <div class="add-resource ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            Refine your post
+        </div>
+        <div class="content">
+            <div class="ui grid">
+                <div class="eight wide column">
+                    <div class="ui special cards fluid">
+                        <div class="ui card fluid">
+                            {{{post.resource.html}}}
+                            <div class="content">
+                                <a class="header">{{post.resource.title}}</a>
+                                <div class="meta">
+                                    <span class="date">{{post.resource.author}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="eight wide column">
+                    <div class="ui comments">
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="{{post.from.picture}}">
+                            </a>
+                            <div class="content">
+                                <a class="author">{{post.from.name}}</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui form">
+                        <div class="field">
+                            <textarea placeholder="Share your thoughts about this"></textarea>
+                        </div>
+                    </div>
+
+                    <h4 class="ui horizontal header divider">
+                        <i class="tags icon"></i>
+                    </h4>
+
+                    <div class="ui tiny tag labels">
+                        {{#unless post.resource.tags}}
+                        <span class="mute">no tags found.</span>
+                        {{/unless}}
+                        {{#each post.resource.tags}}
+                        <a href="#" class="tag ui black label" data-html="Show all <b>{{name}}</b> related posts" data-variation="small inverted">
+                            {{name}}
+                        </a>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui button cancel">Cancel</div>
+            <div class="ui button ok">OK</div>
+        </div>
+    </div>
+
+</template>

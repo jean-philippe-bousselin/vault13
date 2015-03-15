@@ -12,15 +12,17 @@
     </div>
 
     <div style="margin-top: 15px;">
+        {{#if message}}
         <i class="quote left icon"></i>
             {{message}}
         <i class="quote right icon"></i>
+        {{/if}}
     </div>
 
+    {{#if resource.tags}}
     <h4 class="ui horizontal header divider">
         <i class="tags icon"></i>
     </h4>
-
     <div class="ui tiny tag labels">
         {{#each resource.tags}}
         <a href="#" class="tag ui black label" data-html="Show all <b>{{name}}</b> related posts" data-variation="small inverted">
@@ -28,4 +30,5 @@
         </a>
         {{/each}}
     </div>
+    {{/if}}
 </template>

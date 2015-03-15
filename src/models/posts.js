@@ -3,11 +3,12 @@ posts = new Mongo.Collection('posts');
 posts.attachSchema(
     new SimpleSchema({
         message: {
-            type: String
+            type: String,
+            optional: true
         },
         resource: {
             type: new SimpleSchema({
-                "token" : {
+                "html" : {
                     type: String
                 },
                 "originalUrl" : {
@@ -41,7 +42,7 @@ posts.attachSchema(
             })
         },
         createdTime : {
-            type: Date
+            type: Number
         },
         'comments': {
             type: [new SimpleSchema({
@@ -62,7 +63,7 @@ posts.attachSchema(
                     })
                 },
                 createdTime: {
-                    type: Date
+                    type: Number
                 }
             })]
         }
@@ -72,7 +73,7 @@ posts.attachSchema(
 if (Meteor.isServer) {
 
     Meteor.publish('posts', function () {
-        return posts.find();
+        return posts.find({}, {sort: {createdTime: -1}});
     });
 
     posts.allow({

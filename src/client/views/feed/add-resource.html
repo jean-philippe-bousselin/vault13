@@ -26,7 +26,7 @@
                                     </div>
                                     <div class="ui search fluid">
                                         <div class="ui icon input fluid">
-                                            <input class="prompt" type="text" placeholder="Common passwords...">
+                                            <input class="artist-name prompt" type="text" placeholder="Artist name">
                                             <i class="search icon"></i>
                                         </div>
                                         <div class="results"></div>
@@ -52,7 +52,7 @@
 
                     <div class="ui form">
                         <div class="field">
-                            <textarea placeholder="Share your thoughts about this"></textarea>
+                            <textarea id="user-expression-on-resource" placeholder="Share your thoughts about this"></textarea>
                         </div>
                     </div>
 
@@ -61,15 +61,25 @@
                     </h4>
 
                     <div class="ui tiny tag labels">
+                        <div class="mute" style="margin-bottom: 15px;">Tags are based on the artist name, they might not be accurate. Edit them as you see fit.</div>
                         {{#unless post.resource.tags}}
                         <span class="mute">no tags found.</span>
                         {{/unless}}
                         {{#each post.resource.tags}}
-                        <a href="#" class="tag ui black label" data-html="Show all <b>{{name}}</b> related posts" data-variation="small inverted">
+                        <a href="#"
+                           class="artist-tag ui black label"
+                           data-content="Click to delete this tag"
+                           data-variation="small inverted">
                             {{name}}
                         </a>
                         {{/each}}
                     </div>
+
+                    <div class="ui left icon input">
+                        <input type="text" placeholder="Add tag">
+                        <i class="plus icon"></i>
+                    </div>
+
                 </div>
             </div>
         </div>

@@ -1,21 +1,22 @@
 Meteor.methods({
-    /**
-     * Created by jean-philippe on 13.03.15.
-     */
+
     "lastfm.artist.getTags": function (artist) {
 
         check(artist, String);
 
+        if(artist != '') {
 
-        LastFMApi = {
-            client: new LastFM({
-                apiKey    : '990d47d03475973d72e70c0e9123e00c',
-                apiSecret : '598ad5662005daafaa3ff92795edbfeb'
-            })
-        };
+            var result = HTTP.get('http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&format=json', {
+                params: {
+                    artist: artist,
+                    api_key: '990d47d03475973d72e70c0e9123e00c'
+                }
+            });
 
-        var tags = LastFMApi.client.artist.getTags(artist);
+            return result.data.artist.tags.tag;
 
-        console.log(tags);
+        } else {
+            return [];
+        }
     }
 });

@@ -107,7 +107,7 @@ if (Meteor.isServer) {
                         name: Meteor.user().username,
                         picture: Meteor.user().profile.picture
                     },
-                    createdTime: new Date()
+                    createdTime: Date.parse(new Date())
                 }}
             });
         }

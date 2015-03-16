@@ -1,3 +1,12 @@
+var newPost;
+function getTags() {
+    Meteor.apply('lastfm.artist.getTags', [newPost.resource.author], true, function(error, tags) {
+        newPost.resource.tags = tags;
+        newPost.tagsLoaded = true;
+        Session.set('newPost', newPost);
+    });
+};
+
 Template.feed.helpers({
 
     newPost: function() {
@@ -14,46 +23,29 @@ Template.feed.events({
         $('.resource-url-input-container').addClass('loading');
 
         var url = template.find('.add-url-button').value;
-        Meteor.call('iframely.oembed', url, function(error, resource) {
-
-            if (error) {
-                Session.set( url, {error: error.error});
-                return;
-            }
-
-            var newPost = {
+        Meteor.apply('iframely.oembed', [url], true, function(error, resource) {
+            newPost = {
                 resource: resource,
                 from: {
                     "id" : Meteor.userId(),
                     "name" : Meteor.user().username,
                     "picture" : Meteor.user().profile.picture
-                }
+                },
+                tagsLoaded: false
             };
             Session.set('newPost', newPost);
 
-            // @TODO move this server side
-            var lastfm = new LastFM({
-                apiKey    : '990d47d03475973d72e70c0e9123e00c',
-                apiSecret : '598ad5662005daafaa3ff92795edbfeb'
-            });
-
-            if(resource.author != '') {
-                lastfm.artist.getInfo({artist: resource.author}, {
-                    success: function(data){
-                        for(tag in data.artist.tags.tag) {
-                            newPost.resource.tags.push(data.artist.tags.tag[tag]);
-                        }
-                        Session.set('newPost', newPost);
-                        $('.artist-tag').popup();
-                    }
-                });
-            }
+            //@TODO find a way to remove this ugly setimeout
+            // it is only used to fix a supposed race conditions
+            // which is making meteor throw an arguments not checked exception
+            Meteor.setTimeout(
+                getTags,
+            1000);
 
             $('.add-resource.ui.modal').modal(
                 {
                     onVisible: function() {
-                      //$('.artist-tag').popup();
-                      $('.artist-tag').click(function(){
+                        $('.artist-tag').click(function(){
                           var value = $(this).html().trim();
                           for (index in newPost.resource.tags) {
                               if(value == newPost.resource.tags[index]) {
@@ -61,7 +53,20 @@ Template.feed.events({
                               }
                           }
                           Session.set('newPost', newPost);
-                      });
+                        });
+                        //$('.artist-name').blur(function(){
+                        //    debugger;
+                        //    if($(this).val() != '') {
+                        //        newPost.tagsLoaded = false;
+                        //        newPost.resource.author = $(this).val();
+                        //        Meteor.apply('lastfm.artist.getTags', [newPost.resource.author], true, function(error, tags) {
+                        //            newPost.resource.tags = tags;
+                        //            newPost.tagsLoaded = true;
+                        //            Session.set('newPost', newPost);
+                        //        });
+                        //    }
+                        //});
+
                     },
                     onApprove: function() {
                         newPost.message = $('#user-expression-on-resource').val();
@@ -78,7 +83,6 @@ Template.feed.events({
 
         });
 
-        return;
     }
 
 });

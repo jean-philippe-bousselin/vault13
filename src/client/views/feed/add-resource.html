@@ -24,7 +24,7 @@
                                             <p>Please fill in the name below</p>
                                         </div>
                                     </div>
-                                    <div class="ui search fluid">
+                                    <div class="artist-search ui top aligned search fluid">
                                         <div class="ui icon input fluid">
                                             <input class="artist-name prompt" type="text" placeholder="Artist name">
                                             <i class="search icon"></i>
@@ -56,12 +56,15 @@
                         </div>
                     </div>
 
+                    {{#if tagsLoaded}}
                     <h4 class="ui horizontal header divider">
                         <i class="tags icon"></i>
                     </h4>
 
                     <div class="ui tiny tag labels">
-                        <div class="mute" style="margin-bottom: 15px;">Tags are based on the artist name, they might not be accurate. Edit them as you see fit.</div>
+                        <div class="mute" style="margin-bottom: 15px;">
+                            Tags are based on the artist name, therefore they might not be accurate. Edit them as you see fit.
+                        </div>
                         {{#unless post.resource.tags}}
                         <span class="mute">no tags found.</span>
                         {{/unless}}
@@ -74,12 +77,21 @@
                         </a>
                         {{/each}}
                     </div>
-
-                    <div class="ui left icon input">
-                        <input type="text" placeholder="Add tag">
-                        <i class="plus icon"></i>
+                    {{else}}
+                    <div class="ui segment" style="height: 100px;">
+                        <div class="ui active inverted dimmer">
+                            <div class="ui text loader">Looking for tags</div>
+                        </div>
+                        <p></p>
                     </div>
-
+                    {{/if}}
+                    <div class="tag-search ui search fluid" style="margin-top: 15px;">
+                        <div class="ui icon input fluid">
+                            <input class="tag-name prompt" type="text" placeholder="Add a tag">
+                            <i class="search icon"></i>
+                        </div>
+                        <div class="results"></div>
+                    </div>
                 </div>
             </div>
         </div>

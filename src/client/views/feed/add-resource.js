@@ -1,5 +1,5 @@
 Template.addResource.events({
-    'blur .artist-name': function() {
+    'click .artist-tag': function() {
         debugger;
     }
 });

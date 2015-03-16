@@ -12,21 +12,9 @@
                         <div class="ui card fluid">
                             {{{post.resource.html}}}
                             <div class="content">
-                                <div class="ui pointing below label">
-                                    Edit resource title
-                                </div>
                                 <a class="header">{{post.resource.title}}</a>
                                 <div class="meta">
                                     {{#unless post.resource.author}}
-                                    <div class="ui yellow icon message">
-                                        <i class="inbox icon"></i>
-                                        <div class="content">
-                                            <div class="header">
-                                                Vault13 could not find the artist name
-                                            </div>
-                                            <p>Please fill in the name below</p>
-                                        </div>
-                                    </div>
                                     <div class="artist-search ui top aligned search fluid">
                                         <div class="ui icon input fluid">
                                             <input class="artist-name prompt" type="text" placeholder="Artist name">
@@ -34,12 +22,12 @@
                                         </div>
                                         <div class="results"></div>
                                     </div>
+                                    <div class="ui pointing label">
+                                        V13 couldn't find the artist name :( can you fill it in?
+                                    </div>
                                     {{/unless}}
                                     <div class="date">
                                         {{post.resource.author}}
-                                    </div>
-                                    <div class="ui pointing label">
-                                        Edit artist name
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +62,9 @@
                             Tags are based on the artist name, therefore they might not be accurate. Edit them as you see fit.
                         </div>
                         {{#unless post.resource.tags}}
-                        <span class="mute">no tags found.</span>
+                        <span class="mute">
+                            No tag found.
+                        </span>
                         {{/unless}}
                         {{#each post.resource.tags}}
                         <a href="#"
@@ -94,6 +84,17 @@
                     </div>
                     {{/if}}
                     <div class="tag-search ui search fluid" style="margin-top: 15px;">
+                        {{#unless post.resource.author}}
+                        <div class="ui active dimmer">
+                            <div class="content">
+                                <div class="center">
+                                    <div class="ui inverted">
+                                        Please fill in the artist name before adding any tag
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{/unless}}
                         <div class="ui icon input fluid">
                             <input class="tag-name prompt" type="text" placeholder="Add a tag">
                             <i class="search icon"></i>

@@ -24,7 +24,8 @@ posts.attachSchema(
                     type: String
                 },
                 "tags": {
-                    type: [new SimpleSchema({name: {type: String}})]
+                    type: [new SimpleSchema({name: {type: String}})],
+                    optional: true
                 }
             })
         },

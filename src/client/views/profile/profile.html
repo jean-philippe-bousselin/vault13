@@ -22,7 +22,9 @@
         Publications
     </h4>
 
-    {{> posts}}
+    {{#each userPosts}}
+        {{> post}}
+    {{/each}}
 
     {{> editProfileModal}}
 

@@ -1,6 +1,9 @@
 Template.profile.helpers({
     user: function () {
         return Meteor.user();
+    },
+    userPosts: function() {
+        return posts.find({from:{id: Meteor.userId()}}, {sort: {createdTime: -1}});
     }
 });
 

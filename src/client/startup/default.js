@@ -5,10 +5,10 @@ Meteor.startup(function () {
         $('.momentum').each(function() {
             $(this).html(moment($(this).data('date-original')).fromNow());
         });
-        Meteor.setTimeout(momentumReapply, 60000);
+        Meteor.setTimeout(momentumReapply, 30000);
     }
-    Meteor.setTimeout(momentumReapply, 60000);
+    Meteor.setTimeout(momentumReapply, 30000);
 
     // initialize playlist
-    Session.set('playlist', []);
+    Session.setDefault('playlist', []);
 });

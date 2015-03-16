@@ -12,6 +12,9 @@
                         <div class="ui card fluid">
                             {{{post.resource.html}}}
                             <div class="content">
+                                <div class="ui pointing below label">
+                                    Edit resource title
+                                </div>
                                 <a class="header">{{post.resource.title}}</a>
                                 <div class="meta">
                                     {{#unless post.resource.author}}
@@ -32,7 +35,12 @@
                                         <div class="results"></div>
                                     </div>
                                     {{/unless}}
-                                    <span class="date">{{post.resource.author}}</span>
+                                    <div class="date">
+                                        {{post.resource.author}}
+                                    </div>
+                                    <div class="ui pointing label">
+                                        Edit artist name
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +81,7 @@
                            class="artist-tag ui black label"
                            data-content="Click to delete this tag"
                            data-variation="small inverted">
-                            {{name}}
+                            {{name}} <i class="icon close"></i>
                         </a>
                         {{/each}}
                     </div>

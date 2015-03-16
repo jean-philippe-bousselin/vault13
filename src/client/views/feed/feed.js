@@ -54,21 +54,9 @@ Template.feed.events({
                           }
                           Session.set('newPost', newPost);
                         });
-                        //$('.artist-name').blur(function(){
-                        //    debugger;
-                        //    if($(this).val() != '') {
-                        //        newPost.tagsLoaded = false;
-                        //        newPost.resource.author = $(this).val();
-                        //        Meteor.apply('lastfm.artist.getTags', [newPost.resource.author], true, function(error, tags) {
-                        //            newPost.resource.tags = tags;
-                        //            newPost.tagsLoaded = true;
-                        //            Session.set('newPost', newPost);
-                        //        });
-                        //    }
-                        //});
-
                     },
                     onApprove: function() {
+                        newPost = Session.get('newPost');
                         newPost.message = $('#user-expression-on-resource').val();
                         newPost.createdTime = Date.parse(new Date());
                         newPost.comments = [];

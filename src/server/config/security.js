@@ -7,6 +7,7 @@ BrowserPolicy.content.allowOriginForAll("*.ytimg.com"); // youtube image CDN
 BrowserPolicy.content.allowOriginForAll("*.soundcloud.com");
 BrowserPolicy.content.allowOriginForAll("*.sndcdn.com"); // soundcloud CDN
 BrowserPolicy.content.allowOriginForAll("*.bandcamp.com");
+BrowserPolicy.content.allowOriginForAll("*.bcbits.com"); // bandcamp CDN
 BrowserPolicy.content.allowOriginForAll("*.audioscrobbler.com"); // last FM API server
 BrowserPolicy.content.allowOriginForAll("*.last.fm");
 

@@ -12,9 +12,14 @@ Meteor.methods({
                     api_key: '990d47d03475973d72e70c0e9123e00c'
                 }
             });
-
+            if(result.data.hasOwnProperty('error') && result.data.error == 6) {
+                // artist not found, silently return an empty array
+                return [];
+            }
+            if(!Array.isArray(result.data.artist.tags)) {
+                return [];
+            }
             return result.data.artist.tags.tag;
-
         } else {
             return [];
         }

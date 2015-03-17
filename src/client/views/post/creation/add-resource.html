@@ -61,18 +61,16 @@
                         <div class="mute" style="margin-bottom: 15px;">
                             Tags are based on the artist name, therefore they might not be accurate. Edit them as you see fit.
                         </div>
-                        {{#unless post.resource.tags}}
-                        <span class="mute">
-                            No tag found.
-                        </span>
-                        {{/unless}}
+                        {{#if showWarningNoTags}}
+                        <div class="ui warning message">
+                            <div class="header">
+                                No tag found
+                            </div>
+                            <p>Are you sure the artist name is correct?</p>
+                        </div>
+                        {{/if}}
                         {{#each post.resource.tags}}
-                        <a href="#"
-                           class="artist-tag ui black label"
-                           data-content="Click to delete this tag"
-                           data-variation="small inverted">
-                            {{name}} <i class="icon close"></i>
-                        </a>
+                            {{> tag }}
                         {{/each}}
                     </div>
                     {{else}}

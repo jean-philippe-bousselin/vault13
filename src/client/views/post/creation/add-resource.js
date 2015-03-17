@@ -1,12 +1,10 @@
-Template.addResource.events({
-    'click .artist-tag': function() {
-        debugger;
-    }
-});
-
 Template.addResource.helpers({
     tagsLoaded: function() {
         return Session.get('newPost') !== undefined && Session.get('newPost').tagsLoaded;
+    },
+    showWarningNoTags: function() {
+        var post = Session.get('newPost');
+        return post.resource.tags.length == 0 && post.resource.author != '';
     }
 });
 
@@ -90,15 +88,16 @@ Template.addResource.rendered = function() {
             templates: {
                 lastFMTags: function(response) {
                     var html = '';
-                    if(response.results !== undefined && response.results.tagmatches !== undefined) {
+                    if(response.results !== undefined
+                        && response.results.tagmatches !== undefined
+                        && response.results.tagmatches.tag !== undefined
+                        ) {
                         // each result
                         $.each(response.results.tagmatches.tag, function(index, result) {
                             html += '<a class="result">';
                             html += '<div class="content">';
                             if(result.name !== undefined) {
                                 html += '<div class="title">' + result.name + '</div>';
-                            } else {
-                                html += '<div class="title">Tag name not found.</div>';
                             }
                             html += '</div>';
                             html += '</a>';

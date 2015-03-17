@@ -7,7 +7,7 @@ Template.resource.events({
         Session.set('playlist', playlistArray);
         // play resource if play button
         if(event.currentTarget.classList.contains('trigger-play')) {
-            Session.set('resourcePlayingHTML', this.resource.html);
+            Session.set('currentlyPlayingResource', this.resource);
         }
     }
 });

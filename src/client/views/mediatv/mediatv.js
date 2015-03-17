@@ -1,9 +1,7 @@
 Template.mediatv.helpers({
-
     'player': function() {
         return Session.get('resourcePlayingHTML');
     }
-
 });
 
 Template.mediatv.events({

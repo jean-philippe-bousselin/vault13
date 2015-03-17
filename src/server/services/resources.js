@@ -23,13 +23,13 @@ Meteor.methods({
         }
 
         return {
-            source: result.data.provider_name,
-            originalUrl: result.data.url,
+            source:       result.data.provider_name,
+            originalUrl:  result.data.url,
             thumbnailUrl: result.data.thumbnail_url,
-            title: result.data.title,
-            author: result.data.author || '',
-            html: result.data.html,
-            tags: []
+            title:        result.data.title,
+            author:       result.data.author || '',
+            html:         result.data.html,
+            tags:         []
         };
     }
 });

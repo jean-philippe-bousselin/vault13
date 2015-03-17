@@ -1,14 +1,14 @@
 <template name="playlistItem">
-    <div class="item hidden playlist-item">
+    <div class="ui item hidden playlist-item" style="position: relative;">
+        {{#if onAir}}
+        <div class="ui left corner large blue label" style="padding: 2px 0 0 2px;">
+            <i class="music icon"></i>
+        </div>
+        {{/if}}
         <img class="ui tiny image" src="{{thumbnailUrl}}">
         <div class="content">
             <div class="header">{{title}}</div>
             {{author}}
         </div>
-        {{#if onAir}}
-        <div class="ui floating right aligned">
-            Now playing!
-        </div>
-        {{/if}}
     </div>
 </template>

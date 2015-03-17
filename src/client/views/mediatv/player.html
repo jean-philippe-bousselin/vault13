@@ -1,0 +1,10 @@
+<template name="player">
+
+    <div class="embed-container">
+        <div style="z-index: auto" class="{{#if hasResourceSelected}}hidden{{/if}} player-loading ui active inverted dimmer">
+            <div class="ui text loader">Loading</div>
+        </div>
+        {{{currentlyPlayingResource.html}}}
+    </div>
+
+</template>

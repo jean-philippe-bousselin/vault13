@@ -5,10 +5,24 @@ Template.addResource.helpers({
     showWarningNoTags: function() {
         var post = Session.get('newPost');
         return post.resource.tags.length == 0 && post.resource.author != '';
+    },
+    showArtistEditField: function() {
+        return Session.get('newPost').resource.author === undefined || Session.get('editingArtistName');
     }
 });
 
+Template.addResource.events({
+
+    'click .edit-artist-name': function() {
+        debugger;
+        Session.set('editingArtistName', true);
+    }
+
+});
+
 Template.addResource.rendered = function() {
+    Session.setDefault('editingArtistName', false);
+
     // initialize artist search
     $('.artist-search')
         .search({

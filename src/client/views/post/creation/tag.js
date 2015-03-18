@@ -1,6 +1,5 @@
 var selectedTag, newPost;
 Template.tag.events({
-
     'click .artist-tag': function() {
         // delete the tag on click over it
         newPost = Session.get('newPost');

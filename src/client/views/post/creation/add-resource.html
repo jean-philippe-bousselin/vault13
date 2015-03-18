@@ -12,22 +12,31 @@
                         <div class="ui card fluid">
                             {{{post.resource.html}}}
                             <div class="content">
+                                <div class="ui pointing below label button">
+                                    <i class="edit icon"></i> Edit title
+                                </div>
                                 <a class="header">{{post.resource.title}}</a>
                                 <div class="meta">
-                                    {{#unless post.resource.author}}
+                                    <!--{{#unless post.resource.author}}-->
+                                    {{#if showArtistEditField}}
                                     <div class="artist-search ui top aligned search fluid">
                                         <div class="ui icon input fluid">
-                                            <input class="artist-name prompt" type="text" placeholder="Artist name">
+                                            <input class="artist-name prompt" type="text" placeholder="Artist name" value="{{post.resource.author}}">
                                             <i class="search icon"></i>
                                         </div>
                                         <div class="results"></div>
                                     </div>
-                                    <div class="ui pointing label">
-                                        V13 couldn't find the artist name :( can you fill it in?
-                                    </div>
-                                    {{/unless}}
+                                    {{else}}
                                     <div class="date">
                                         {{post.resource.author}}
+                                    </div>
+                                    {{/if}}
+                                    <div class="ui pointing label button edit-artist-name">
+                                        {{#if post.resource.author}}
+                                            <i class="edit icon"></i> Edit artist
+                                        {{else}}
+                                        V13 couldn't find the artist name :( can you fill it in?
+                                        {{/if}}
                                     </div>
                                 </div>
                             </div>

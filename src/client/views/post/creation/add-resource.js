@@ -1,4 +1,7 @@
 Template.addResource.helpers({
+    post: function() {
+        return Session.get('newPost');
+    },
     tagsLoaded: function() {
         return Session.get('newPost') !== undefined && Session.get('newPost').tagsLoaded;
     },
@@ -7,82 +10,41 @@ Template.addResource.helpers({
         return post.resource.tags.length == 0 && post.resource.author != '';
     },
     showArtistEditField: function() {
-        return Session.get('newPost').resource.author === undefined || Session.get('editingArtistName');
+
+        var show = false;
+
+        if(!Session.get('newPost').resource.hasOwnProperty('author')) {
+            show = true;
+        }
+        if(Session.get('newPost').resource.author === undefined) {
+            show = true;
+        }
+        if(Session.get('editingArtistName')) {
+            show = true;
+        }
+
+        return show;
+    },
+    showResourceTitleEditField: function() {
+        return Session.get('editingResourceTitle');
     }
 });
 
 Template.addResource.events({
 
     'click .edit-artist-name': function() {
-        debugger;
         Session.set('editingArtistName', true);
+    },
+    'click .edit-resource-title': function() {
+        Session.set('editingResourceTitle', true);
     }
-
 });
 
 Template.addResource.rendered = function() {
+
     Session.setDefault('editingArtistName', false);
+    Session.setDefault('editingResourceTitle', false);
 
-    // initialize artist search
-    $('.artist-search')
-        .search({
-            apiSettings: {
-                url: 'http://ws.audioscrobbler.com/2.0/?method=artist.search&artist={query}&api_key=990d47d03475973d72e70c0e9123e00c&format=json'
-            },
-            type: 'lastFMArtists',
-            searchFields   : [
-                'name'
-            ],
-            onSelect: function(result, response){
-                var newPost = Session.get('newPost');
-                newPost.tagsLoaded = false;
-                newPost.resource.author = this.text;
-                Session.set('newPost', newPost);
-                Meteor.apply('lastfm.artist.getTags', [newPost.resource.author], true, function(error, tags) {
-                    var tagExists;
-                    $.each(tags, function(index, newTag){
-                        tagExists = false;
-                        $.each(newPost.resource.tags, function(index, existingTag){
-                            if(existingTag.name == newTag.name) {
-                                tagExists = true;
-                            }
-                        });
-                        if(!tagExists) {
-                            newPost.resource.tags.push(newTag);
-                        }
-                    });
-
-                    newPost.tagsLoaded = true;
-                    Session.set('newPost', newPost);
-                });
-            },
-            templates: {
-                lastFMArtists: function(response) {
-                    var html = '';
-                    if(response.results !== undefined && response.results.artistmatches !== undefined) {
-                        // each result
-                        $.each(response.results.artistmatches.artist, function(index, result) {
-                            html += '<a class="result">';
-                            html += ''
-                            + '<div class="image">'
-                            + ' <img src="' + result.image[1]['#text'] + '">'
-                            + '</div>'
-                            html += '<div class="content">';
-                            if(result.name !== undefined) {
-                                html += '<div class="title">' + result.name + '</div>';
-                            } else {
-                                html += '<div class="title">Artist name not found.</div>';
-                            }
-                            html += '</div>';
-                            html += '</a>';
-                        });
-                        return html;
-                    }
-                    return false;
-                }
-            }
-        })
-    ;
     // initialize tag search
     $('.tag-search')
         .search({
@@ -124,4 +86,3 @@ Template.addResource.rendered = function() {
         })
     ;
 };
-

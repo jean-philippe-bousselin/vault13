@@ -19,5 +19,18 @@
 
     {{> posts}}
 
-    {{> addResource post=newPost}}
+    <!--{{> addResource post=newPost}}-->
+    <div class="add-resource ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            Refine your post
+        </div>
+        <div id="add-post-modal-content" class="content">
+
+        </div>
+        <div class="actions">
+            <div class="ui button cancel">Cancel</div>
+            <div class="ui button ok">OK</div>
+        </div>
+    </div>
 </template>

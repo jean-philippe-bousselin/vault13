@@ -24,6 +24,7 @@ Template.feed.events({
 
         var url = template.find('.add-url-button').value;
         Meteor.apply('iframely.oembed', [url], true, function(error, resource) {
+
             newPost = {
                 resource: resource,
                 from: {
@@ -36,24 +37,17 @@ Template.feed.events({
             Session.set('newPost', newPost);
 
             //@TODO find a way to remove this ugly setimeout
-            // it is only used to fix a supposed race conditions
+            // it is only used to fix a supposed race condition
             // which is making meteor throw an arguments not checked exception
             Meteor.setTimeout(
                 getTags,
             1000);
 
+            var modalContentView;
             $('.add-resource.ui.modal').modal(
                 {
-                    onVisible: function() {
-                        $('.artist-tag').click(function(){
-                          var value = $(this).html().trim();
-                          for (index in newPost.resource.tags) {
-                              if(value == newPost.resource.tags[index]) {
-                                  delete newPost.resource.tags[index];
-                              }
-                          }
-                          Session.set('newPost', newPost);
-                        });
+                    onShow: function() {
+                        modalContentView = Blaze.renderWithData(Template.addResource, {}, document.getElementById('add-post-modal-content'));
                     },
                     onApprove: function() {
                         newPost = Session.get('newPost');
@@ -65,6 +59,7 @@ Template.feed.events({
                     onHide: function() {
                         $('.resource-url-input-container').removeClass('loading');
                         $('.resource-url-input-container').find('input').val('');
+                        Blaze.remove(modalContentView);
                     }
                 }
             ).modal('show');

@@ -1,120 +1,103 @@
 <template name="addResource">
-
-    <div class="add-resource ui modal">
-        <i class="close icon"></i>
-        <div class="header">
-            Refine your post
-        </div>
-        <div class="content">
-            <div class="ui grid">
-                <div class="eight wide column">
-                    <div class="ui special cards fluid">
-                        <div class="ui card fluid">
-                            {{{post.resource.html}}}
-                            <div class="content">
-                                <div class="ui pointing below label button">
-                                    <i class="edit icon"></i> Edit title
-                                </div>
-                                <a class="header">{{post.resource.title}}</a>
-                                <div class="meta">
-                                    <!--{{#unless post.resource.author}}-->
-                                    {{#if showArtistEditField}}
-                                    <div class="artist-search ui top aligned search fluid">
-                                        <div class="ui icon input fluid">
-                                            <input class="artist-name prompt" type="text" placeholder="Artist name" value="{{post.resource.author}}">
-                                            <i class="search icon"></i>
-                                        </div>
-                                        <div class="results"></div>
-                                    </div>
-                                    {{else}}
-                                    <div class="date">
-                                        {{post.resource.author}}
-                                    </div>
-                                    {{/if}}
-                                    <div class="ui pointing label button edit-artist-name">
-                                        {{#if post.resource.author}}
-                                            <i class="edit icon"></i> Edit artist
-                                        {{else}}
-                                        V13 couldn't find the artist name :( can you fill it in?
-                                        {{/if}}
-                                    </div>
-                                </div>
-                            </div>
+    <div class="ui grid">
+        <div class="eight wide column">
+            <div class="ui special cards fluid">
+                <div class="ui card fluid">
+                    {{{post.resource.html}}}
+                    <div class="content">
+                        <div class="ui pointing below label button edit-resource-title">
+                            <i class="edit icon"></i> Edit title
                         </div>
-                    </div>
-                </div>
-                <div class="eight wide column">
-                    <div class="ui comments">
-                        <div class="comment">
-                            <a class="avatar">
-                                <img src="{{post.from.picture}}">
-                            </a>
-                            <div class="content">
-                                <a class="author">{{post.from.name}}</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="ui form">
-                        <div class="field">
-                            <textarea id="user-expression-on-resource" placeholder="Share your thoughts about this"></textarea>
-                        </div>
-                    </div>
-
-                    {{#if tagsLoaded}}
-                    <h4 class="ui horizontal header divider">
-                        <i class="tags icon"></i>
-                    </h4>
-
-                    <div class="ui tiny tag labels">
-                        <div class="mute" style="margin-bottom: 15px;">
-                            Tags are based on the artist name, therefore they might not be accurate. Edit them as you see fit.
-                        </div>
-                        {{#if showWarningNoTags}}
-                        <div class="ui warning message">
-                            <div class="header">
-                                No tag found
-                            </div>
-                            <p>Are you sure the artist name is correct?</p>
-                        </div>
+                        {{#if showResourceTitleEditField}}
+                            {{> resourceTitleEdit title=post.resource.title}}
+                        {{else}}
+                        <a class="header">{{post.resource.title}}</a>
                         {{/if}}
-                        {{#each post.resource.tags}}
-                            {{> tag }}
-                        {{/each}}
-                    </div>
-                    {{else}}
-                    <div class="ui segment" style="height: 100px;">
-                        <div class="ui active inverted dimmer">
-                            <div class="ui text loader">Looking for tags</div>
-                        </div>
-                        <p></p>
-                    </div>
-                    {{/if}}
-                    <div class="tag-search ui search fluid" style="margin-top: 15px;">
-                        {{#unless post.resource.author}}
-                        <div class="ui active dimmer">
-                            <div class="content">
-                                <div class="center">
-                                    <div class="ui inverted">
-                                        Please fill in the artist name before adding any tag
-                                    </div>
-                                </div>
+                        <div class="meta">
+                            {{#if showArtistEditField}}
+                                {{> artistSearch author=post.resource.author}}
+                            {{else}}
+                            <div class="date">
+                                {{post.resource.author}}
+                            </div>
+                            {{/if}}
+                            <div class="ui pointing label button edit-artist-name">
+                                {{#if post.resource.author}}
+                                    <i class="edit icon"></i> Edit artist
+                                {{else}}
+                                V13 couldn't find the artist name :( can you fill it in?
+                                {{/if}}
                             </div>
                         </div>
-                        {{/unless}}
-                        <div class="ui icon input fluid">
-                            <input class="tag-name prompt" type="text" placeholder="Add a tag">
-                            <i class="search icon"></i>
-                        </div>
-                        <div class="results"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="actions">
-            <div class="ui button cancel">Cancel</div>
-            <div class="ui button ok">OK</div>
+        <div class="eight wide column">
+            <div class="ui comments">
+                <div class="comment">
+                    <a class="avatar">
+                        <img src="{{post.from.picture}}">
+                    </a>
+                    <div class="content">
+                        <a class="author">{{post.from.name}}</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui form">
+                <div class="field">
+                    <textarea id="user-expression-on-resource" placeholder="Share your thoughts about this"></textarea>
+                </div>
+            </div>
+
+            {{#if tagsLoaded}}
+            <h4 class="ui horizontal header divider">
+                <i class="tags icon"></i>
+            </h4>
+
+            <div class="ui tiny tag labels">
+                <div class="mute" style="margin-bottom: 15px;">
+                    Tags are based on the artist name, therefore they might not be accurate. Edit them as you see fit.
+                </div>
+                {{#if showWarningNoTags}}
+                <div class="ui warning message">
+                    <div class="header">
+                        No tag found
+                    </div>
+                    <p>Are you sure the artist name is correct?</p>
+                </div>
+                {{/if}}
+                {{#each post.resource.tags}}
+                    {{> tag }}
+                {{/each}}
+            </div>
+            {{else}}
+            <div class="ui segment" style="height: 100px;">
+                <div class="ui active inverted dimmer">
+                    <div class="ui text loader">Looking for tags</div>
+                </div>
+                <p></p>
+            </div>
+            {{/if}}
+            <div class="tag-search ui search fluid" style="margin-top: 15px;">
+                {{#unless post.resource.author}}
+                <div class="ui active dimmer">
+                    <div class="content">
+                        <div class="center">
+                            <div class="ui inverted">
+                                Please fill in the artist name before adding any tag
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/unless}}
+                <div class="ui icon input fluid">
+                    <input class="tag-name prompt" type="text" placeholder="Add a tag">
+                    <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
+            </div>
         </div>
     </div>
-
 </template>

@@ -6,7 +6,3 @@ Template.playlist.helpers({
         return Session.get('playlist');
     }
 });
-
-Template.playlistItem.rendered = function() {
-    $(this.firstNode).fadeIn('fast');
-};

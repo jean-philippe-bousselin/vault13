@@ -16,7 +16,7 @@ Meteor.methods({
                 // artist not found, silently return an empty array
                 return [];
             }
-            if(!Array.isArray(result.data.artist.tags)) {
+            if(typeof result.data.artist.tags != 'object') {
                 return [];
             }
             return result.data.artist.tags.tag;

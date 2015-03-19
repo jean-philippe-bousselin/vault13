@@ -2,6 +2,7 @@ BrowserPolicy.content.allowOriginForAll("*.googleapis.com");
 BrowserPolicy.content.allowOriginForAll("*.gstatic.com");
 BrowserPolicy.content.allowOriginForAll("*.bootstrapcdn.com");
 
+BrowserPolicy.content.allowOriginForAll("*.iframe.ly");
 BrowserPolicy.content.allowOriginForAll("*.youtube.com");
 BrowserPolicy.content.allowOriginForAll("*.ytimg.com"); // youtube image CDN
 BrowserPolicy.content.allowOriginForAll("*.soundcloud.com");

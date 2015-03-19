@@ -7,14 +7,12 @@
     <div class="ui inverted form">
         <div class="fields">
             <div class="sixteen wide field">
-                <form id="resource-add-form">
-                    <div class="resource-url-input-container ui left icon input">
-                        <input
-                                class="add-url-button"
-                                type="text"
-                                placeholder="Paste any resource url"
-                                data-html="<div class='header red'>The value is not a correct URL.</div>">
+                <form id="resource-add-form" class="ui form">
+                    <div class="field">
+                    <div class="resource-url-input-container ui left icon input {{#if postCreationLoading}}loading{{/if}}">
+                        <input class="add-url-button" type="text" name="url" placeholder="Paste any resource url">
                         <i class="world icon"></i>
+                    </div>
                     </div>
                 </form>
             </div>
@@ -23,18 +21,38 @@
 
     {{> posts}}
 
-    <!--{{> addResource post=newPost}}-->
     <div class="add-resource ui modal">
         <i class="close icon"></i>
         <div class="header">
             Refine your post
         </div>
-        <div id="add-post-modal-content" class="content">
-
-        </div>
+        <div id="add-post-modal-content" class="content"></div>
         <div class="actions">
             <div class="ui button cancel">Cancel</div>
             <div class="ui button ok">OK</div>
         </div>
     </div>
+
+    <div class="error ui small modal">
+        <i class="close icon"></i>
+        <div class="header">Oops! Something went wrong.</div>
+        <div class="content">
+            <div class="ui icon message">
+                <i class="cloud icon"></i>
+                <div class="content">
+                    <div class="header">
+                        {{error.message}}
+                        {{#if error.code}}
+                            ({{error.code}})
+                        {{/if}}
+                    </div>
+                    <p>We couldn't proceed to your post creation :(</p>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui button">OK</div>
+        </div>
+    </div>
+
 </template>

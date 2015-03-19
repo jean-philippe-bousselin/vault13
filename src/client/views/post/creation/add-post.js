@@ -1,6 +1,9 @@
-Template.addResource.helpers({
+Template.addPost.helpers({
     post: function() {
         return Session.get('newPost');
+    },
+    linkMode: function() {
+        return Session.get('newPost') !== undefined && Session.get('newPost').resource.type == 'link';
     },
     tagsLoaded: function() {
         return Session.get('newPost') !== undefined && Session.get('newPost').tagsLoaded;
@@ -30,7 +33,7 @@ Template.addResource.helpers({
     }
 });
 
-Template.addResource.events({
+Template.addPost.events({
 
     'click .edit-artist-name': function() {
         Session.set('editingArtistName', true);
@@ -40,7 +43,7 @@ Template.addResource.events({
     }
 });
 
-Template.addResource.rendered = function() {
+Template.addPost.rendered = function() {
 
     Session.setDefault('editingArtistName', false);
     Session.setDefault('editingResourceTitle', false);

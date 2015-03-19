@@ -22,10 +22,10 @@ natestrauser:animate-css
 dburles:collection-helpers
 meteorhacks:fast-render
 
-nooitaf:semantic-ui
 momentjs:moment
 maazalik:highcharts
 tomi:upload-server
 tomi:upload-jquery
 houston:admin
 http
+semantic:ui-css

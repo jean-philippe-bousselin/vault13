@@ -23,6 +23,7 @@ Meteor.methods({
         }
 
         return {
+            type:         result.data.type,
             source:       result.data.provider_name,
             originalUrl:  result.data.url,
             thumbnailUrl: result.data.thumbnail_url,

@@ -8,8 +8,11 @@ function getTags() {
 }
 
 Template.feed.helpers({
-    newPost: function() {
-        return Session.get('newPost');
+    postCreationLoading: function() {
+        return Session.get('postCreationLoading');
+    },
+    error: function() {
+        return Session.get('createError');
     }
 });
 
@@ -19,10 +22,32 @@ Template.feed.events({
 
         event.preventDefault();
 
-        $('.resource-url-input-container').addClass('loading');
+        Session.set('postCreationLoading', true);
 
         var url = template.find('.add-url-button').value;
+
         Meteor.apply('iframely.oembed', [url], true, function(error, resource) {
+
+            if(error) {
+                Session.set('createError', {
+                    message: 'The requested URL returned an error',
+                    code: error.error
+                });
+                Session.set('postCreationLoading', false);
+                $('.error.ui.modal').modal('show');
+                return;
+            }
+
+            // @TODO this does not allow users to post regular content
+            // even if it is culturally related.
+            if(resource.html === undefined) {
+                Session.set('createError', {
+                    message: 'No resource found for the requested URL'
+                });
+                Session.set('postCreationLoading', false);
+                $('.error.ui.modal').modal('show');
+                return;
+            }
 
             newPost = {
                 resource: resource,
@@ -46,7 +71,7 @@ Template.feed.events({
             $('.add-resource.ui.modal').modal(
                 {
                     onShow: function() {
-                        modalContentView = Blaze.renderWithData(Template.addResource, {}, document.getElementById('add-post-modal-content'));
+                        modalContentView = Blaze.render(Template.addPost, document.getElementById('add-post-modal-content'));
                     },
                     onApprove: function() {
                         newPost = Session.get('newPost');
@@ -56,7 +81,7 @@ Template.feed.events({
                         posts.insert(newPost);
                     },
                     onHide: function() {
-                        $('.resource-url-input-container').removeClass('loading');
+                        Session.set('postCreationLoading', false);
                         $('.resource-url-input-container').find('input').val('');
                         Blaze.remove(modalContentView);
                     }
@@ -64,7 +89,26 @@ Template.feed.events({
             ).modal('show');
 
         });
-
     }
-
 });
+
+Template.feed.rendered = function() {
+
+    $('#resource-add-form')
+        .form({
+            url: {
+                identifier: 'url',
+                rules: [
+                    {
+                        type: 'url',
+                        prompt: 'Please enter a valid URL.'
+                    }
+                ]
+            }
+        }, {
+            inline : true,
+            on     : 'blur'
+        })
+    ;
+
+};

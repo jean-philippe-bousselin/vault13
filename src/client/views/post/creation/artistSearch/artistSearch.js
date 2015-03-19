@@ -13,6 +13,7 @@ Template.artistSearch.rendered = function() {
                 'name'
             ],
             onSelect: function(result, response){
+                debugger;
                 var newPost = Session.get('newPost');
                 newPost.tagsLoaded = false;
                 newPost.resource.author = this.text;

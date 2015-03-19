@@ -2,6 +2,7 @@ Meteor.methods({
 
     "lastfm.artist.getTags": function (artist) {
 
+        console.log(artist);
         check(artist, String);
 
         if(artist != '') {
@@ -12,6 +13,7 @@ Meteor.methods({
                     api_key: '990d47d03475973d72e70c0e9123e00c'
                 }
             });
+
             if(result.data.hasOwnProperty('error') && result.data.error == 6) {
                 // artist not found, silently return an empty array
                 return [];

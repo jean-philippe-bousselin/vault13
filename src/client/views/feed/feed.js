@@ -106,8 +106,7 @@ Template.feed.rendered = function() {
                 ]
             }
         }, {
-            inline : true,
-            on     : 'blur'
+            inline : true
         })
     ;
 

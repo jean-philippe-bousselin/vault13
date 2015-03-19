@@ -12,10 +12,13 @@ Template.post.events({
 });
 
 Template.post.rendered = function() {
+
+    if(this.data.comments.length > 0) {
+        $(this.firstNode).find('.comments-wrapper').addClass('hidden');
+    }
+
     $('.post .toggle-comments').popup();
     $('.post .tag').popup();
-    //$('.post .ui.dropdown').dropdown();
-
     $(this.firstNode).find('.special.cards .image').dimmer({
         on: 'hover'
     });

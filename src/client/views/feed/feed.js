@@ -5,10 +5,9 @@ function getTags() {
         newPost.tagsLoaded = true;
         Session.set('newPost', newPost);
     });
-};
+}
 
 Template.feed.helpers({
-
     newPost: function() {
         return Session.get('newPost');
     }

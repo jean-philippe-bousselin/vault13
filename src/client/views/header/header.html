@@ -8,7 +8,7 @@
             <i class="chat icon"></i>
             Feed
         </a>
-        <a href="{{ pathFor 'profile' }}" class="item {{#if active 'profile'}}active{{/if}}">
+        <a href="{{ pathFor 'profile' userName=currentUserName}}" class="item {{#if active 'profile'}}active{{/if}}">
             <i class="user icon"></i>
             Profile
         </a>

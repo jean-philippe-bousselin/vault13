@@ -1,8 +1,27 @@
-// Home Route
+//Router.route('/profile/:id', {name: 'profile'}, function () {
+//  this.render('profile', {
+//      data: function() {
+//          return {userId: this.params.id};
+//      }
+//  });
+//});
 
-Router.route('/profile', {name: 'profile'}, function () {
-  this.render('profile');
+ProfileController = RouteController.extend({
+    data: function() {
+        return {
+            user: Meteor.users.findOne({username: this.params.userName})
+        };
+    },
+
+    action: function () {
+        this.render('profile');
+    }
 });
+Router.route('/profile/:userName', {
+    name: 'profile',
+    controller: ProfileController
+});
+
 Router.route('/about', {name: 'about'}, function () {
   this.render('about');
 });

@@ -4,9 +4,12 @@ Template.header.created = function () {
 };
 
 Template.header.helpers({
-  active: function (route) {
-    return Router.current().route.getName() == route;
-  }
+    active: function (route) {
+        return Router.current().route.getName() == route;
+    },
+    currentUserName: function() {
+        return Meteor.user().username;
+    }
 });
 
 Template.header.events({

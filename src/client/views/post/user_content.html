@@ -1,11 +1,11 @@
 <template name="user_content">
     <div class="ui comments">
         <div class="comment">
-            <a class="avatar">
+            <a href="{{pathFor 'profile' userName=from.name }}" class="avatar">
                 <img src="{{from.picture}}">
             </a>
             <div class="content">
-                <a class="author">{{from.name}}</a>
+                <a href="{{pathFor 'profile' userName=from.name }}" class="author">{{from.name}}</a>
                 <div class="date momentum" data-date-original="{{createdTime}}">{{fromNow createdTime}}</div>
             </div>
         </div>

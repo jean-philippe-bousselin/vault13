@@ -6,25 +6,28 @@
 
     <div class="ui grid">
         <div class="four wide column">
-            <img class="profile-pic ui middle aligned bordered fluid image" src="{{currentUser.profile.picture}}" />
+            <img class="profile-pic ui middle aligned bordered fluid image" src="{{user.profile.picture}}" />
+            {{#if isOwnProfile}}
             <div class="fluid ui tiny black button edit-profile-button">
                 <i class="edit icon"></i>
                 Edit infos
             </div>
+            {{/if}}
         </div>
         <div class="twelve wide column">
             {{> profile_chart}}
         </div>
     </div>
 
+    {{#if userPosts.count}}
     <h4 class="ui horizontal header divider">
         <i class="list icon"></i>
         Publications
     </h4>
-
-    {{#each userPosts}}
-        {{> post}}
-    {{/each}}
+        {{#each userPosts}}
+            {{> post}}
+        {{/each}}
+    {{/if}}
 
     {{> editProfileModal}}
 

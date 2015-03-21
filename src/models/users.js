@@ -1,5 +1,14 @@
 if (Meteor.isServer) {
 
+    Meteor.publish("users", function () {
+        return Meteor.users.find({}, {
+            fields: {
+                'username': 1,
+                'profile.picture': 1
+            }
+        });
+    });
+
     Accounts.onCreateUser(function(options, user) {
         //pass the surname in the options
 

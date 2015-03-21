@@ -1,9 +1,15 @@
+Meteor.subscribe("posts");
+Meteor.subscribe("users");
+
 Template.profile.helpers({
+    isOwnProfile: function() {
+        return Meteor.user().username == this.user.username;
+    },
     user: function () {
-        return Meteor.user();
+        return this.user;
     },
     userPosts: function() {
-        return posts.find({from:{id: Meteor.userId()}}, {sort: {createdTime: -1}});
+        return posts.find({'from.name': this.user.userName}, {sort: {createdTime: -1}});
     }
 });
 

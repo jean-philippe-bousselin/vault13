@@ -52,27 +52,30 @@ Template.addPost.rendered = function() {
     $('.tag-search')
         .search({
             apiSettings: {
-                url: 'http://ws.audioscrobbler.com/2.0/?method=tag.search&tag={{query}}&api_key=990d47d03475973d72e70c0e9123e00c&format=json'
+                url: '/lastfm/get-tags/{query}'
             },
             type: 'lastFMTags',
-            searchFields   : [
-                'name'
-            ],
-            onSelect: function(result, response) {
+            onSelect: function(element) {
                 var post = Session.get('newPost');
-                post.resource.tags.push({name: this.text});
+                var tagExists = false;
+                var selectedTag = element;
+                $.each(post.resource.tags, function(index, existingTag){
+                    if(existingTag.name == selectedTag.name) {
+                        tagExists = true;
+                    }
+                });
+                if(!tagExists) {
+                    post.resource.tags.push(selectedTag);
+                }
                 Session.set('newPost', post);
                 $('.tag-search input').val('');
             },
             templates: {
                 lastFMTags: function(response) {
                     var html = '';
-                    if(response.results !== undefined
-                        && response.results.tagmatches !== undefined
-                        && response.results.tagmatches.tag !== undefined
-                        ) {
+                    if(response.results !== undefined) {
                         // each result
-                        $.each(response.results.tagmatches.tag, function(index, result) {
+                        $.each(response.results, function(index, result) {
                             html += '<a class="result">';
                             html += '<div class="content">';
                             if(result.name !== undefined) {

@@ -6,21 +6,18 @@ Template.artistSearch.rendered = function() {
     $('.artist-search')
         .search({
             apiSettings: {
-                //url: 'http://ws.audioscrobbler.com/2.0/?method=artist.search&artist={query}&api_key=990d47d03475973d72e70c0e9123e00c&format=json',
                 url: '/lastfm/get-artist/{query}'
             },
             type: 'lastFMArtists',
-            onSelect: function(element, result, results){
-                debugger;
+            onSelect: function(element){
                 var newPost = Session.get('newPost');
                 newPost.tagsLoaded = false;
-                newPost.resource.author = this.text;
+                newPost.resource.author = element.name;
                 Session.set('newPost', newPost);
                 Session.set('editingArtistName', false);
                 // Rebuild tags when changing artist name
                 Meteor.apply('lastfm.artist.getTags', [newPost.resource.author], true, function(error, tags) {
                     var tagExists;
-                    debugger;
                     $.each(tags, function(index, newTag){
                         tagExists = false;
                         $.each(newPost.resource.tags, function(index, existingTag){

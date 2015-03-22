@@ -1,12 +1,3 @@
-var newPost;
-function getTags() {
-    Meteor.apply('lastfm.artist.getTags', [newPost.resource.author], true, function(error, tags) {
-        newPost.resource.tags = tags;
-        newPost.tagsLoaded = true;
-        Session.set('newPost', newPost);
-    });
-}
-
 Template.feed.helpers({
     postCreationLoading: function() {
         return Session.get('postCreationLoading');
@@ -49,7 +40,7 @@ Template.feed.events({
                 return;
             }
 
-            newPost = {
+            var newPost = {
                 resource: resource,
                 from: {
                     "id" : Meteor.userId(),
@@ -60,24 +51,34 @@ Template.feed.events({
             };
             Session.set('newPost', newPost);
 
-            //@TODO find a way to remove this ugly setimeout
-            // it is only used to fix a supposed race condition
-            // which is making meteor throw an arguments not checked exception
-            Meteor.setTimeout(
-                getTags,
-            1000);
+            Meteor.apply('lastfm.artist.getTags', [newPost.resource.author], true, function(error, tags) {
+                newPost.resource.tags = tags;
+                newPost.tagsLoaded = true;
+                Session.set('newPost', newPost);
+            });
 
-            var modalContentView;
+
+            var modalContentView = Blaze.render(Template.addPost, document.getElementById('add-post-modal-content'));
+
             $('.add-resource.ui.modal').modal(
                 {
-                    onShow: function() {
-                        modalContentView = Blaze.render(Template.addPost, document.getElementById('add-post-modal-content'));
-                    },
                     onApprove: function() {
                         newPost = Session.get('newPost');
+                        if(newPost.resource.author === '') {
+                            newPost.resource.author = 'Unknown artist';
+                        }
                         newPost.message = $('#user-expression-on-resource').val();
                         newPost.createdTime = Date.parse(new Date());
                         newPost.comments = [];
+                        // add autoplay setting on iframe url.
+                        var srcMatch = newPost.resource.html.match(/src="(.*)" frameborder/);
+                        var separator;
+                        if(srcMatch[0] !== undefined && srcMatch[0].match(/\?/) != null) {
+                            separator = '&';
+                        } else {
+                            separator = '?'
+                        }
+                        newPost.resource.html = newPost.resource.html.replace(/src="(.*)" frameborder/, 'src="$1' + separator + 'autoplay=true&auto_play=true" frameborder');
                         posts.insert(newPost);
                     },
                     onHide: function() {

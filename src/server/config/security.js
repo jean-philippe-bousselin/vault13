@@ -11,5 +11,9 @@ BrowserPolicy.content.allowOriginForAll("*.bandcamp.com");
 BrowserPolicy.content.allowOriginForAll("*.bcbits.com"); // bandcamp CDN
 BrowserPolicy.content.allowOriginForAll("*.audioscrobbler.com"); // last FM API server
 BrowserPolicy.content.allowOriginForAll("*.last.fm");
+BrowserPolicy.content.allowOriginForAll("*.vimeo.com");
+BrowserPolicy.content.allowOriginForAll("*.vimeocdn.com");
+BrowserPolicy.content.allowOriginForAll("*.dailymotion.com");
+BrowserPolicy.content.allowOriginForAll("*.dmcdn.net"); // dailymotion CDN
 
 BrowserPolicy.content.allowFontDataUrl();

@@ -1,11 +1,3 @@
-//Router.route('/profile/:id', {name: 'profile'}, function () {
-//  this.render('profile', {
-//      data: function() {
-//          return {userId: this.params.id};
-//      }
-//  });
-//});
-
 ProfileController = RouteController.extend({
     data: function() {
         return {
@@ -34,18 +26,14 @@ Router.route('/lastfm/get-artist/:name', { where: 'server' })
     .get(function () {
         this.response.setHeader("Content-Type", "application/json");
         this.response.end(JSON.stringify({results: Meteor.call('lastfm.artist.find', this.params.name)}));
-
     });
-//lastFMController = RouteController.extend({
-//    action: function () {
-//        Meteor.call('lastfm.artist.find', this.params.name, function(error, artists) {
-//            debugger;
-//        });
-//    }
-//});
-//Router.route('/lastfm/get-artist/:name', {
-//    controller: lastFMController
-//});
+
+Router.route('/lastfm/get-tags/:name', { where: 'server' })
+    .get(function () {
+        this.response.setHeader("Content-Type", "application/json");
+        this.response.end(JSON.stringify({results: Meteor.call('lastfm.tags.find', this.params.name)}));
+    });
+
 
 Router.configure({
   onAfterAction: function() {

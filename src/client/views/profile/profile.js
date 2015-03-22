@@ -9,7 +9,7 @@ Template.profile.helpers({
         return this.user;
     },
     userPosts: function() {
-        return posts.find({'from.name': this.user.userName}, {sort: {createdTime: -1}});
+        return posts.find({'from.name': this.user.username}, {sort: {createdTime: -1}});
     }
 });
 

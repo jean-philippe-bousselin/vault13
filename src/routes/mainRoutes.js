@@ -29,6 +29,24 @@ Router.route('/', {name: 'feed'}, function () {
   this.render('home');
 });
 
+
+Router.route('/lastfm/get-artist/:name', { where: 'server' })
+    .get(function () {
+        this.response.setHeader("Content-Type", "application/json");
+        this.response.end(JSON.stringify({results: Meteor.call('lastfm.artist.find', this.params.name)}));
+
+    });
+//lastFMController = RouteController.extend({
+//    action: function () {
+//        Meteor.call('lastfm.artist.find', this.params.name, function(error, artists) {
+//            debugger;
+//        });
+//    }
+//});
+//Router.route('/lastfm/get-artist/:name', {
+//    controller: lastFMController
+//});
+
 Router.configure({
   onAfterAction: function() {
       if(Meteor.isClient) {

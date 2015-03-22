@@ -83,6 +83,8 @@ Template.feed.events({
                     onHide: function() {
                         Session.set('postCreationLoading', false);
                         $('.resource-url-input-container').find('input').val('');
+                    },
+                    onHidden: function() {
                         Blaze.remove(modalContentView);
                     }
                 }

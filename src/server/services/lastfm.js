@@ -2,7 +2,6 @@ Meteor.methods({
 
     "lastfm.artist.getTags": function (artist) {
 
-        console.log(artist);
         check(artist, String);
 
         if(artist != '') {
@@ -22,6 +21,33 @@ Meteor.methods({
                 return [];
             }
             return result.data.artist.tags.tag;
+        } else {
+            return [];
+        }
+    },
+
+    "lastfm.artist.find": function (artist) {
+
+
+        check(artist, String);
+
+        if(artist != '') {
+            console.log('qqq');
+            var result = HTTP.get('http://ws.audioscrobbler.com/2.0/?method=artist.search&format=json', {
+                params: {
+                    artist: artist,
+                    api_key: '990d47d03475973d72e70c0e9123e00c'
+                }
+            });
+
+            results = [];
+            $.each(result.data.results.artistmatches.artist, function(index, result) {
+                result.title = result.name;
+                results.push(result);
+
+            });
+
+            return results;
         } else {
             return [];
         }

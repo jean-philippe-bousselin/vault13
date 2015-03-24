@@ -69,6 +69,7 @@ Template.addPost.rendered = function() {
                 }
                 Session.set('newPost', post);
                 $('.tag-search input').val('');
+                return false;
             },
             templates: {
                 lastFMTags: function(response) {

@@ -7,7 +7,7 @@ Fixtures.posts.push(
         "message" : "Classique mais toujous bon. Je recommande chaudement pour les amateurs de trash.",
         "resource": {
             source: 'youtube',
-            html: '<iframe width="420" height="315" src="https://www.youtube.com/embed/K6_zsJ8KPP0" frameborder="0" allowfullscreen></iframe>',
+            html: '<iframe width="420" height="315" src="https://www.youtube.com/embed/K6_zsJ8KPP0?autoplay=1" frameborder="0" allowfullscreen></iframe>',
             originalUrl: 'https://www.youtube.com/watch?v=K6_zsJ8KPP0',
             thumbnailUrl: 'http://img.youtube.com/vi/K6_zsJ8KPP0/hqdefault.jpg',
             title: 'Angel of Death',
@@ -57,7 +57,7 @@ Fixtures.posts.push(
         "message" : "Normalement ce post arrive en premier.",
         "resource": {
             source: 'youtube',
-            html: '<iframe width="420" height="315" src="https://www.youtube.com/embed/K6_zsJ8KPP0" frameborder="0" allowfullscreen></iframe>',
+            html: '<iframe width="420" height="315" src="https://www.youtube.com/embed/K6_zsJ8KPP0?autoplay=1" frameborder="0" allowfullscreen></iframe>',
             originalUrl: 'https://www.youtube.com/watch?v=K6_zsJ8KPP0',
             thumbnailUrl: 'http://img.youtube.com/vi/K6_zsJ8KPP0/hqdefault.jpg',
             title: 'Angel of Death',

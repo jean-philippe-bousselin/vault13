@@ -14,14 +14,28 @@ Router.route('/profile/:userName', {
     controller: ProfileController
 });
 
+
+Router.route('/search', function () {
+    this.render('search');
+});
+Router.route('/search/:keyword', function () {
+    this.render('search', {
+        data: this.params.keyword
+    });
+});
+
 Router.route('/about', {name: 'about'}, function () {
   this.render('about');
 });
+
 Router.route('/', {name: 'feed'}, function () {
   this.render('home');
 });
 
 
+/**
+ * Last FM service
+ */
 Router.route('/lastfm/get-artist/:name', { where: 'server' })
     .get(function () {
         this.response.setHeader("Content-Type", "application/json");

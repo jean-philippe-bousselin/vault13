@@ -4,7 +4,7 @@
             <i class="comments icon"></i>
             Chat room
         </h4>
-        <div class="ui tiny list chat-list" style="height: 95%; overflow-y: scroll">
+        <div class="ui tiny list chat-list" style="height: 100%; overflow-y: hidden">
             {{#each chats}}
                 {{> chat_row}}
             {{/each}}
@@ -22,14 +22,14 @@
 
 <template name="chat_row">
     <div class="chat-row item">
-        <div class="left floated">
-            <img class="ui avatar image "
-                 src="{{from.picture}}"
-                 data-html="by <b>{{from.name}}</b> <span class='momentum' data-date-original='{{createdTime}}'>{{fromNow createdTime}}</span> "
-                 data-variation="small inverted">
-        </div>
+        <img class="ui image"
+             src="{{from.picture}}"
+             data-html="by <b>{{from.name}}</b> <span class='momentum' data-date-original='{{createdTime}}'>{{fromNow createdTime}}</span> "
+             data-variation="small inverted">
         <div class="content">
-            {{message}}
+            <div class="ui small message">
+                <p>{{message}}</p>
+            </div>
         </div>
     </div>
 </template>

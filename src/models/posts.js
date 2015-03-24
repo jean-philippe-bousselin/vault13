@@ -90,6 +90,18 @@ if (Meteor.isServer) {
     });
 
     Meteor.methods({
+        'posts.search': function(keyword) {
+            check(keyword, String);
+            var regex = new RegExp(keyword, 'i');
+            return posts.find({
+                $or: [
+                    { "message": regex},
+                    { "resource.author": regex},
+                    { "resource.title": regex},
+                    { "resource.tags": {$elemMatch: {name: regex}}}
+                ]
+            }).fetch();
+        },
         addComment: function (args) {
             // Make sure the user is logged in before inserting a task
             if (! Meteor.userId()) {

@@ -1,0 +1,39 @@
+<template name="search">
+    <h4 class="ui horizontal header divider">
+        <i class="search icon"></i>
+        Search
+    </h4>
+
+    <div class="ui inverted form">
+        <div class="fields">
+            <div class="sixteen wide field">
+                <form id="search-form" class="ui form">
+                    <div class="field">
+                        <div class="resource-url-input-container ui left icon input {{#if searchPending}}loading{{/if}}">
+                            <input class="search-input" type="text" name="url" placeholder="Artist, song, tag...">
+                            <i class="database icon"></i>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {{#if displayNoResults }}
+    <div class="ui icon message">
+        <i class="inbox icon"></i>
+        <div class="content">
+            <div class="header">
+                Sorry, your search came up empty.
+            </div>
+            <p>Check your spelling, or use another keyword.</p>
+        </div>
+    </div>
+    {{/if}}
+    <div class="ui divided items">
+    {{#each searchResults}}
+        {{> post}}
+    {{/each}}
+    </div>
+
+</template>

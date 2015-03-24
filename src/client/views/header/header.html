@@ -12,6 +12,10 @@
             <i class="user icon"></i>
             Profile
         </a>
+        <a href="{{ pathFor 'search' }}" class="item {{#if active 'search'}}active{{/if}}">
+            <i class="search icon"></i>
+            Search
+        </a>
         <a href="{{ pathFor 'about' }}" class="item {{#if active 'about'}}active{{/if}}">
             <i class="info icon"></i>
             About

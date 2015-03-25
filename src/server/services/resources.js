@@ -1,10 +1,6 @@
 Meteor.methods({
     "iframely.oembed": function (url) {
 
-        if(!Meteor.user()) {
-            throw new Meteor.error('403 Forbidden');
-        }
-
         check(url, String);
 
         var error;

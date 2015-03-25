@@ -27,6 +27,9 @@ Meteor.methods({
     },
 
     "lastfm.artist.find": function (artist) {
+        if(!Meteor.user()) {
+            throw new Meteor.Error('403 Forbidden');
+        }
         check(artist, String);
         var results = [];
         if(artist != '') {

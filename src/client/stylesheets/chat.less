@@ -1,31 +1,44 @@
 @import 'variables';
 @import 'lib/elements';
 
-.chat-list .item .content {
-  padding-top: 8px;
-}
-.chat-title {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: inherit;
+.chat-column {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-.chat-row {
+.chat-list {
+  margin: 0;
+  padding-bottom: 10px;
 
-  position: relative;
+  .item .content {
+    padding-top: 8px;
+  }
 
-  .ui.image {
-    height: 30px;
-    max-width: 20%;
-  }
-  div.content {
-    width: 80%;
-  }
-  div.ui.message {
+  .chat-title {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    box-shadow: none;
+    background: inherit;
   }
 
+  .chat-row {
+
+    position: relative;
+
+    .ui.image {
+      height: 30px;
+      max-width: 20%;
+    }
+    div.content {
+      width: 80%;
+    }
+    div.ui.message {
+      width: 100%;
+      box-shadow: none;
+    }
+
+  }
 }
+

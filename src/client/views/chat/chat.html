@@ -1,9 +1,5 @@
 <template name="chat">
     <div class="row" style="height: 100%">
-        <h4 class="ui horizontal header divider chat-title">
-            <i class="comments icon"></i>
-            Chat room
-        </h4>
         <div class="ui tiny list chat-list" style="height: 100%; overflow-y: hidden">
             {{#each chats}}
                 {{> chat_row}}

@@ -15,5 +15,6 @@ BrowserPolicy.content.allowOriginForAll("*.vimeo.com");
 BrowserPolicy.content.allowOriginForAll("*.vimeocdn.com");
 BrowserPolicy.content.allowOriginForAll("*.dailymotion.com");
 BrowserPolicy.content.allowOriginForAll("*.dmcdn.net"); // dailymotion CDN
+BrowserPolicy.content.allowOriginForAll("*.ggpht.com"); // dailymotion CDN
 
 BrowserPolicy.content.allowFontDataUrl();

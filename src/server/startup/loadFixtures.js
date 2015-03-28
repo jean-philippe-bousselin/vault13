@@ -1,8 +1,5 @@
 function loadFixture(fixtures, collection) {
-  var i;
-
-  for (i = 0; i < fixtures.length; i+= 1) {
-    //collection.remove({ });
+  for (var i = 0; i < fixtures.length; i+= 1) {
     collection.insert(fixtures[i]);
   }
 }
@@ -10,7 +7,7 @@ function loadFixture(fixtures, collection) {
 function clearDb() {
     chats.remove({});
     posts.remove({});
-    //Meteor.users.remove({});
+    Meteor.users.remove({});
 }
 
 Meteor.startup(function () {

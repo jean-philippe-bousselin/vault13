@@ -17,17 +17,9 @@ Template.artistSearch.rendered = function() {
                 Session.set('editingArtistName', false);
                 // Rebuild tags when changing artist name
                 Meteor.apply('lastfm.artist.getTags', [newPost.resource.author], true, function(error, tags) {
-                    var tagExists;
+                    newPost.resource.tags = [];
                     $.each(tags, function(index, newTag){
-                        tagExists = false;
-                        $.each(newPost.resource.tags, function(index, existingTag){
-                            if(existingTag.name == newTag.name) {
-                                tagExists = true;
-                            }
-                        });
-                        if(!tagExists) {
-                            newPost.resource.tags.push(newTag);
-                        }
+                        newPost.resource.tags.push(newTag);
                     });
                     newPost.tagsLoaded = true;
                     Session.set('newPost', newPost);

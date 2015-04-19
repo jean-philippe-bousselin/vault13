@@ -1,3 +1,11 @@
+Template.artistSearch.events({
+
+    'click .input-save-artist-name': function(event, element) {
+        refreshTags($('.artist-name.prompt').val());
+    }
+
+});
+
 Template.artistSearch.rendered = function() {
 
     this.find('input[type=text]').focus();
@@ -10,20 +18,7 @@ Template.artistSearch.rendered = function() {
             },
             type: 'lastFMArtists',
             onSelect: function(element){
-                var newPost = Session.get('newPost');
-                newPost.tagsLoaded = false;
-                newPost.resource.author = element.name;
-                Session.set('newPost', newPost);
-                Session.set('editingArtistName', false);
-                // Rebuild tags when changing artist name
-                Meteor.apply('lastfm.artist.getTags', [newPost.resource.author], true, function(error, tags) {
-                    newPost.resource.tags = [];
-                    $.each(tags, function(index, newTag){
-                        newPost.resource.tags.push(newTag);
-                    });
-                    newPost.tagsLoaded = true;
-                    Session.set('newPost', newPost);
-                });
+                refreshTags(element.name);
             },
             templates: {
                 lastFMArtists: function(response) {
@@ -66,3 +61,20 @@ Template.artistSearch.rendered = function() {
     ;
 
 };
+
+function refreshTags(artistName) {
+    var newPost = Session.get('newPost');
+    newPost.tagsLoaded = false;
+    newPost.resource.author = artistName;
+    Session.set('newPost', newPost);
+    Session.set('editingArtistName', false);
+    // Rebuild tags when changing artist name
+    Meteor.apply('lastfm.artist.getTags', [newPost.resource.author], true, function(error, tags) {
+        newPost.resource.tags = [];
+        $.each(tags, function(index, newTag){
+            newPost.resource.tags.push(newTag);
+        });
+        newPost.tagsLoaded = true;
+        Session.set('newPost', newPost);
+    });
+}

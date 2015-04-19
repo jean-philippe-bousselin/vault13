@@ -1,9 +1,12 @@
 <template name="artistSearch">
 
     <div class="artist-search ui top aligned search fluid">
-        <div class="ui transparent left icon input">
-            <input class="artist-name prompt" type="text" placeholder="Artist name" value="{{author}}">
+        <div class="ui right labeled left icon input">
             <i class="search icon"></i>
+            <input class="artist-name prompt" type="text" placeholder="Artist name" value="{{author}}">
+            <div class="ui button input-save-artist-name">
+                Save
+            </div>
         </div>
         <div class="results"></div>
     </div>

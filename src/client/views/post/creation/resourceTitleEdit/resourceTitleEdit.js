@@ -3,7 +3,6 @@ Template.resourceTitleEdit.helpers({
 });
 
 Template.resourceTitleEdit.events({
-
     'submit .title-edit-form': function(event, template) {
         var post = Session.get('newPost');
         post.resource.title = event.target[0].value;
@@ -12,6 +11,10 @@ Template.resourceTitleEdit.events({
 
         event.preventDefault();
         return false;
+    },
+
+    'click .input-change-title': function() {
+        $('.title-edit-form').submit();
     }
 
 });

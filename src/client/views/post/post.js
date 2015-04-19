@@ -19,6 +19,9 @@ Template.post.rendered = function() {
 
     $('.post .toggle-comments').popup();
     $('.post .tag').popup();
+    $('.post .tag').click(function() {
+        $(this).popup('destroy');
+    });
     $(this.firstNode).find('.special.cards .image').dimmer({
         on: 'hover'
     });

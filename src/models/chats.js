@@ -44,7 +44,7 @@ if (Meteor.isServer) {
 
     Meteor.methods({
         addChat: function (text) {
-            // Make sure the user is logged in before inserting a task
+
             if (! Meteor.userId()) {
                 throw new Meteor.Error("not-authorized");
             }

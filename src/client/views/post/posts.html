@@ -1,11 +1,7 @@
 <template name="posts">
-    {{#unless posts}}
-        Gathering posts.
-    {{/unless}}
     <div class="ui divided items">
-        {{#each posts}}
-            {{> post}}
-        {{/each}}
+    {{#each posts}}
+        {{> post}}
+    {{/each}}
     </div>
-
 </template>

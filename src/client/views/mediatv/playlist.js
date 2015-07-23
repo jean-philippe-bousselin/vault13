@@ -1,8 +1,10 @@
+Meteor.subscribe("playlistItems");
+
 Template.playlist.helpers({
     isPlaylistEmpty: function() {
-        return Session.get('playlist').length == 0;
+        return false;
     },
     playlist: function() {
-        return Session.get('playlist');
+        return playlistItems.find({userId: Meteor.userId()});
     }
 });

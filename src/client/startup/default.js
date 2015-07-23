@@ -9,6 +9,4 @@ Meteor.startup(function () {
     }
     Meteor.setTimeout(momentumReapply, 30000);
 
-    // initialize playlist
-    Session.setDefault('playlist', []);
 });

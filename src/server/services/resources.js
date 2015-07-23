@@ -9,7 +9,7 @@ Meteor.methods({
             var result = HTTP.get('http://open.iframe.ly/api/oembed', {
                 params: {
                     url: url,
-                    origin: 'meteor'
+                    origin: 'vault13'
                 }
             });
         } catch (ex) {

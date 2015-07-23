@@ -5,10 +5,15 @@
             <i class="music icon"></i>
         </div>
         {{/if}}
-        <img class="ui tiny image" src="{{thumbnailUrl}}">
+        <img class="ui tiny image" src="{{resource.thumbnailUrl}}">
         <div class="content">
-            <div class="header">{{title}}</div>
-            {{author}}
+            <div class="header">{{resource.title}}</div>
+            {{resource.author}}
+        </div>
+        <div class="delete-button hidden right floated" style="margin-top: 11px;">
+            <button class="ui icon button">
+                <i class="trash icon"></i>
+            </button>
         </div>
     </div>
 </template>

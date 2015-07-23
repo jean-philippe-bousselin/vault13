@@ -22,7 +22,7 @@ if (Meteor.isServer) {
 
     Meteor.methods({
         updateUserInfos: function (values) {
-            // Make sure the user is logged in before inserting a task
+
             if (! Meteor.userId()) {
                 throw new Meteor.Error("not-authorized");
             }

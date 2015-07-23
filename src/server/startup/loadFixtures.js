@@ -7,7 +7,7 @@ function loadFixture(fixtures, collection) {
 function clearDb() {
     chats.remove({});
     posts.remove({});
-    Meteor.users.remove({});
+    //Meteor.users.remove({});
 }
 
 Meteor.startup(function () {

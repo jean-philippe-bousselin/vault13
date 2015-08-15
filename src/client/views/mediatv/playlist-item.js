@@ -4,6 +4,17 @@ Template.playlistItem.helpers({
     }
 });
 
+Template.playlistItem.events({
+
+    'click .playlist-item': function(event, element) {
+        Session.set('currentlyPlayingResource', this.resource);
+    },
+    'click .playlist-item button.remove-item': function(event, element) {
+        Meteor.call("playlist.removeItem", this.resource);
+        event.stopPropagation();
+    }
+});
+
 Template.playlistItem.rendered = function() {
     $(this.firstNode).fadeIn('fast');
     $(this.firstNode).on('mouseover', function() {

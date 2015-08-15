@@ -22,7 +22,10 @@ playlistItems.attachSchema(
                 "tags": {
                     type: [new SimpleSchema({name: {type: String}})],
                     optional: true
-                }
+                },
+                publicId: {
+                    type: String
+                },
             })
         },
         "createdTime" : {
@@ -53,7 +56,7 @@ if (Meteor.isServer) {
     });
 
     Meteor.methods({
-        addPlaylistItem: function (resource) {
+        'playlist.addItem': function (resource) {
 
             if (! Meteor.userId()) {
                 throw new Meteor.Error("not-authorized");
@@ -61,12 +64,30 @@ if (Meteor.isServer) {
 
             check(arguments, [Match.Any]);
 
+            resource.publicId = new Date().getTime();
+
             playlistItems.insert({
                 createdTime: new Date(),
                 resource: resource,
                 userId: Meteor.userId()
             });
+        },
+
+        'playlist.removeItem': function(resource) {
+
+            if (!Meteor.userId()) {
+                throw new Meteor.Error("not-authorized");
+            }
+
+            check(arguments, [Match.Any]);
+
+            playlistItems.remove({
+                userId: Meteor.userId(),
+                "resource.publicId": resource.publicId
+            })
+
         }
+
     });
 
 }

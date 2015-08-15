@@ -11,7 +11,7 @@ function clearDb() {
 }
 
 Meteor.startup(function () {
-  clearDb();
-  loadFixture(Fixtures.chats, chats);
-  loadFixture(Fixtures.posts, posts);
+  //clearDb();
+  //loadFixture(Fixtures.chats, chats);
+  //loadFixture(Fixtures.posts, posts);
 });

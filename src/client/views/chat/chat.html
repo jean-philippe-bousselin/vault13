@@ -1,13 +1,13 @@
 <template name="chat">
-    <div class="row" style="height: 100%">
-        <div class="ui tiny list chat-list" style="height: 100%; overflow-y: hidden">
+    <div class="row">
+        <div class="ui tiny list chat-list">
             {{#each chats}}
                 {{> chat_row}}
             {{/each}}
-            <div class="item">
-                <div class="ui icon input" style="width: 100%;">
+            <div class="chat-row item">
+                <div class="ui icon input">
                     <form class="new-chat">
-                        <input type="text" name="text" placeholder="Talk, man.">
+                        <input type="text" name="text" placeholder="7r011 H3r3">
                     </form>
                     <i class="comment icon"></i>
                 </div>

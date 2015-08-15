@@ -74,7 +74,6 @@ if (Meteor.isServer) {
         },
 
         'playlist.removeItem': function(resource) {
-
             if (!Meteor.userId()) {
                 throw new Meteor.Error("not-authorized");
             }
@@ -85,7 +84,6 @@ if (Meteor.isServer) {
                 userId: Meteor.userId(),
                 "resource.publicId": resource.publicId
             })
-
         }
 
     });

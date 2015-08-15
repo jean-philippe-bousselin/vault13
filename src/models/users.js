@@ -3,6 +3,7 @@ if (Meteor.isServer) {
     Meteor.publish("users", function () {
         return Meteor.users.find({}, {
             fields: {
+                'createdAt': 1,
                 'username': 1,
                 'profile.picture': 1
             }

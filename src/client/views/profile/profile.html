@@ -5,7 +5,7 @@
     </h4>
 
     <div class="ui grid">
-        <div class="four wide column">
+        <div class="six wide column">
             <img class="profile-pic ui middle aligned bordered fluid image" src="{{user.profile.picture}}" />
             {{#if isOwnProfile}}
             <div class="fluid ui tiny black button edit-profile-button">
@@ -14,8 +14,15 @@
             </div>
             {{/if}}
         </div>
-        <div class="twelve wide column">
-            {{> profile_chart}}
+        <div class="ten wide column">
+            <div class="ui label">
+                Member since
+                <div class="detail">{{formatDate user.createdAt}}</div>
+            </div>
+            <div class="ui label">
+                Contributions
+                <div class="detail">{{countPosts}}</div>
+            </div>
         </div>
     </div>
 

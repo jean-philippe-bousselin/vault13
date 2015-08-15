@@ -1,6 +1,8 @@
 Meteor.subscribe("posts");
 Meteor.subscribe("users");
 
+var userPosts = [];
+
 Template.profile.helpers({
     isOwnProfile: function() {
         return Meteor.user().username == this.user.username;
@@ -9,8 +11,13 @@ Template.profile.helpers({
         return this.user;
     },
     userPosts: function() {
-        return posts.find({'from.name': this.user.username}, {sort: {createdTime: -1}});
+
+        return userPosts;
+    },
+    countPosts: function() {
+        return userPosts.count();
     }
+
 });
 
 Template.profile.events({
@@ -29,3 +36,7 @@ Template.profile.events({
         ).modal('show');
     }
 });
+
+Template.profile.created = function() {
+    userPosts = posts.find({'from.name': this.data.user.username}, {sort: {createdTime: -1}});
+};

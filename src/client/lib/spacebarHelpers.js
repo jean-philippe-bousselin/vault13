@@ -31,3 +31,7 @@ Template.registerHelper('fromNow', function(context) {
     return moment(context).fromNow();
   }
 });
+
+Template.registerHelper('formatDate', function(date) {
+  return moment(date).format('DD/MM/YYYY');
+});

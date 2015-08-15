@@ -7,12 +7,14 @@
                     “Share your knowledge. It’s a way to achieve immortality.” 
                 </div>
             </h1>
-            <div class="at-form ui large fluid form segment">
+
+            <div class="at-form ui large fluid form segment login">
                 <div class="at-title">
                     <h2 class="ui center aligned dividing header">
                         Sign In
                     </h2>
                 </div>
+
                 <div class="at-pwd-form">
                     <form id="login-form" action="#" method="POST" novalidate="">
                         <div id="login-error" class="ui {{#unless accessDenied}}hidden{{/unless}} icon red message">
@@ -21,7 +23,7 @@
                                 <div class="header">
                                     Access Denied
                                 </div>
-                                <p>Bad credentials.</p>
+                                <p>Incorrect credentials.</p>
                             </div>
                         </div>
                         <div class="at-input required field">
@@ -29,7 +31,7 @@
                                 Username
                             </label>
                             <div class="ui fluid input icon">
-                                <input type="text" id="login-username" name="at-field-email" placeholder="Username" autocapitalize="none" autocorrect="off">
+                                <input type="text" id="login-username" name="at-field-username" placeholder="Username" autocapitalize="none" autocorrect="off">
                             </div>
                         </div>
                         <div class="at-input required field">
@@ -43,7 +45,76 @@
                         <input type="submit" class="at-btn ui fluid large primary button" id="at-btn" value="Sign In">
                     </form>
                 </div>
+                <div class="at-signin-link at-wrap">
+                    <p>
+                        No account yet?
+                        <a href="#" id="at-register" class="at-link at-register">Register</a>
+                    </p>
+                </div>
             </div>
+
+            <div class="at-form ui large fluid form segment register">
+                <div class="at-title">
+                    <h2 class="ui center aligned dividing header">
+                        Create an Account
+                    </h2>
+                </div>
+                <div class="at-pwd-form">
+                    <form id="register-form" action="#" method="POST" novalidate="">
+                        {{#if hasRegistrationError}}
+                        <div id="login-error" class="ui icon red message">
+                            <i class="warning sign icon"></i>
+                            <div class="content left aligned">
+                                <div class="header">
+                                    Registration error
+                                </div>
+                                <p>{{registrationError}} </p>
+                            </div>
+                        </div>
+                        {{/if}}
+                        <div class="at-input required field">
+                            <label>
+                                Username
+                            </label>
+                            <div class="ui fluid input icon">
+                                <input type="username" id="register-username" name="at-field-username" placeholder="Username" autocapitalize="none" autocorrect="off">
+                            </div>
+                        </div>
+                        <div class="at-input required field">
+                            <label>
+                                Email
+                            </label>
+                            <div class="ui fluid input icon">
+                                <input type="email" id="register-email" name="at-field-email" placeholder="Email" autocapitalize="none" autocorrect="off">
+                            </div>
+                        </div>
+                        <div class="at-input required field">
+                            <label>
+                                Password
+                            </label>
+                            <div class="ui fluid input icon">
+                                <input type="password" id="register-password" name="at-field-password" placeholder="Password" autocapitalize="none" autocorrect="off">
+                            </div>
+                        </div>
+                        <div class="at-input required field">
+                            <label>
+                                Password (again)
+                            </label>
+                            <div class="ui fluid input icon">
+                                <input type="password" id="register-password-again" name="at-field-password-again" placeholder="Password (again)" autocapitalize="none" autocorrect="off">
+                            </div>
+                        </div>
+                        <input type="submit" class="at-btn ui fluid large primary button" id="at-btn" value="Register">
+                    </form>
+                </div>
+                <div class="at-signin-link at-wrap">
+                    <p>
+                        If you already have an account
+                        <a href="#" id="at-login" class="at-link at-signin">sign in</a>
+                    </p>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>

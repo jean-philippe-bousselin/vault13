@@ -8,5 +8,4 @@ Meteor.startup(function () {
         Meteor.setTimeout(momentumReapply, 30000);
     }
     Meteor.setTimeout(momentumReapply, 30000);
-
 });

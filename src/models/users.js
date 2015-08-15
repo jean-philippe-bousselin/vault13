@@ -21,6 +21,47 @@ if (Meteor.isServer) {
     });
 
     Meteor.methods({
+
+        'user.create': function (values) {
+
+            check(arguments, [Match.Any]);
+
+            if (values.username == '') {
+                throw new Meteor.Error('Username is required.');
+            }
+            if (values.email == '') {
+                throw new Meteor.Error('Email is required.');
+            }
+            var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+            if(!re.test(values.email)) {
+                throw new Meteor.Error('Invalid email format.');
+            }
+            if (values.password == '') {
+                throw new Meteor.Error('Password is required.');
+            }
+            if (values.passwordAgain == '') {
+                throw new Meteor.Error('Password again is required.');
+            }
+            if (values.password != values.passwordAgain) {
+                throw new Meteor.Error('Passwords does not match.');
+            }
+
+            var user = Meteor.users.findOne({username: values.username});
+            if(typeof user != 'undefined') {
+                throw new Meteor.Error('Username already exists.');
+            }
+            user = Meteor.users.findOne({email: values.email});
+            if(typeof user != 'undefined') {
+                throw new Meteor.Error('User with this email already exists.');
+            }
+
+            Accounts.createUser({
+                username: values.username,
+                email : values.email,
+                password : values.password
+            });
+        },
+
         updateUserInfos: function (values) {
 
             if (! Meteor.userId()) {

@@ -1,6 +1,14 @@
 <template name="user_content">
     <div class="ui comments">
         <div class="comment">
+            <div class="posts-options">
+                <div class="ui right pointing dropdown post-options">
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <div class="item open-post">Open post</div>
+                    </div>
+                </div>
+            </div>
             <a href="{{pathFor 'profile' userName=from.name }}" class="avatar">
                 <img src="{{from.picture}}">
             </a>

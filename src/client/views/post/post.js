@@ -8,6 +8,11 @@ Template.post.events({
     "click .toggle-comments": function (event) {
         $(event.target).parent().siblings('.comments-wrapper').slideToggle('fast');
         event.preventDefault();
+    },
+    'click .open-post': function(event, template) {
+        Router.go(
+            Router.path('singlePost', {id: this._id})
+        );
     }
 });
 

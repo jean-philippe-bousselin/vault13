@@ -18,5 +18,6 @@ BrowserPolicy.content.allowOriginForAll("*.dailymotion.com");
 BrowserPolicy.content.allowOriginForAll("*.dmcdn.net"); // dailymotion CDN
 BrowserPolicy.content.allowOriginForAll("*.ggpht.com"); // dailymotion CDN
 BrowserPolicy.content.allowOriginForAll("*.wp.com"); // dailymotion CDN
+BrowserPolicy.content.allowOriginForAll("*.metalinjection.net"); // dailymotion CDN
 
 BrowserPolicy.content.allowFontDataUrl();

@@ -14,16 +14,28 @@ Router.route('/profile/:userName', {
     controller: ProfileController
 });
 
+Router.route('/post/:id', {
+    name: 'singlePost',
+    controller: RouteController.extend({
+        data: function() {
+            var postArray = posts.find({_id: this.params.id}).fetch();
+            return postArray.pop();
+        },
+        action: function () {
+            this.render('singlePost');
+        }
+    })
+});
 
 Router.route('/search', function () {
     this.render('search');
 });
+
 Router.route('/search/:keyword', function () {
     this.render('search', {
         data: this.params.keyword
     });
 });
-
 Router.route('/about', {name: 'about'}, function () {
   this.render('about');
 });

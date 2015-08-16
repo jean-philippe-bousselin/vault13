@@ -1,5 +1,4 @@
 <template name="about">
-
     <h4 class="ui horizontal header divider chat-title">
         <i class="info circle icon"></i>
         About
@@ -8,22 +7,66 @@
     <div class="ui styled fluid accordion">
         <div class="active title">
             <i class="dropdown icon"></i>
-            The project
+            What's Vault13 about?
         </div>
         <div class="active content">
-            <ul class="ui list">
-                <li>Build a community around music sharing</li>
-                <li>Easy sharing / playing</li>
-                <li>Wrap other content delivery platforms in a transparent way for you</li>
-                <li>Discover, share, enjoy</li>
-            </ul>
+            <p>
+            V13 was initially designed to share music within it's community. It's purpose has now expanded to any
+            culturally related content, should it be music, video, art... you name it.
+            </p>
+            <p><b>Yet another Facebook?</b></p>
+            <p>Yes, but no. V13 was largely inspired by other social networks of course, what's different is that it
+            is focused on cultural sharing, and provides accurate tools to do so.</p>
+            <p><b>Privacy</b></p>
+            <p>The only thing to know is that everything you put in V13 is available to all other members of the community.
+            There are no adds, and we do not keep any personal information about you (except your mail address).</p>
+            <p><b>Bug report</b></p>
+            <p>V13 is still in active development, therefore if you encounter a bug on the plateform please be kind enough
+            to report it to
+            <a href="mailto:contact.vault13@gmail.com" class="ui label">
+                <i class="mail icon"></i> contact.vault13@gmail.com
+            </a>. Feedback is also very much welcomed, good or bad :)
+            </p>
+        </div>
+        <div class="title">
+            <i class="dropdown icon"></i>
+            What exactly can I share, and how?
+        </div>
+        <div class="content">
+            <p>
+                You can share any content available from most of the mainstream content delivery services, such as
+                youtube, bandcamp, soundcloud, and so on. You can also share web pages, it's a great way to
+                be able to share events (concerts, expo...) for example.
+            </p>
+            <p><b>Sharing</b></p>
+            <p>
+                To do so, simply paste the content URL into the omnibox on the <a href="{{ pathFor 'feed' }}">Feed</a> page,
+                fill in a couple fields to add context to your post and you're done.
+                {{> omnibox}}
+            </p>
+            <p><b>Browsing</b></p>
+            <p>
+                When you are done sharing for the day, it's time to discover. Browse the plateform's content
+                and play it. A playlist is automatically kept up to date for you, this way you can keep track
+                of your discoveries.
+            </p>
+            <p><b>Searching</b></p>
+            <p>
+                A quick way to find something particular in V13's library. Type in a keyword the system will search
+                in artists name, posts title, posts text content, or tags.
+            </p>
+            <p><b>Moderation</b></p>
+            <p>
+                As much as we don't want to do that, every non culturally related content will be systematically removed.
+                Abuses will result in permanent ban.
+            </p>
         </div>
         <div class="title">
             <i class="dropdown icon"></i>
             Tech
         </div>
         <div class="content">
-            V13 couldn't exists without the work of awesome people:
+            V13 is open source, and use the following awesome tools:
             <div class="ui list techs">
                 <div class="item">
                     <img width="350" class="ui image" src="/images/meteor-logo.png" title="Meteor"/>

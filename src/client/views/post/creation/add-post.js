@@ -75,7 +75,6 @@ Template.addPost.rendered = function() {
                 lastFMTags: function(response) {
                     var html = '';
                     if(response.results !== undefined) {
-                        // each result
                         $.each(response.results, function(index, result) {
                             html += '<a class="result">';
                             html += '<div class="content">';

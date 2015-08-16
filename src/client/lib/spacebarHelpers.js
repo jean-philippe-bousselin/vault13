@@ -35,3 +35,8 @@ Template.registerHelper('fromNow', function(context) {
 Template.registerHelper('formatDate', function(date) {
   return moment(date).format('DD/MM/YYYY');
 });
+
+Template.registerHelper('nl2br', function(text) {
+  var nl2br = (text + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '<br/>' + '$2');
+  return new Spacebars.SafeString(nl2br);
+});

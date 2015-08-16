@@ -19,6 +19,7 @@ Template.artistSearch.rendered = function() {
             type: 'lastFMArtists',
             onSelect: function(element){
                 refreshTags(element.name);
+                return false;
             },
             templates: {
                 lastFMArtists: function(response) {

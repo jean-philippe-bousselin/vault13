@@ -14,9 +14,7 @@
   width: 100%;
   overflow-y: hidden;
 
-  .item .content {
-    padding-top: 8px;
-  }
+
 
   .chat-title {
     position: absolute;
@@ -26,10 +24,13 @@
     background: inherit;
   }
 
-  .chat-row {
+  .chat-row.item {
 
     position: relative;
 
+    .content {
+      padding-top: 8px;
+    }
     .ui.image {
       height: 30px;
       max-width: 20%;
@@ -40,6 +41,9 @@
     div.ui.message {
       width: 100%;
       box-shadow: none;
+      a {
+        color: #009fda !important;
+      }
     }
 
   }

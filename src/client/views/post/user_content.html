@@ -14,7 +14,7 @@
     <div style="margin-top: 15px;">
         {{#if message}}
         <i class="quote left icon"></i>
-            {{message}}
+        {{#autolink}}{{nl2br message}}{{/autolink}}
         <i class="quote right icon"></i>
         {{/if}}
     </div>

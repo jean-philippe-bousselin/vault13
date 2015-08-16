@@ -44,7 +44,6 @@ Router.route('/', {name: 'feed'}, function () {
   this.render('home');
 });
 
-
 /**
  * Last FM service
  */
@@ -62,9 +61,11 @@ Router.route('/lastfm/get-tags/:name', { where: 'server' })
 
 
 Router.configure({
-  onAfterAction: function() {
+    onAfterAction: function() {
       if(Meteor.isClient) {
           $('.dynamic-content').hide().fadeIn(300);
       }
-  }
+    },
+    loadingTemplate: 'loading',
+    notFoundTemplate: 'notFound'
 });

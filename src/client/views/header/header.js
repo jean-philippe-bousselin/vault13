@@ -13,8 +13,8 @@ Template.header.helpers({
 });
 
 Template.header.events({
-  'click .log-out.button' : function () {
-    Meteor.logout();
-  }
+    'click .log-out.button' : function () {
+        Meteor.logout();
+    }
 });
 

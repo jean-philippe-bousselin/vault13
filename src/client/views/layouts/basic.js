@@ -11,7 +11,3 @@ Template.basicLayout.helpers({
         return Meteor.user();
     }
 });
-
-Template.basicLayout.events({
-
-});

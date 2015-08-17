@@ -1,9 +1,6 @@
 <template name="profile">
-    <h4 class="ui horizontal header divider">
-        <i class="user icon"></i>
-        {{user.username}}
-    </h4>
-
+    {{> omnibox}}
+    <br/>
     <div class="ui grid">
         <div class="six wide column">
             <img class="profile-pic ui middle aligned bordered fluid image" src="{{user.profile.picture}}" />
@@ -15,6 +12,7 @@
             {{/if}}
         </div>
         <div class="ten wide column">
+            <h1>{{user.username}}</h1>
             <div class="ui label">
                 Member since
                 <div class="detail">{{formatDate user.createdAt}}</div>
@@ -26,15 +24,12 @@
         </div>
     </div>
 
-    {{#if userPosts.count}}
     <h4 class="ui horizontal header divider">
         <i class="list icon"></i>
         Publications
     </h4>
-        {{#each userPosts}}
-            {{> post}}
-        {{/each}}
-    {{/if}}
+
+    {{> posts}}
 
     {{> editProfileModal}}
 

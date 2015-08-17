@@ -1,10 +1,18 @@
-ProfileController = RouteController.extend({
-    data: function() {
-        return {
-            user: Meteor.users.findOne({username: this.params.userName})
-        };
-    },
+Router.configure({
+    loadingTemplate:"loading"
+});
+Router.onBeforeAction("loading");
 
+ProfileController = RouteController.extend({
+    waitOn:function(){
+        return Meteor.subscribe("posts", this.params.userName);
+    },
+    data: function() {
+      return {
+          user: Meteor.users.findOne({username: this.params.userName}),
+          posts: posts.find({'from.name': this.params.userName}, {sort: {createdTime: -1}})
+      }
+    },
     action: function () {
         this.render('profile');
     }
@@ -40,8 +48,14 @@ Router.route('/about', {name: 'about'}, function () {
   this.render('about');
 });
 
-Router.route('/', {name: 'feed'}, function () {
-  this.render('home');
+Router.route("feed",{
+    path:"/",
+    controller: RouteController.extend({
+        template:"home",
+        waitOn: function(){
+            return Meteor.subscribe("posts");
+        }
+    })
 });
 
 /**
@@ -58,14 +72,3 @@ Router.route('/lastfm/get-tags/:name', { where: 'server' })
         this.response.setHeader("Content-Type", "application/json");
         this.response.end(JSON.stringify({results: Meteor.call('lastfm.tags.find', this.params.name)}));
     });
-
-
-Router.configure({
-    onAfterAction: function() {
-      if(Meteor.isClient) {
-          $('.dynamic-content').hide().fadeIn(300);
-      }
-    },
-    loadingTemplate: 'loading',
-    notFoundTemplate: 'notFound'
-});

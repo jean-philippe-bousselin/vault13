@@ -1,7 +1,5 @@
-Meteor.subscribe("posts");
+//Meteor.subscribe("posts");
 Meteor.subscribe("users");
-
-var userPosts = [];
 
 Template.profile.helpers({
     isOwnProfile: function() {
@@ -10,14 +8,9 @@ Template.profile.helpers({
     user: function () {
         return this.user;
     },
-    userPosts: function() {
-
-        return userPosts;
-    },
     countPosts: function() {
-        return userPosts.count();
+        return this.posts.count();
     }
-
 });
 
 Template.profile.events({
@@ -36,7 +29,3 @@ Template.profile.events({
         ).modal('show');
     }
 });
-
-Template.profile.created = function() {
-    userPosts = posts.find({'from.name': this.data.user.username}, {sort: {createdTime: -1}});
-};

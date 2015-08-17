@@ -1,4 +1,4 @@
-Meteor.subscribe("posts");
+//Meteor.subscribe("posts");
 
 Template.posts.helpers({
     posts: function() {

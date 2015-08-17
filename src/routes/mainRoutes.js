@@ -54,7 +54,12 @@ Router.route("feed",{
         template:"home",
         waitOn: function(){
             return Meteor.subscribe("posts");
-        }
+        },
+        data: function() {
+            return {
+                posts: posts.find({}, {sort: {createdTime: -1}})
+            }
+        },
     })
 });
 

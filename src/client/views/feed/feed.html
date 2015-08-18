@@ -1,4 +1,8 @@
 <template name="feed">
     {{> omnibox}}
     {{> posts}}
+    <button class="fluid ui button {{#if loadingNewPosts}}loading{{/if}} more-content">
+        <i class="refresh icon"></i>
+        Load more posts
+    </button>
 </template>

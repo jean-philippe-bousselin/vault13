@@ -5,7 +5,7 @@ Router.onBeforeAction("loading");
 
 ProfileController = RouteController.extend({
     waitOn:function(){
-        return Meteor.subscribe("posts", this.params.userName);
+        return Meteor.subscribe("posts", 10, this.params.userName);
     },
     data: function() {
       return {
@@ -53,9 +53,10 @@ Router.route("feed",{
     controller: RouteController.extend({
         template:"home",
         waitOn: function(){
-            return Meteor.subscribe("posts");
+            return Meteor.subscribe("posts", 10);
         },
         data: function() {
+            Session.set('limit', 10);
             return {
                 posts: posts.find({}, {sort: {createdTime: -1}})
             }

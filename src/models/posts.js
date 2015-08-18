@@ -73,12 +73,14 @@ posts.attachSchema(
 
 if (Meteor.isServer) {
 
-    Meteor.publish('posts', function (user) {
+    Meteor.publish('posts', function (limit, user) {
         check(user, Match.Optional(String));
+        check(limit, Number);
+
         if(typeof user != 'undefined') {
-            return posts.find({'from.name': user}, {sort: {createdTime: -1}});
+            return posts.find({'from.name': user}, {sort: {createdTime: -1}, limit: limit});
         } else {
-            return posts.find({}, {sort: {createdTime: -1}});
+            return posts.find({}, {sort: {createdTime: -1}, limit: limit});
         }
     });
 

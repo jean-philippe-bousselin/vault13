@@ -10,7 +10,7 @@ ProfileController = RouteController.extend({
     data: function() {
       return {
           user: Meteor.users.findOne({username: this.params.userName}),
-          posts: posts.find({'from.name': this.params.userName}, {sort: {createdTime: -1}})
+          posts: posts.find({}, {sort: {createdTime: -1}})
       }
     },
     action: function () {

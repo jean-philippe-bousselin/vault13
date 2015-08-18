@@ -74,9 +74,9 @@ posts.attachSchema(
 if (Meteor.isServer) {
 
     Meteor.publish('posts', function (user) {
-        check(arguments, [Match.Any]);
+        check(user, Match.Optional(String));
         if(typeof user != 'undefined') {
-            return posts.find({'from.name': user.username}, {sort: {createdTime: -1}});
+            return posts.find({'from.name': user}, {sort: {createdTime: -1}});
         } else {
             return posts.find({}, {sort: {createdTime: -1}});
         }

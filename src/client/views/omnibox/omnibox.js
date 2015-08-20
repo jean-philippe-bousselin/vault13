@@ -8,17 +8,6 @@ Template.omnibox.helpers({
 });
 
 Template.omnibox.events({
-
-    'click .go-top': function(){
-        $('.dynamic-content').animate({
-            scrollTop: 0
-        }, 500);
-    },
-    'click .go-bottom': function(){
-        $('.dynamic-content').animate({
-            scrollTop: $('.dynamic-content')[0].scrollHeight
-        }, 500);
-    },
     'submit #resource-add-form': function(event, template) {
 
         event.preventDefault();
@@ -105,18 +94,6 @@ Template.omnibox.events({
 });
 
 Template.omnibox.rendered = function() {
-
-    var scrolltop;
-    $('.dynamic-content').scroll(function(e){
-        scrolltop = $(this).scrollTop();
-        if(scrolltop > 50) {
-            $('.omnibox-control-buttons').fadeIn('fast');
-        } else {
-            $('.omnibox-control-buttons').fadeOut('fast');
-        }
-        $('.omnibox-control-buttons').css('top', scrolltop - 13);
-    });
-
     $('#resource-add-form')
         .form({
             url: {

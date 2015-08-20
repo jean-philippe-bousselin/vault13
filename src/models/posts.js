@@ -85,13 +85,13 @@ if (Meteor.isServer) {
     });
 
     posts.allow({
-        insert : function () {
+        insert: function () {
             return true;
         },
-        update : function () {
+        update: function () {
             return true;
         },
-        remove : function () {
+        remove: function () {
             return true;
         }
     });
@@ -102,10 +102,10 @@ if (Meteor.isServer) {
             var regex = new RegExp(keyword, 'i');
             return posts.find({
                 $or: [
-                    { "message": regex},
-                    { "resource.author": regex},
-                    { "resource.title": regex},
-                    { "resource.tags": {$elemMatch: {name: regex}}}
+                    {"message": regex},
+                    {"resource.author": regex},
+                    {"resource.title": regex},
+                    {"resource.tags": {$elemMatch: {name: regex}}}
                 ]
             }).fetch();
         },

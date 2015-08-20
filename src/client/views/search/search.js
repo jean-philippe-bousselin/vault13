@@ -24,15 +24,13 @@ Template.search.events({
         Session.set('hasSearched', true);
 
         Meteor.call('posts.search', keyword, function(error, results) {
-
             if(error !== undefined) {
+                //@TODO prettify error messages.
                 console.log(error);
             } else {
-                Session.set('searchResults', results);
+                Session.set('searchResults', results)
             }
-
             Session.set('searchPending', false);
-
         });
 
         event.preventDefault();

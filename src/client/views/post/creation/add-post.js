@@ -13,7 +13,6 @@ Template.addPost.helpers({
         return post.resource.tags.length == 0 && post.resource.author != '';
     },
     showArtistEditField: function() {
-
         var show = false;
 
         if(!Session.get('newPost').resource.hasOwnProperty('author')) {
@@ -34,61 +33,28 @@ Template.addPost.helpers({
 });
 
 Template.addPost.events({
-
     'click .edit-artist-name': function() {
         Session.set('editingArtistName', true);
     },
     'click .edit-resource-title': function() {
         Session.set('editingResourceTitle', true);
+    },
+    'submit #add-tag-form': function(event, template) {
+        var tagName = template.find('.tag-name').value;
+        if(tagName == '') {
+            return false;
+        }
+        var post = Session.get('newPost');
+        post.resource.tags.push({
+            name: tagName
+        });
+        Session.set('newPost', post);
+        template.find('.tag-name').value = '';
+        return false;
     }
 });
 
 Template.addPost.rendered = function() {
-
     Session.setDefault('editingArtistName', false);
     Session.setDefault('editingResourceTitle', false);
-
-    // initialize tag search
-    $('.tag-search')
-        .search({
-            apiSettings: {
-                url: '/lastfm/get-tags/{query}'
-            },
-            type: 'lastFMTags',
-            onSelect: function(element) {
-                var post = Session.get('newPost');
-                var tagExists = false;
-                var selectedTag = element;
-                $.each(post.resource.tags, function(index, existingTag){
-                    if(existingTag.name == selectedTag.name) {
-                        tagExists = true;
-                    }
-                });
-                if(!tagExists) {
-                    post.resource.tags.push(selectedTag);
-                }
-                Session.set('newPost', post);
-                $('.tag-search input').val('');
-                return false;
-            },
-            templates: {
-                lastFMTags: function(response) {
-                    var html = '';
-                    if(response.results !== undefined) {
-                        $.each(response.results, function(index, result) {
-                            html += '<a class="result">';
-                            html += '<div class="content">';
-                            if(result.name !== undefined) {
-                                html += '<div class="title">' + result.name + '</div>';
-                            }
-                            html += '</div>';
-                            html += '</a>';
-                        });
-                        return html;
-                    }
-                    return false;
-                }
-            }
-        })
-    ;
 };

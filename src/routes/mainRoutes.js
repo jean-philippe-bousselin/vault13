@@ -5,12 +5,12 @@ Router.onBeforeAction("loading");
 
 ProfileController = RouteController.extend({
     waitOn:function(){
-        return Meteor.subscribe("posts", 10, this.params.userName);
+        return Meteor.subscribe("posts", 0, this.params.userName);
     },
     data: function() {
       return {
           user: Meteor.users.findOne({username: this.params.userName}),
-          posts: posts.find({}, {sort: {createdTime: -1}})
+          posts: posts.find({'from.name': this.params.userName}, {sort: {createdTime: -1}})
       }
     },
     action: function () {

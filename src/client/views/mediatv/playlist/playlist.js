@@ -8,3 +8,7 @@ Template.playlist.helpers({
         return playlistItems.find({userId: Meteor.userId()});
     }
 });
+
+Template.playlist.rendered = function() {
+  Session.setDefault('currentlyPlayingResource', null);
+};

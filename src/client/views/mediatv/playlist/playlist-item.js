@@ -1,13 +1,28 @@
 Template.playlistItem.helpers({
     onAir: function() {
-        return JSON.stringify(Session.get('currentlyPlayingResource')) == JSON.stringify(this.resource)
+        var currentResource = Session.get('currentlyPlayingResource');
+        if (typeof currentResource != 'undefined'
+            && currentResource != null
+            && currentResource.hasOwnProperty('originalUrl')) {
+            return currentResource.originalUrl == this.resource.originalUrl;
+        } else {
+            return false;
+        }
     }
 });
 
 Template.playlistItem.events({
 
     'click .playlist-item': function(event, element) {
-        Session.set('currentlyPlayingResource', this.resource);
+        var currentResource = Session.get('currentlyPlayingResource');
+        if(typeof currentResource != 'undefined'
+            && currentResource != null
+            && currentResource.hasOwnProperty('originalUrl')
+            && currentResource.originalUrl == this.resource.originalUrl) {
+            Session.set('currentlyPlayingResource', null);
+        } else {
+            Session.set('currentlyPlayingResource', this.resource);
+        }
     },
     'click .playlist-item button.remove-item': function(event, element) {
         Meteor.call("playlist.removeItem", this.resource);
@@ -26,5 +41,5 @@ Template.playlistItem.rendered = function() {
     // automatically scroll the playlist to bottom
     $('.playlist-items').animate({
         scrollTop: $('.playlist-items')[0].scrollHeight
-    }, 500);
+    }, 200);
 };

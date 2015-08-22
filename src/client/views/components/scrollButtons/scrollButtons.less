@@ -2,10 +2,25 @@ div.omnibox-control-buttons {
   display: none;
   position: absolute;
   z-index: 9999999;
-  width: 100%;
+  width: 500px;
+  left: 50%;
+  margin-left: -250px;
   text-align: center;
-  button.ui.blue {
-    background-color: #009fda;
-    width: 80px;
+  .ui.inverted.segment {
+    padding: 0;
+    .ui.mini.inverted.statistic {
+      margin: 3px 10% 5px 10%;
+      padding: 2px 5px 7px 5px;
+      &.go-top:hover, &.go-bottom:hover {
+        background: #333;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        cursor: pointer;
+        .label {
+          color: #54c8ff;
+        }
+      }
+    }
   }
 }

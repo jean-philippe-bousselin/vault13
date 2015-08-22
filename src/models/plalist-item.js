@@ -48,7 +48,7 @@ if (Meteor.isServer) {
             return true;
         },
         update : function () {
-            return true;
+            return false;
         },
         remove : function () {
             return true;
@@ -83,7 +83,19 @@ if (Meteor.isServer) {
             playlistItems.remove({
                 userId: Meteor.userId(),
                 "resource.publicId": resource.publicId
-            })
+            });
+        },
+
+        'playlist.clear': function() {
+            if (!Meteor.userId()) {
+                throw new Meteor.Error("not-authorized");
+            }
+
+            check(arguments, [Match.Any]);
+
+            playlistItems.remove({
+                userId: Meteor.userId()
+            });
         }
 
     });

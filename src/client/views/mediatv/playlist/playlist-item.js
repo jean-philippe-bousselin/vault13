@@ -23,4 +23,8 @@ Template.playlistItem.rendered = function() {
     $(this.firstNode).on('mouseleave', function() {
         $(this).find('div.delete-button').addClass('hidden');
     });
+    // automatically scroll the playlist to bottom
+    $('.playlist-items').animate({
+        scrollTop: $('.playlist-items')[0].scrollHeight
+    }, 500);
 };

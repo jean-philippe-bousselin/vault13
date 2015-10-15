@@ -1,7 +1,6 @@
 Template.notifications.helpers({
 
     notifications: function() {
-        console.log(Meteor.user());
         return Meteor.user().notifications
     }
 

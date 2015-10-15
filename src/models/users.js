@@ -5,7 +5,8 @@ if (Meteor.isServer) {
             fields: {
                 'createdAt': 1,
                 'username': 1,
-                'profile.picture': 1
+                'profile.picture': 1,
+                notifications: 1
             }
         });
     });

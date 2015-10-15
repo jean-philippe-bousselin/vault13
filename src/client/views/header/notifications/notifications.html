@@ -1,0 +1,12 @@
+<template name="notifications">
+    <div class="ui dropdown item notifications-button">
+        <a class="ui red circular label">{{notifications.length}}</a>
+        <div class="menu">
+            {{#each notifications}}
+            <a class="item" href="{{link}}">
+                {{message}}
+            </a>
+            {{/each}}
+        </div>
+    </div>
+</template>

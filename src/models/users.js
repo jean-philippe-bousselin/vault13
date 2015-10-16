@@ -84,6 +84,50 @@ if (Meteor.isServer) {
             }
 
             Meteor.users.update({_id: Meteor.user()._id}, {$set: data})
+        },
+
+        'user.deleteNotification': function(timestamp) {
+
+            if (!Meteor.userId()) {
+                throw new Meteor.Error("not-authorized");
+            }
+
+            check(arguments, [Match.Any]);
+
+            Meteor.users.update(
+                {
+                    _id : Meteor.user()._id,
+                },
+                {
+                    $pull: {
+                        notifications: {
+                            createdTime: timestamp
+                        }
+                    }
+                }
+            );
+
+        },
+
+        'user.deleteAllNotifications': function() {
+
+            if (!Meteor.userId()) {
+                throw new Meteor.Error("not-authorized");
+            }
+
+            check(arguments, [Match.Any]);
+
+            Meteor.users.update(
+                {
+                    _id : Meteor.user()._id,
+                },
+                {
+                    $pull: {
+                        notifications: {}
+                    }
+                }
+            );
+
         }
     });
 }

@@ -1,12 +1,16 @@
 <template name="notifications">
-    <div class="ui dropdown item notifications-button">
+    <div class="ui dropdown item notifications-button {{#unless hasNotifications}}hidden{{/unless}}">
         <a class="ui red circular label">{{notifications.length}}</a>
         <div class="menu">
             {{#each notifications}}
-            <a class="item" href="{{link}}">
-                {{message}}
+            <a class="item notification-item" data-time="{{createdTime}}" href="{{link}}">
+                {{{message}}}
             </a>
             {{/each}}
+            <div class="divider"></div>
+            <a class="item notification-item mark-all-seen">
+                <i class="unhide black icon"></i> Mark all as read.
+            </a>
         </div>
     </div>
 </template>

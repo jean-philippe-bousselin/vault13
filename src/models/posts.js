@@ -131,22 +131,28 @@ if (Meteor.isServer) {
                     createdTime: Date.parse(new Date())
                 }}
             });
+
             // notify users, determine the user ids first
             var post = posts.findOne({_id: args[1]});
-            var ids = [post.from.id]; // post creator
-            for(var i = 0; i < post.comments.length; i++) {
-                ids.push(post.comments[i].from.id); // any commenter
+            var ids = [];
+            if(post.from.id != Meteor.userId()) {
+                // post creator
+                ids.push(post.from.id);
             }
-            // remove the current user id from the list (avoid spam)
-            ids.splice(ids.indexOf(Meteor.userId(), 1));
+            for(var i = 0; i < post.comments.length; i++) {
+                if(post.comments[i].from.id != Meteor.userId()) {
+                    ids.push(post.comments[i].from.id); // any commenter
+                }
+            }
+
             // add notification to users
             Meteor.users.update(
                 {_id : { $in : ids}},
                 {
                     $push: {
                         notifications: {
-                            link: '/posts/' + args[1],
-                            message: Meteor.user().username + ' commented on a post.',
+                            link: '/post/' + args[1],
+                            message: '<b>' + Meteor.user().username + '</b> commented on <b>' + post.resource.title + '</b>',
                             createdTime: Date.parse(new Date())
                         }
                     }

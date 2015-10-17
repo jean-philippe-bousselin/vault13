@@ -15,8 +15,3 @@ Meteor.startup(function () {
   //loadFixture(Fixtures.chats, chats);
   //loadFixture(Fixtures.posts, posts);
 });
-
-new Mongo.Collection('news').insert({
-    title: 'test',
-    text: 'test'
-});

@@ -35,6 +35,21 @@ Router.route('/post/:id', {
     })
 });
 
+Router.route("news",{
+    path:"/news",
+    controller: RouteController.extend({
+        template:"news",
+        waitOn: function(){
+            return Meteor.subscribe("news");
+        },
+        data: function() {
+            return {
+                news: news.find({}, {sort: {createdTime: -1}})
+            }
+        }
+    })
+});
+
 Router.route('/search', function () {
     this.render('search');
 });

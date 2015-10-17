@@ -111,12 +111,13 @@ if (Meteor.isServer) {
         },
         addComment: function (args) {
 
-            if (! Meteor.userId()) {
+            if (!Meteor.userId()) {
                 throw new Meteor.Error("not-authorized");
             }
 
             check(arguments, [Match.Any]);
 
+            // insert the actual comment
             posts.update({
                 _id: args[1]
             }, {
@@ -130,6 +131,33 @@ if (Meteor.isServer) {
                     createdTime: Date.parse(new Date())
                 }}
             });
+
+            // notify users, determine the user ids first
+            var post = posts.findOne({_id: args[1]});
+            var ids = [];
+            if(post.from.id != Meteor.userId()) {
+                // post creator
+                ids.push(post.from.id);
+            }
+            for(var i = 0; i < post.comments.length; i++) {
+                if(post.comments[i].from.id != Meteor.userId()) {
+                    ids.push(post.comments[i].from.id); // any commenter
+                }
+            }
+
+            // add notification to users
+            Meteor.users.update(
+                {_id : { $in : ids}},
+                {
+                    $push: {
+                        notifications: {
+                            link: '/post/' + args[1],
+                            message: '<b>' + Meteor.user().username + '</b> commented on <b>' + post.resource.title + '</b>',
+                            createdTime: Date.parse(new Date())
+                        }
+                    }
+                }
+            );
         }
     });
 

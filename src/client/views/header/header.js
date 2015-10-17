@@ -17,4 +17,3 @@ Template.header.events({
         Meteor.logout();
     }
 });
-

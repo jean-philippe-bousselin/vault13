@@ -1,0 +1,17 @@
+<template name="news">
+
+    <div class="ui divided items news-list">
+        {{#each news}}
+            <div class="ui card">
+                <div class="content">
+                    <div class="header">{{title}}</div>
+                    <div class="meta">{{fromNow createdTime}}</div>
+                    <div class="description">
+                        {{{nl2br text}}}
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+
+</template>

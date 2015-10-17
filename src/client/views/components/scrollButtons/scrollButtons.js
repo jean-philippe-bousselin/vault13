@@ -11,19 +11,6 @@ Template.scrollButtons.events({
     }
 });
 
-Template.scrollButtons.helpers({
-
-    'newPostsNotifications': function() {
-        return Session.get('postCreatedNotifications');
-    },
-    'newPosts': function() {
-        return Session.get('postCreatedNotifications') > 0;
-    },
-    'text': function() {
-        return Session.get('postCreatedNotifications') > 1? 'New posts' : 'New post';
-    }
-});
-
 Template.scrollButtons.rendered = function() {
     var scrolltop;
     $('.dynamic-content').scroll(function(e){
@@ -31,9 +18,7 @@ Template.scrollButtons.rendered = function() {
         if(scrolltop > 50) {
             $('.omnibox-control-buttons').fadeIn('fast');
         } else {
-            $('.omnibox-control-buttons').fadeOut('fast', function() {
-                Session.set('postCreatedNotifications', 0);
-            });
+            $('.omnibox-control-buttons').fadeOut('fast');
         }
         $('.omnibox-control-buttons').css('top', scrolltop);
     });

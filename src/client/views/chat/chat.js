@@ -2,7 +2,7 @@ Meteor.subscribe("chats");
 
 Template.chat.helpers({
     chats: function () {
-        return chats.find({});
+        return chats.find({},{sort: {createdTime: 1}});
     }
 });
 

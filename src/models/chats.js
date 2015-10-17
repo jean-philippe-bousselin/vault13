@@ -27,7 +27,7 @@ chats.attachSchema(
 if (Meteor.isServer) {
 
     Meteor.publish('chats', function () {
-        return chats.find({},{limit: 30});
+        return chats.find({}, {sort: {createdTime: -1}, limit: 30});
     });
 
     chats.allow({
